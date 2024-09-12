@@ -1,0 +1,28 @@
+{
+  "organizations": [
+    {
+      "id": 1,
+      "name": "The Beatles Company"
+    },
+    {
+      "id": 2,
+      "name": "The Rollings Stones Company"
+    },
+    {
+      "id": 3,
+      "name": "Sun Industries"
+    },
+    {
+      "id": 4,
+      "name": "Innovation Trading sp. z o.o."
+    },
+    {
+      "id": 5,
+      "name": "Garage Inc."
+    },
+    {
+      "id": 6,
+      "name": "W Gorącej Wodzie Company"
+    }
+  ]
+}
