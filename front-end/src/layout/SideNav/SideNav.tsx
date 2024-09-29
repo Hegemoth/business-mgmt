@@ -5,6 +5,7 @@ import {
   IconButton,
   Stack,
   SvgIcon,
+  SxProps,
   Tooltip,
   Typography,
   useMediaQuery,
@@ -15,6 +16,48 @@ import { Icon } from '../../components/Icon';
 import { SIDE_NAV_WIDTH } from '../../constants/constants';
 import { AppRoute } from '../../types/enums';
 import SideNavList from './components/SideNavList';
+
+const drawerPaperProps: SxProps<Theme> = {
+  sx: {
+    backgroundColor: 'neutral.800',
+    color: 'common.white',
+    width: SIDE_NAV_WIDTH,
+  },
+};
+
+const sxRootBox: SxProps<Theme> = {
+  height: '100%',
+  '& .simplebar-content': {
+    height: '100%',
+  },
+  '& .simplebar-scrollbar:before': {
+    background: 'neutral.400',
+  },
+};
+
+const sxRootStack: SxProps<Theme> = {
+  height: '100%',
+  overflowY: 'auto',
+  scrollbarWidth: 'none',
+  '&::-webkit-scrollbar': {
+    display: 'none',
+  },
+};
+
+const sxLogo: SxProps<Theme> = {
+  color: 'white',
+  textDecoration: 'none',
+};
+
+const sxH1: SxProps<Theme> = {
+  fontSize: 20,
+};
+
+const sxOrgNameStack = {
+  p: 1,
+  borderRadius: 1,
+  backgroundColor: 'rgba(255, 255, 255, 0.04)',
+};
 
 interface SideNavProps {
   isSideNavOpen: boolean;
@@ -30,49 +73,19 @@ const SideNav = ({ isSideNavOpen, toggleSideNav }: SideNavProps) => {
       variant={isLgUp ? 'persistent' : 'temporary'}
       open={isSideNavOpen}
       onClose={toggleSideNav}
-      sx={!isLgUp ? { zIndex: (theme) => theme.zIndex.modal } : {}}
-      PaperProps={{
-        sx: {
-          backgroundColor: 'neutral.800',
-          color: 'common.white',
-          width: SIDE_NAV_WIDTH,
-        },
-      }}
+      sx={isLgUp ? {} : { zIndex: (theme) => theme.zIndex.modal }}
+      PaperProps={drawerPaperProps}
     >
-      <Box
-        sx={{
-          height: '100%',
-          '& .simplebar-content': {
-            height: '100%',
-          },
-          '& .simplebar-scrollbar:before': {
-            background: 'neutral.400',
-          },
-        }}
-      >
-        {/* TODO: Check is everything ok with styles */}
-        <Stack
-          sx={{
-            height: '100%',
-            overflowY: 'auto',
-            scrollbarWidth: 'none',
-            '&::-webkit-scrollbar': {
-              display: 'none',
-            },
-          }}
-        >
-          <Stack sx={{ gap: 3, p: 3 }}>
+      <Box sx={sxRootBox}>
+        <Stack sx={sxRootStack}>
+          <Stack spacing={3} sx={{ p: 3 }}>
             <Stack
               flexDirection="row"
               justifyContent="space-between"
               alignItems="center"
             >
-              <Box
-                component={Link}
-                to={AppRoute.HOME}
-                sx={{ color: 'white', textDecoration: 'none' }}
-              >
-                <Typography variant="h1" sx={{ fontSize: 20 }}>
+              <Box component={Link} to={AppRoute.HOME} sx={sxLogo}>
+                <Typography variant="h1" sx={sxH1}>
                   Business.mgmt
                 </Typography>
               </Box>
@@ -86,13 +99,9 @@ const SideNav = ({ isSideNavOpen, toggleSideNav }: SideNavProps) => {
               flexDirection="row"
               justifyContent="space-between"
               alignItems="center"
-              sx={{
-                p: 1,
-                borderRadius: 1,
-                backgroundColor: 'rgba(255, 255, 255, 0.04)',
-              }}
+              sx={sxOrgNameStack}
             >
-              <Typography color="neutral.400" variant="body2">
+              <Typography variant="body2" color="neutral.400">
                 {'currentOrg.name'}
               </Typography>
 
@@ -112,9 +121,7 @@ const SideNav = ({ isSideNavOpen, toggleSideNav }: SideNavProps) => {
 
           <Divider sx={{ borderColor: 'neutral.700' }} />
 
-          <Box component="nav" sx={{ flexGrow: 1, px: 2, py: 3 }}>
-            <SideNavList />
-          </Box>
+          <SideNavList />
 
           <Divider sx={{ borderColor: 'neutral.700' }} />
 
@@ -133,11 +140,7 @@ const SideNav = ({ isSideNavOpen, toggleSideNav }: SideNavProps) => {
               target="_blank"
               variant="contained"
               fullWidth
-              endIcon={
-                <SvgIcon fontSize="small">
-                  <Icon.Launch />
-                </SvgIcon>
-              }
+              endIcon={<Icon.Launch />}
               sx={{ mt: 2 }}
             >
               FAQ

@@ -28,6 +28,11 @@ const Home = () => {
     <PageContainer>
       <PageTitle
         title="Dashboard"
+        bottomContent={
+          <Button variant="contained" startIcon={<Icon.Add />}>
+            Dodaj organizację
+          </Button>
+        }
         rightContent={
           <Button variant="contained" startIcon={<Icon.Add />}>
             Dodaj organizację
