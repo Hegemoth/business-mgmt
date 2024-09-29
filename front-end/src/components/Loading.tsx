@@ -9,7 +9,7 @@ const Loading = () => (
       height: '100vh',
     }}
   >
-    <CircularProgress />
+    <CircularProgress size={60} />
   </Box>
 );
 

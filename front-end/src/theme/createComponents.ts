@@ -1,5 +1,3 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-nocheck
 import {
   createTheme,
   filledInputClasses,
@@ -12,7 +10,7 @@ import {
 // Used only to create transitions
 const muiTheme = createTheme();
 
-export const createComponents = (config) => {
+export const createComponents = (config: { palette: any }) => {
   const { palette } = config;
 
   return {
@@ -91,9 +89,9 @@ export const createComponents = (config) => {
     MuiCardContent: {
       styleOverrides: {
         root: {
-          padding: '32px 24px',
+          padding: '24px',
           '&:last-child': {
-            paddingBottom: '32px',
+            paddingBottom: '24px',
           },
         },
       },
@@ -109,7 +107,7 @@ export const createComponents = (config) => {
       },
       styleOverrides: {
         root: {
-          padding: '32px 24px 16px',
+          padding: '24px 24px 0',
         },
       },
     },
@@ -123,15 +121,15 @@ export const createComponents = (config) => {
           WebkitFontSmoothing: 'antialiased',
           display: 'flex',
           flexDirection: 'column',
-          minHeight: '100%',
           width: '100%',
+          minHeight: '100%',
         },
         body: {
           display: 'flex',
           flex: '1 1 auto',
           flexDirection: 'column',
-          minHeight: '100%',
           width: '100%',
+          minHeight: '100%',
         },
         '#__next': {
           display: 'flex',

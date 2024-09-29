@@ -1,5 +1,3 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-nocheck
 import { createTheme as createMuiTheme } from '@mui/material';
 // import { plPL } from '@mui/x-data-grid';
 import { createComponents } from './createComponents';

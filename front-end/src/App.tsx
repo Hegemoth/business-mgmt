@@ -3,19 +3,19 @@ import { BrowserRouter } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import Layout from './layout/Layout';
 import MainWrapper from './layout/MainWrapper';
-import Routes from './routes/Routes';
+import Router from './router/Router';
 import { createTheme } from './theme/createTheme';
 
 const theme = createTheme();
 
 const App = () => (
   <ThemeProvider theme={theme}>
+    <CssBaseline />
     <BrowserRouter>
       <MainWrapper>
-        <CssBaseline />
         <ToastContainer />
         <Layout>
-          <Routes />
+          <Router />
         </Layout>
       </MainWrapper>
     </BrowserRouter>
