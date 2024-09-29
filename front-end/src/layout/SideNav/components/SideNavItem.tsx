@@ -31,10 +31,10 @@ const sxIcon: SxProps<Theme> = {
   mr: 2,
 };
 
-const sxTitle = {
+const sxTitle: SxProps<Theme> = {
   flexGrow: 1,
   fontSize: 14,
-  fontFamily: (theme: Theme) => theme.typography.fontFamily,
+  fontFamily: (theme) => theme.typography.fontFamily,
   fontWeight: 600,
   lineHeight: '24px',
 };
@@ -47,8 +47,6 @@ const sxNestedTitle: SxProps<Theme> = {
   lineHeight: '24px',
 };
 
-type NestedItemPath = NavNestedItem['path'];
-
 interface SideNavItemProps extends NavItem {
   active?: boolean;
   currentPath?: string;
@@ -59,21 +57,17 @@ const SideNavItem = ({
   icon,
   path,
   navNestedItems,
-  active = false,
+  active,
   currentPath,
 }: SideNavItemProps) => {
   const [isNestedMenuOpen, toggleNestedMenu] = useToggle(false);
 
-  const isNestedItemActive = (nestedItemPath: NestedItemPath): boolean => {
-    return currentPath === nestedItemPath;
+  const getLinkProps = (path?: AppRoute) => {
+    return path ? { component: Link, to: path } : {};
   };
 
-  const getLinkProps = (route?: AppRoute) => {
-    if (!route) return {};
-    return {
-      component: Link,
-      to: route,
-    };
+  const isNestedItemActive = (nestedItemPath: NavNestedItem['path']) => {
+    return currentPath === nestedItemPath;
   };
 
   return (
@@ -123,7 +117,7 @@ const SideNavItem = ({
                       : 'transparent',
                   }}
                 >
-                  <SvgIcon sx={{ fontSize: '0.5rem', mr: 0.8, ml: 0.7 }}>
+                  <SvgIcon sx={{ fontSize: 8, mx: 1 }}>
                     <Icon.Square />
                   </SvgIcon>
                 </Box>
