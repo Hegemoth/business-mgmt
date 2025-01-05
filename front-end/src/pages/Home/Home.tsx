@@ -7,25 +7,21 @@ import {
   CardHeader,
   Grid2 as Grid,
 } from '@mui/material';
-import { useEffect, useState } from 'react';
-import { Icon } from '../../components/Icon';
+import Icon from '../../components/Icon';
 import PageContainer from '../../components/PageContainer';
 import PageTitle from '../../components/PageTitle';
-import { BACKEND_URL } from '../../constants/constants';
 import { useGetOrganizationsQuery } from '../../redux/api/organizationApi';
-import { Organization } from '../../types/organization';
 
 const Home = () => {
-  // const [organizations, setOrganizations] = useState<Organization[]>([]);
-
-  const { data: organizations = [], isLoading } = useGetOrganizationsQuery();
-
-  // TODO: Zmiana na RTK Query
-  // useEffect(() => {
-  //   fetch(`${BACKEND_URL}/organizations`)
-  //     .then((res) => res.json())
-  //     .then((res) => setOrganizations(res));
-  // }, []);
+  const { organizations, isLoadingOrganizations } = useGetOrganizationsQuery(
+    {},
+    {
+      selectFromResult: (r) => ({
+        organizations: r.data?.items || [],
+        isLoadingOrganizations: r.isLoading,
+      }),
+    }
+  );
 
   return (
     <PageContainer>
@@ -51,12 +47,12 @@ const Home = () => {
               subheader="Sprawdź listę organizacji"
             />
             <CardContent>
-              {isLoading && (
+              {isLoadingOrganizations && (
                 <Alert color="info">Ładowanie organizacji...</Alert>
               )}
-              {!isLoading && (
+              {!isLoadingOrganizations && (
                 <Alert color="info" variant="outlined">
-                  {organizations.map((org) => (
+                  {organizations?.map((org) => (
                     <Box key={org.id}>{org.name}</Box>
                   ))}
                 </Alert>
@@ -69,7 +65,7 @@ const Home = () => {
           <Card>
             <CardContent>
               <Alert color="warning">
-                {organizations.map((org) => (
+                {organizations?.map((org) => (
                   <Box key={org.id}>{org.name}</Box>
                 ))}
               </Alert>
@@ -85,7 +81,7 @@ const Home = () => {
             />
             <CardContent>
               <Alert color="info" variant="outlined">
-                {organizations.map((org) => (
+                {organizations?.map((org) => (
                   <Box key={org.id}>{org.name}</Box>
                 ))}
               </Alert>
@@ -97,7 +93,7 @@ const Home = () => {
           <Card>
             <CardContent>
               <Alert color="warning">
-                {organizations.map((org) => (
+                {organizations?.map((org) => (
                   <Box key={org.id}>{org.name}</Box>
                 ))}
               </Alert>
@@ -113,7 +109,7 @@ const Home = () => {
             />
             <CardContent>
               <Alert color="info" variant="outlined">
-                {organizations.map((org) => (
+                {organizations?.map((org) => (
                   <Box key={org.id}>{org.name}</Box>
                 ))}
               </Alert>
@@ -125,7 +121,7 @@ const Home = () => {
           <Card>
             <CardContent>
               <Alert color="warning">
-                {organizations.map((org) => (
+                {organizations?.map((org) => (
                   <Box key={org.id}>{org.name}</Box>
                 ))}
               </Alert>

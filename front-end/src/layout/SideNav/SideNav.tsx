@@ -1,4 +1,5 @@
 import {
+  Box,
   Button,
   Divider,
   Drawer,
@@ -6,14 +7,16 @@ import {
   Stack,
   SvgIcon,
   SxProps,
+  Theme,
   Tooltip,
   Typography,
   useMediaQuery,
 } from '@mui/material';
-import { Box, Theme } from '@mui/system';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Icon } from '../../components/Icon';
+import Icon from '../../components/Icon';
 import { SIDE_NAV_WIDTH } from '../../constants/constants';
+import { getCurrentOrg } from '../../redux/slices/appContextSlice';
 import { AppRoute } from '../../types/enums';
 import SideNavList from './components/SideNavList';
 
@@ -50,7 +53,8 @@ const sxLogo: SxProps<Theme> = {
 };
 
 const sxH1: SxProps<Theme> = {
-  fontSize: 20,
+  fontFamily: 'Verdana',
+  fontSize: 20.2,
 };
 
 const sxOrgNameStack = {
@@ -65,6 +69,7 @@ interface SideNavProps {
 }
 
 const SideNav = ({ isSideNavOpen, toggleSideNav }: SideNavProps) => {
+  const currentOrg = useSelector(getCurrentOrg);
   const isLgUp = useMediaQuery((theme: Theme) => theme.breakpoints.up('lg'));
 
   return (
@@ -102,7 +107,7 @@ const SideNav = ({ isSideNavOpen, toggleSideNav }: SideNavProps) => {
               sx={sxOrgNameStack}
             >
               <Typography variant="body2" color="neutral.400">
-                {'currentOrg.name'}
+                {currentOrg?.name}
               </Typography>
 
               {/* TODO: Add popover with orgs */}

@@ -1,3 +1,5 @@
+export type Export = string;
+
 export enum AppRoute {
   HOME = '/',
   EMPLOYEES = '/employees',
@@ -23,6 +25,53 @@ export enum AppRoute {
 
 export enum ModalMode {
   CLOSED,
-  CREATE,
-  CHANGE,
+  ADD,
+  EDIT,
+  DELETE,
+}
+
+export enum EmploymentType {
+  UOP = 'UOP',
+  B2B = 'B2B',
+  UZ = 'UZ',
+  UOD = 'UOD',
+}
+
+export enum PaymentPeriod {
+  MONTHLY = 'monthly',
+  HOURLY = 'hourly',
+}
+
+export enum Unit {
+  UN = 'un',
+  KG = 'kg',
+  L = 'l',
+}
+
+export enum TaxRate {
+  _23 = 23,
+  _8 = 8,
+  _5 = 5,
+  _0 = 0,
+}
+
+export enum InvoiceType {
+  PURCHASE = 'purchase',
+  SALE = 'sale',
+}
+
+export enum PaymentMethod {
+  CARD = 'card',
+  CASH = 'cash',
+  TRANSFER = 'transfer',
+}
+
+export enum Currency {
+  PLN = 'PLN',
+  EUR = 'EUR',
+  USD = 'USD',
+}
+
+export enum TableId {
+  EMPLOYEES = 'employees',
 }

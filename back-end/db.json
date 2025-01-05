@@ -1,28 +1,278 @@
 {
   "organizations": [
     {
-      "id": 1,
-      "name": "The Beatles Company"
+      "id": "b8b5be65-15f7-49f1-b72e-846eb528b43f",
+      "name": "The Beatles Company",
+      "features": [],
+      "config": {}
     },
     {
-      "id": 2,
-      "name": "The Rollings Stones Company"
+      "id": "d03b4c67-10f2-4e77-89fc-72d1e41656d5",
+      "name": "The Rollings Stones Company",
+      "features": [],
+      "config": {}
     },
     {
-      "id": 3,
-      "name": "Sun Industries"
+      "id": "f8f5d4e9-9140-48ae-b607-e3075fc0e6c1",
+      "name": "Sun Industries",
+      "features": [],
+      "config": {}
     },
     {
-      "id": 4,
-      "name": "Innovation Trading sp. z o.o."
+      "id": "5b116540-7d1a-46fc-8753-83c0cbfadf3d",
+      "name": "Innovation Trading sp. z o.o.",
+      "features": [],
+      "config": {}
     },
     {
-      "id": 5,
-      "name": "Garage Inc."
+      "id": "999c973d-19e5-4b66-8ff3-5efc4c16f47b",
+      "name": "Garage Inc.",
+      "features": [],
+      "config": {}
     },
     {
-      "id": 6,
-      "name": "W Gorącej Wodzie Company"
+      "id": "830c9453-9f77-4cfe-9b13-3f6e11229404",
+      "name": "W Gorącej Wodzie Company",
+      "features": [],
+      "config": {}
+    }
+  ],
+  "employees": [
+    {
+      "id": "f865aad0-c9b1-4e3f-ae8c-d2a96a338c38",
+      "firstName": "Andrzej",
+      "lastName": "Polej",
+      "email": "andrzej.polej@gmail.com",
+      "phone": "+48 123 345 456",
+      "active": true,
+      "orgId": "999c973d-19e5-4b66-8ff3-5efc4c16f47b"
+    },
+    {
+      "id": "94f26be5-bf6d-4a5d-8b76-994590c3e824",
+      "firstName": "Magdalena",
+      "lastName": "Kowalska",
+      "email": "magdalena.kowalska@gmail.com",
+      "phone": "+48 654 321 098",
+      "active": true,
+      "orgId": "999c973d-19e5-4b66-8ff3-5efc4c16f47b"
+    },
+    {
+      "firstName": "Andrzej",
+      "lastName": "Nowak",
+      "email": "andrzej.nowak@gmail.com",
+      "phone": "+48 789 456 123",
+      "active": true,
+      "orgId": "999c973d-19e5-4b66-8ff3-5efc4c16f47b",
+      "id": "a8276fd8-9221-4d56-8f2c-27be1b839b01"
+    },
+    {
+      "id": "a3b32ac7-cf97-4327-9b95-7a26a989d10e",
+      "firstName": "Anna",
+      "lastName": "Zielińska",
+      "email": "anna.zielinska@gmail.com",
+      "phone": "+48 987 654 321",
+      "active": true,
+      "orgId": "999c973d-19e5-4b66-8ff3-5efc4c16f47b"
+    },
+    {
+      "id": "f0eb6065-b292-4a83-b0ff-b6a2619f27b1",
+      "firstName": "Andrzej",
+      "lastName": "Wiśniewski",
+      "email": "andrzej.wisniewski@gmail.com",
+      "phone": "+48 123 789 456",
+      "active": true,
+      "orgId": "999c973d-19e5-4b66-8ff3-5efc4c16f47b"
+    },
+    {
+      "id": "9f03c93d-6992-4ea4-81d0-b3659e76e05f",
+      "firstName": "Katarzyna",
+      "lastName": "Lewandowska",
+      "email": "katarzyna.lewandowska@gmail.com",
+      "phone": "+48 321 654 987",
+      "active": false,
+      "orgId": "830c9453-9f77-4cfe-9b13-3f6e11229404"
+    },
+    {
+      "id": "42b5c56c-e6fc-4799-b1c2-92d433eb2d76",
+      "firstName": "Michał",
+      "lastName": "Kaczmarek",
+      "email": "michal.kaczmarek@gmail.com",
+      "phone": "+48 654 123 789",
+      "active": true,
+      "orgId": "830c9453-9f77-4cfe-9b13-3f6e11229404"
+    },
+    {
+      "id": "b193b3d3-fb7d-47b2-a6c6-9a3997c13f3b",
+      "firstName": "Ewa",
+      "lastName": "Piotrowska",
+      "email": "ewa.piotrowska@gmail.com",
+      "phone": "+48 789 123 456",
+      "active": true,
+      "orgId": "830c9453-9f77-4cfe-9b13-3f6e11229404"
+    },
+    {
+      "id": "2be0d157-d68b-442b-b18c-1b9ab9374bb6",
+      "firstName": "Paweł",
+      "lastName": "Wójcik",
+      "email": "pawel.wojcik@gmail.com",
+      "phone": "+48 456 789 123",
+      "active": false,
+      "orgId": "830c9453-9f77-4cfe-9b13-3f6e11229404"
+    },
+    {
+      "id": "9f8297fa-8c7a-418b-a9cf-9987bfa1e6c3",
+      "firstName": "Joanna",
+      "lastName": "Kamińska",
+      "email": "joanna.kaminska@gmail.com",
+      "phone": "+48 123 456 789",
+      "active": true,
+      "orgId": "830c9453-9f77-4cfe-9b13-3f6e11229404"
+    },
+    {
+      "id": "5f26ecb9-0389-4873-90b9-e660a576535e",
+      "firstName": "Krzysztof",
+      "lastName": "Zawadzki",
+      "email": "krzysztof.zawadzki@gmail.com",
+      "phone": "+48 654 987 321",
+      "active": true,
+      "orgId": "830c9453-9f77-4cfe-9b13-3f6e11229404"
+    },
+    {
+      "id": "4b32d2fc-0db6-4d85-b7fc-b9c2ad74a15f",
+      "firstName": "Aleksandra",
+      "lastName": "Michalska",
+      "email": "aleksandra.michalska@gmail.com",
+      "phone": "+48 321 456 789",
+      "active": false,
+      "orgId": "830c9453-9f77-4cfe-9b13-3f6e11229404"
+    },
+    {
+      "firstName": "Marcin",
+      "lastName": "Adamczyk",
+      "email": "marcin.adamczyk@gmail.com",
+      "phone": "+48 987 321 654",
+      "active": false,
+      "orgId": "999c973d-19e5-4b66-8ff3-5efc4c16f47b",
+      "id": "204e8e10-5f56-4849-b5b9-b0a41d7ae7b5"
+    },
+    {
+      "id": "32c37f91-7f25-4691-9239-99c8a63d90fe",
+      "firstName": "Natalia",
+      "lastName": "Szymańska",
+      "email": "natalia.szymanska@gmail.com",
+      "phone": "+48 456 123 789",
+      "active": true,
+      "orgId": "999c973d-19e5-4b66-8ff3-5efc4c16f47b"
+    },
+    {
+      "id": "8a056f95-8f53-4dfe-bbfc-1b8d3b5eb73a",
+      "firstName": "Łukasz",
+      "lastName": "Pawlak",
+      "email": "lukasz.pawlak@gmail.com",
+      "phone": "+48 789 654 321",
+      "active": false,
+      "orgId": "999c973d-19e5-4b66-8ff3-5efc4c16f47b"
+    },
+    {
+      "firstName": "Agnieszka",
+      "lastName": "Górska",
+      "email": "agnieszka.gorska@gmail.com",
+      "phone": "+48 321 987 654",
+      "active": true,
+      "orgId": "999c973d-19e5-4b66-8ff3-5efc4c16f47b",
+      "id": "a2671c57-8498-49ea-b658-9d5420aee32c"
+    },
+    {
+      "id": "9e5f3e17-7ec9-4e27-b4d1-6f6297ad4780",
+      "firstName": "Dawid",
+      "lastName": "Zieliński",
+      "email": "dawid.zielinski@gmail.com",
+      "phone": "+48 123 654 987",
+      "active": true,
+      "orgId": "999c973d-19e5-4b66-8ff3-5efc4c16f47b"
+    },
+    {
+      "id": "11199e7f-d464-47b0-8870-1e5cf6d093d1",
+      "firstName": "Marta",
+      "lastName": "Majewska",
+      "email": "marta.majewska@gmail.com",
+      "phone": "+48 987 456 123",
+      "active": false,
+      "orgId": "999c973d-19e5-4b66-8ff3-5efc4c16f47b"
+    },
+    {
+      "id": "2df1d8de-d0f9-4199-bac2-572a131da24b",
+      "firstName": "Jakub",
+      "lastName": "Dąbrowski",
+      "email": "jakub.dabrowski@gmail.com",
+      "phone": "+48 654 321 456",
+      "active": true,
+      "orgId": "830c9453-9f77-4cfe-9b13-3f6e11229404"
+    },
+    {
+      "id": "ff05fd29-7c64-4ff3-9e51-2de3cf3f4aeb",
+      "firstName": "Beata",
+      "lastName": "Wolska",
+      "email": "beata.wolska@gmail.com",
+      "phone": "+48 321 123 987",
+      "active": true,
+      "orgId": "830c9453-9f77-4cfe-9b13-3f6e11229404"
+    },
+    {
+      "firstName": "Kamil",
+      "lastName": "Ślimak",
+      "email": "kamilslimak@gmail.com",
+      "phone": "+48 234 345 456",
+      "id": "xuZBJ60"
+    },
+    {
+      "firstName": "Kamil",
+      "lastName": "Ślimak",
+      "email": "kamilslimak@gmail.com",
+      "phone": "+48 234 345 456",
+      "id": "L-_npNK"
+    },
+    {
+      "firstName": "Tytus",
+      "lastName": "Bomba",
+      "id": "lyswRoT"
+    },
+    {
+      "firstName": "Marcin",
+      "lastName": "Marciniak",
+      "id": "sd60TVi"
+    },
+    {
+      "firstName": "Test",
+      "lastName": "Test",
+      "id": "yV7kxS-"
+    },
+    {
+      "firstName": "Test",
+      "lastName": "Org",
+      "id": "5X2ehBv"
+    },
+    {
+      "firstName": "Ctest11",
+      "lastName": "Orggg",
+      "orgId": "999c973d-19e5-4b66-8ff3-5efc4c16f47b",
+      "email": "test@test.test",
+      "active": true,
+      "id": "MfP11gR"
+    },
+    {
+      "firstName": "Btest1",
+      "lastName": "QWEQWE",
+      "orgId": "999c973d-19e5-4b66-8ff3-5efc4c16f47b",
+      "id": "BB2CyUv"
+    }
+  ],
+  "employeepositions": [
+    {
+      "id": "BB2CyUv",
+      "orgId": "772ed136-d41f-490a-9c62-5cc577e84e39",
+      "name": "Btest1",
+      "color": "#222222"
     }
   ]
 }

@@ -7,7 +7,7 @@ import {
   Theme,
 } from '@mui/material';
 import { Link } from 'react-router-dom';
-import { Icon } from '../../../components/Icon';
+import Icon from '../../../components/Icon';
 import { useToggle } from '../../../hooks/useToggle';
 import { AppRoute } from '../../../types/enums';
 import { NavItem, NavNestedItem } from '../../../types/navigation';
@@ -97,7 +97,7 @@ const SideNavItem = ({
         </Box>
 
         {navNestedItems && (
-          <SvgIcon sx={{ fontSize: '15px', color: 'neutral.400' }}>
+          <SvgIcon sx={{ fontSize: 18, color: 'neutral.400' }}>
             {isNestedMenuOpen ? <Icon.ExpandMore /> : <Icon.ChevronLeft />}
           </SvgIcon>
         )}

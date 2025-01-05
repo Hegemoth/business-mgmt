@@ -1,15 +1,29 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { BACKEND_URL } from '../../constants/constants';
+import { createApi } from '@reduxjs/toolkit/query/react';
+import baseQuery from '../../shared/baseQuery';
+import { ApiResponse, QueryParams } from '../../types/api';
 import { Organization } from '../../types/organization';
 
 export const organizationApi = createApi({
   reducerPath: 'organizationApi',
-  baseQuery: fetchBaseQuery({ baseUrl: BACKEND_URL }),
+  baseQuery,
   endpoints: (builder) => ({
-    getOrganizations: builder.query<Organization[], void>({
-      query: () => '/organizations',
+    getOrganizations: builder.query<ApiResponse<Organization>, QueryParams>({
+      query: (params) => ({
+        url: '/organizations',
+        params,
+      }),
     }),
   }),
 });
 
 export const { useGetOrganizationsQuery } = organizationApi;
+
+// const defaultResponseTransform = <T>(
+//   response: T[],
+//   meta: FetchBaseQueryMeta
+// ): ApiResponse<T> => ({
+//   items: response,
+//   total: Number(meta?.response?.headers.get('X-Total-Count')) || 0,
+//   limit: Number(meta?.response?.headers.get('X-Limit')),
+//   offset: Number(meta?.response?.headers.get('X-Offset')),
+// });

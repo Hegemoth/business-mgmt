@@ -7,7 +7,7 @@ import {
   Theme,
   useMediaQuery,
 } from '@mui/material';
-import { Icon } from '../../components/Icon';
+import Icon from '../../components/Icon';
 import { SIDE_NAV_WIDTH, TOP_NAV_HEIGHT } from '../../constants/constants';
 
 interface TopNavProps {
@@ -43,14 +43,14 @@ const TopNav = ({ isSideNavOpen, toggleSideNav }: TopNavProps) => {
               <Icon.Hamburger />
             </IconButton>
           )}
-          <Alert>Testowanie</Alert>
-          <Alert>Testowanie</Alert>
+          {/* <Alert>Testowanie</Alert>
+          <Alert>Testowanie</Alert> */}
         </Stack>
 
         <Stack direction="row" alignItems="center" spacing={2}>
+          {/* <Alert>Testtt</Alert>
           <Alert>Testtt</Alert>
-          <Alert>Testtt</Alert>
-          <Alert>Testtt</Alert>
+          <Alert>Testtt</Alert> */}
         </Stack>
 
         {/* TODO: Avatar & popover */}

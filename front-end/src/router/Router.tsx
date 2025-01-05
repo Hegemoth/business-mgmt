@@ -36,23 +36,14 @@ const Router = () => (
     <Route path={AppRoute.REPORT_REVENUES} element={<ReportRevenues />} />
     <Route path={AppRoute.REPORT_SALES} element={<ReportSales />} />
     <Route path={AppRoute.REPORT_COSTS} element={<ReportCosts />} />
-    <Route
-      path={AppRoute.REPORT_MATERIAL_USAGE}
-      element={<ReportMaterialUsage />}
-    />
+    <Route path={AppRoute.REPORT_MATERIAL_USAGE} element={<ReportMaterialUsage />} />
     <Route path={AppRoute.USERS} element={<Users />} />
     <Route path={AppRoute.USER_PERMISSIONS} element={<UserPermissions />} />
     <Route path={AppRoute.SETTINGS} element={<Settings />} />
     <Route path={AppRoute.ADMIN_FEATURES} element={<AdminFeatures />} />
-    <Route
-      path={AppRoute.ADMIN_ORGANIZATIONS}
-      element={<AdminOrganizations />}
-    />
+    <Route path={AppRoute.ADMIN_ORGANIZATIONS} element={<AdminOrganizations />} />
     <Route path={AppRoute.ADMIN_USERS} element={<AdminUsers />} />
-    <Route
-      path={AppRoute.ADMIN_USER_PERMISSIONS}
-      element={<AdminUserPermissions />}
-    />
+    <Route path={AppRoute.ADMIN_USER_PERMISSIONS} element={<AdminUserPermissions />} />
   </Routes>
 );
 

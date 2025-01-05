@@ -1,4 +1,4 @@
-import { Icon } from '../../../components/Icon';
+import Icon from '../../../components/Icon';
 import { AppRoute } from '../../../types/enums';
 import { NavConfig } from '../../../types/navigation';
 

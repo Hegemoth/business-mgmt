@@ -324,5 +324,12 @@ export const createComponents = (config: { palette: any }) => {
         variant: 'filled',
       },
     },
+    MuiDialogContentText: {
+      styleOverrides: {
+        root: {
+          color: '#6C6C6C',
+        },
+      },
+    },
   };
 };

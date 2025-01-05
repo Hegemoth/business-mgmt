@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/query';
 import { persistStore } from 'redux-persist';
+import { employeesApi } from './api/employeesApi';
 import { organizationApi } from './api/organizationApi';
 import reducer from './reducer';
 
@@ -9,13 +10,12 @@ const store = configureStore({
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: false,
-    }).concat(organizationApi.middleware),
+    }).concat([organizationApi.middleware, employeesApi.middleware]),
 });
-
-export const persistor = persistStore(store);
 
 setupListeners(store.dispatch);
 
+export const persistor = persistStore(store);
 export type RootState = ReturnType<typeof store.getState>;
 
 export default store;

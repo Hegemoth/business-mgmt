@@ -1,21 +1,24 @@
 import { combineReducers } from '@reduxjs/toolkit';
+import { persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
+import { employeesApi } from './api/employeesApi';
 import { organizationApi } from './api/organizationApi';
+import appContextSlice from './slices/appContextSlice';
 
-// const persistConfig = {
-//   key: appSlice.name,
-//   storage,
-// };
+const persistConfig = {
+  key: appContextSlice.name,
+  storage,
+};
 
-// const persistConfigTable = {
-//   key: tableSlice.name,
-//   storage,
-// };
-
-// const persistedAppReducer = persistReducer(persistConfig, appSlice.reducer);
-// const persistedTableReducer = persistReducer(persistConfigTable, tableSlice.reducer);
+const persistedAppContextReducer = persistReducer(
+  persistConfig,
+  appContextSlice.reducer
+);
 
 const reducer = combineReducers({
+  [appContextSlice.name]: persistedAppContextReducer,
   [organizationApi.reducerPath]: organizationApi.reducer,
+  [employeesApi.reducerPath]: employeesApi.reducer,
 });
 
 export default reducer;
