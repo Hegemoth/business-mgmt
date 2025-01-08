@@ -1,5 +1,5 @@
 import { DataGridProps, GridApi } from '@mui/x-data-grid';
-import { MutableRefObject, useRef } from 'react';
+import { MutableRefObject } from 'react';
 import { TableId } from '../types/enums';
 
 interface TableConfig {
@@ -25,24 +25,6 @@ export const useTable = ({
     };
   }
 
-  const isFirstRenderRef = useRef(true);
-
-  const handleAutosizeColumns = () => {
-    if (apiRef?.current) {
-      apiRef.current.autosizeColumns();
-
-      setTimeout(() => {
-        isFirstRenderRef.current = false;
-      }, 1000);
-    }
-  };
-
-  const onStateChange = () => {
-    if (apiRef?.current && isFirstRenderRef.current) {
-      handleAutosizeColumns();
-    }
-  };
-
   return {
     dataGridProps: {
       className: `datagrid-${uniqueId}`,
@@ -58,7 +40,6 @@ export const useTable = ({
         expand: false,
       },
       pageSizeOptions: [8, 25, 50],
-      onStateChange,
       autosizeOnMount: true,
       sx: {
         '.actions-header': {
@@ -69,13 +50,28 @@ export const useTable = ({
           borderLeft: '1px solid #ddd',
           borderRight: '1px solid #ddd',
         },
-        '.MuiDataGrid-row--borderBottom': {
-          gap: 2,
-        },
-        '.MuiDataGrid-row': {
-          gap: 2,
+        '.sx-pr': {
+          pr: 8,
         },
       },
     },
   };
 };
+
+// const isFirstRenderRef = useRef(true);
+
+// const handleAutosizeColumns = () => {
+//   if (apiRef?.current) {
+//     apiRef.current.autosizeColumns();
+
+//     setTimeout(() => {
+//       isFirstRenderRef.current = false;
+//     }, 1000);
+//   }
+// };
+
+// const onStateChange = () => {
+//   if (apiRef?.current && isFirstRenderRef.current) {
+//     handleAutosizeColumns();
+//   }
+// };

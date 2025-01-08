@@ -1,3 +1,5 @@
+import { NameAndValue } from './shared';
+
 export type Export = string;
 
 interface ApiResponse<T> {
@@ -23,8 +25,26 @@ interface PaginationParams {
 
 type QueryParams = SearchParams & PaginationParams;
 
+type CustomParams = QueryParams & Record<string, any>;
+
 interface CustomHeaders {
   headers?: {
     'X-Org-Id': string;
   };
 }
+
+interface SimpleFilter {
+  name: string;
+  value: string;
+}
+
+interface Filters {
+  add: (params: string[]) => void;
+  replace: (params: string[]) => void;
+  remove: (params: string[]) => void;
+  reset: () => void;
+  getFilterByName: (param: string) => SimpleFilter[];
+  current?: string[];
+}
+
+type FilterAction = 'add' | 'remove' | 'replace' | 'reset';

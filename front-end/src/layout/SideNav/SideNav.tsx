@@ -22,7 +22,7 @@ import SideNavList from './components/SideNavList';
 
 const drawerPaperProps: SxProps<Theme> = {
   sx: {
-    backgroundColor: 'neutral.800',
+    backgroundColor: 'neutral.900',
     color: 'common.white',
     width: SIDE_NAV_WIDTH,
   },

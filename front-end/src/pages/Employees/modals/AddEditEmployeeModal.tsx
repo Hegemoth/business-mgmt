@@ -55,7 +55,8 @@ const AddEditEmployeeModal = ({
 
             <DialogContent>
               <DialogContentText>
-                Aby dodać pracownika, podaj poniższe informacje
+                Aby {mode === ModalMode.ADD ? 'dodać' : 'zedytować dane'} pracownika,
+                podaj poniższe informacje
               </DialogContentText>
 
               <FormWrapper>
@@ -89,7 +90,7 @@ const AddEditEmployeeModal = ({
                 variant="contained"
                 loading={isLoading}
               >
-                Zapisz
+                {mode === ModalMode.ADD ? 'Dodaj' : 'Edytuj'}
               </LoadingButton>
             </DialogActions>
           </Form>

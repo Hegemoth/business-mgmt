@@ -6,37 +6,35 @@ import Icon from '../../components/Icon';
 import PageContainer from '../../components/PageContainer';
 import PageTitle from '../../components/PageTitle';
 import Pill from '../../components/Pill';
+import { useAsyncPagination } from '../../hooks/useAsyncPagination';
 import { useModalMode } from '../../hooks/useModalMode';
 import {
   useAddEmployeeMutation,
   useDeleteEmployeeMutation,
-  useGetEmployeesQuery,
   useLazyGetEmployeesQuery,
   useUpdateEmployeeMutation,
 } from '../../redux/api/employeesApi';
 import { Employee, EmployeeData } from '../../types/employees';
 import { ModalMode } from '../../types/enums';
-import { toastErr } from '../../utils/data-utils';
+import { toastErr } from '../../utils/form-utils';
 import AddEditEmployeeModal from './modals/AddEditEmployeeModal';
 import EmployeesTable from './sections/EmployeesTable';
 
 const Employees = () => {
-  const [getEmployees, lazyEmployees] = useLazyGetEmployeesQuery();
+  const { employees, refetch, ...asyncPagination } = useAsyncPagination<Employee>({
+    lazyRtkQuery: useLazyGetEmployeesQuery as any,
+    queryKey: "employees",
+    queryParams: {
+      // f: [`active:true`],
+      s: "firstName",
+    },
+  });
+
+  console.log('asyncPagination', { employees, ...asyncPagination })
+
   const [addEmployee, addEmployeeState] = useAddEmployeeMutation();
   const [updateEmployee, updateEmployeeState] = useUpdateEmployeeMutation();
   const [deleteEmployee, deleteEmployeeState] = useDeleteEmployeeMutation();
-
-  const { employees, isLoadingEmployees } = useGetEmployeesQuery(
-    {},
-    {
-      selectFromResult: (r) => ({
-        employees: r.data?.items || [],
-        isLoadingEmployees: r.isFetching,
-        rest: r,
-      }),
-    }
-  );
-
   const [addEditMode, setAddEditMode, addEditValues] = useModalMode<Employee>();
   const [deleteMode, setDeleteMode, deleteValues] = useModalMode<Employee>();
   const [
@@ -57,7 +55,7 @@ const Employees = () => {
       })
       .then(() => {
         setAddEditMode(ModalMode.CLOSED);
-        getEmployees({});
+        refetch();
       });
   };
 
@@ -74,7 +72,7 @@ const Employees = () => {
       })
       .then(() => {
         setAddEditMode(ModalMode.CLOSED);
-        getEmployees({});
+        refetch();
       });
   };
 
@@ -90,8 +88,8 @@ const Employees = () => {
         error: 'Nie udało się usunąć pracownika',
       })
       .then(() => {
-        setChangeActiveStatusMode(ModalMode.CLOSED);
-        getEmployees({});
+        setDeleteMode(ModalMode.CLOSED);
+        refetch();
       });
   };
 
@@ -112,7 +110,7 @@ const Employees = () => {
       })
       .then(() => {
         setChangeActiveStatusMode(ModalMode.CLOSED);
-        getEmployees({});
+        refetch();
       });
   };
 
@@ -134,8 +132,8 @@ const Employees = () => {
       <Grid container>
         <Grid size={{ xs: 12 }}>
           <EmployeesTable
-            employees={lazyEmployees.data?.items || employees}
-            isLoading={isLoadingEmployees}
+            employees={employees || []}
+            isLoading={asyncPagination.isFetching}
             {...{ setAddEditMode, setDeleteMode, setChangeActiveStatusMode }}
           />
         </Grid>
@@ -162,6 +160,7 @@ const Employees = () => {
           </>
         }
         isLoading={deleteEmployeeState.isLoading}
+        deletion
       >
         <Alert severity="error">
           Czy na pewno chcesz trwale usunąć tego pracownika z bazy? Może to

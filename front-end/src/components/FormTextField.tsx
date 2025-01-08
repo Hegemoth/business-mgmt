@@ -13,7 +13,7 @@ const FormTextField = ({ name, label }: FormTextFieldProps) => (
         {...field}
         fullWidth
         label={label}
-        helperText={meta.touched && meta.error ? meta.error : ''}
+        helperText={meta.touched && meta.error}
         error={meta.touched && !!meta.error}
       />
     )}

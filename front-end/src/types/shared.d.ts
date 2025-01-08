@@ -1,15 +1,8 @@
-export type uuid = string;
+import { ApiResponse, ApiResponseExt } from "./api";
+
+type uuid = string;
 
 type DateType = Date | string;
-
-interface Audit {
-  audit: {
-    creator: uuid;
-    updater: uuid;
-    created: DateType;
-    updated: DateType;
-  };
-}
 
 type Severity =
   | 'primary'
@@ -18,3 +11,23 @@ type Severity =
   | 'info'
   | 'warning'
   | 'success';
+
+interface LazyRtkQueryResult {
+  currentData: ApiResponse<T>;
+  data: ApiResponseExt<T>
+  // dataLength: number;
+  enpointName: string;
+  fulfilledTimeStamp: number;
+  isError: boolean;
+  isFetching: boolean;
+  isLoading: boolean;
+  isSuccess: boolean;
+  isUninitialized: boolean;
+  // original: ApiResponse<T>;
+  originalArgs: QueryParams;
+  requestId: string;
+  reset: () => void;
+  startedTimeStamp: number;
+  status: string;
+  // key: string;
+}

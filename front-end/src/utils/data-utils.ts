@@ -1,4 +1,3 @@
-import { toast } from 'react-toastify';
 import { Unit } from '../types/enums';
 
 export const getUnit = (unit: Unit): string => {
@@ -18,6 +17,10 @@ export const getFullName = (obj: {
   return `${obj.firstName} ${obj.lastName}`;
 };
 
-export const toastErr = (): void => {
-  toast.error('Coś poszło nie tak');
+export const getFilterName = (filter: string): string => {
+  return filter.split(':')[0];
+};
+
+export const getFilterValue = (filter: string): string => {
+  return filter.split(':')[1];
 };

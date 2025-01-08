@@ -1,10 +1,13 @@
-import { Card, CardContent, CardHeader } from '@mui/material';
+import { Card, CardContent, CardHeader, CircularProgress } from '@mui/material';
 import { DataGrid, useGridApiRef } from '@mui/x-data-grid';
+import AvatarText from '../../../components/AvatarText';
 import BinaryIcon from '../../../components/BinaryIcon';
+import Cell from '../../../components/Cell';
 import Icon from '../../../components/Icon';
 import IconTooltip from '../../../components/IconTooltip';
 import { useTable } from '../../../hooks/useTable';
 import { useTableColumns } from '../../../hooks/useTableColumns';
+import { error, indigo } from '../../../theme/colors';
 import { Employee } from '../../../types/employees';
 import { ModalMode, TableId } from '../../../types/enums';
 
@@ -27,12 +30,21 @@ const EmployeesTable = ({
     {
       field: 'firstName',
       headerName: 'Pracownik',
-      renderCell: ({ row }) => `${row.firstName} ${row.lastName}`,
+      renderCell: ({ row }) => (
+        <AvatarText
+          text={`${row.firstName} ${row.lastName}`}
+          color={row.active ? indigo.main : error.main}
+        />
+      ),
     },
     {
       field: 'active',
       headerName: 'Aktywny',
-      renderCell: ({ row }) => <BinaryIcon condition={row.active} />,
+      renderCell: ({ row }) => (
+        <Cell>
+          <BinaryIcon condition={row.active} />
+        </Cell>
+      ),
     },
     {
       field: 'email',
@@ -87,12 +99,16 @@ const EmployeesTable = ({
         subheader="Dodaj i modyfikuj pracowników oraz zarządzaj ich stanowiskami"
       />
       <CardContent>
-        <DataGrid
-          rows={employees}
-          columns={columns}
-          loading={isLoading}
-          {...dataGridProps}
-        />
+        {isLoading ? (
+          <CircularProgress size={50} />
+        ) : (
+          <DataGrid
+            rows={employees}
+            columns={columns}
+            loading={isLoading}
+            {...dataGridProps}
+          />
+        )}
       </CardContent>
     </Card>
   );

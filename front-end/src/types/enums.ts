@@ -74,4 +74,5 @@ export enum Currency {
 
 export enum TableId {
   EMPLOYEES = 'employees',
+  EMPLOYEE_POSITIONS = 'employee_positions',
 }

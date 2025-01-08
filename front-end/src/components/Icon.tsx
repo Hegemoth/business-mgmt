@@ -7,6 +7,7 @@ import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import CheckCircleRoundedIcon from '@mui/icons-material/CheckCircleRounded';
 import ChevronLeftRoundedIcon from '@mui/icons-material/ChevronLeftRounded';
 import ChevronRightRoundedIcon from '@mui/icons-material/ChevronRightRounded';
+import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
 import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
 import EditRoundedIcon from '@mui/icons-material/EditRounded';
 import ExpandMoreRoundedIcon from '@mui/icons-material/ExpandMoreRounded';
@@ -43,6 +44,7 @@ const Icon = {
   Delete: DeleteRoundedIcon,
   Activate: CheckCircleRoundedIcon,
   Deactivate: UnpublishedRoundedIcon,
+  Clear: CloseOutlinedIcon,
   Hamburger: MenuRoundedIcon,
   ChevronLeft: ChevronLeftRoundedIcon,
   ChevronRight: ChevronRightRoundedIcon,
