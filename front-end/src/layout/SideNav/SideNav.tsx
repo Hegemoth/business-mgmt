@@ -4,6 +4,7 @@ import {
   Divider,
   Drawer,
   IconButton,
+  MenuItem,
   Stack,
   SvgIcon,
   SxProps,
@@ -12,17 +13,24 @@ import {
   Typography,
   useMediaQuery,
 } from '@mui/material';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import CustomPopover from '../../components/CustomPopover';
 import Icon from '../../components/Icon';
 import { SIDE_NAV_WIDTH } from '../../constants/constants';
-import { getCurrentOrg } from '../../redux/slices/appContextSlice';
+import { usePopover } from '../../hooks/usePopover';
+import { useGetOrganizationsQuery } from '../../redux/api/organizationApi';
+import {
+  getCurrentOrg,
+  setCurrentOrg,
+} from '../../redux/slices/appContextSlice';
 import { AppRoute } from '../../types/enums';
+import { Organization } from '../../types/organization';
 import SideNavList from './components/SideNavList';
 
 const drawerPaperProps: SxProps<Theme> = {
   sx: {
-    backgroundColor: 'neutral.900',
+    backgroundColor: 'neutral.800',
     color: 'common.white',
     width: SIDE_NAV_WIDTH,
   },
@@ -71,10 +79,22 @@ interface SideNavProps {
 const SideNav = ({ isSideNavOpen, toggleSideNav }: SideNavProps) => {
   const currentOrg = useSelector(getCurrentOrg);
   const isLgUp = useMediaQuery((theme: Theme) => theme.breakpoints.up('lg'));
+  const orgPopover = usePopover();
+  const dispatch = useDispatch();
+
+  const { orgs } = useGetOrganizationsQuery(
+    {},
+    { selectFromResult: (r) => ({ orgs: r.data?.items || [] }) }
+  );
+
+  const changeOrg = (org: Organization) => {
+    dispatch(setCurrentOrg(org));
+    window.location.reload();
+  };
 
   return (
     <Drawer
-      anchor="left"
+      anchor="right"
       variant={isLgUp ? 'persistent' : 'temporary'}
       open={isSideNavOpen}
       onClose={toggleSideNav}
@@ -96,7 +116,7 @@ const SideNav = ({ isSideNavOpen, toggleSideNav }: SideNavProps) => {
               </Box>
 
               <IconButton onClick={toggleSideNav}>
-                <Icon.ChevronLeft />
+                <Icon.Close />
               </IconButton>
             </Stack>
 
@@ -110,11 +130,10 @@ const SideNav = ({ isSideNavOpen, toggleSideNav }: SideNavProps) => {
                 {currentOrg?.name}
               </Typography>
 
-              {/* TODO: Add popover with orgs */}
               <Tooltip title="Twoje organizacje">
                 <IconButton
-                // onClick={restaurantsPopover.handleOpen}
-                // ref={restaurantsPopover.anchorRef}
+                  onClick={orgPopover.handleOpen}
+                  ref={orgPopover.anchorRef}
                 >
                   <SvgIcon fontSize="small" sx={{ color: 'neutral.500' }}>
                     <Icon.ExpandMore />
@@ -128,7 +147,7 @@ const SideNav = ({ isSideNavOpen, toggleSideNav }: SideNavProps) => {
 
           <SideNavList />
 
-          <Divider sx={{ borderColor: 'neutral.700' }} />
+          {/* <Divider sx={{ borderColor: 'neutral.700' }} />
 
           <Box sx={{ px: 2, py: 3 }}>
             <Typography variant="subtitle2" color="neutral.100">
@@ -141,7 +160,7 @@ const SideNav = ({ isSideNavOpen, toggleSideNav }: SideNavProps) => {
 
             <Button
               component="a"
-              href="https://www.youtube.com/@Hegemoth"
+              href="https://github.com/Hegemoth/business-mgmt"
               target="_blank"
               variant="contained"
               fullWidth
@@ -150,9 +169,27 @@ const SideNav = ({ isSideNavOpen, toggleSideNav }: SideNavProps) => {
             >
               FAQ
             </Button>
-          </Box>
+          </Box> */}
         </Stack>
       </Box>
+
+      <CustomPopover
+        title="Wybierz organizację"
+        open={orgPopover.open}
+        onClose={orgPopover.handleClose}
+        anchorEl={orgPopover.anchorRef.current}
+        content={
+          currentOrg
+            ? orgs
+                .filter((org) => org.id !== currentOrg.id)
+                .map((org) => (
+                  <MenuItem key={org.id} onClick={() => changeOrg(org)}>
+                    {org.name}
+                  </MenuItem>
+                ))
+            : []
+        }
+      />
     </Drawer>
   );
 };

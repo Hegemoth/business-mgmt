@@ -1,5 +1,5 @@
-import { Card, CardContent, CardHeader, CircularProgress } from '@mui/material';
-import { DataGrid, useGridApiRef } from '@mui/x-data-grid';
+import { Card, CardContent, CardHeader } from '@mui/material';
+import { DataGridPro, useGridApiRef } from '@mui/x-data-grid-pro';
 import AvatarText from '../../../components/AvatarText';
 import BinaryIcon from '../../../components/BinaryIcon';
 import Cell from '../../../components/Cell';
@@ -10,21 +10,25 @@ import { useTableColumns } from '../../../hooks/useTableColumns';
 import { error, indigo } from '../../../theme/colors';
 import { Employee } from '../../../types/employees';
 import { ModalMode, TableId } from '../../../types/enums';
+import { AsyncPagination } from '../../../types/shared';
+import EmployeesSubtable from './EmployeesSubtable';
 
 interface EmployeesTableProps {
   employees: Employee[];
-  isLoading: boolean;
+  asyncPagination: AsyncPagination<Employee>;
   setAddEditMode: (mode: ModalMode, data?: Employee) => void;
   setDeleteMode: (mode: ModalMode, data?: Employee) => void;
   setChangeActiveStatusMode: (mode: ModalMode, data?: Employee) => void;
+  setAssignMode: (mode: ModalMode, data?: Employee) => void;
 }
 
 const EmployeesTable = ({
   employees,
-  isLoading,
+  asyncPagination,
   setAddEditMode,
   setDeleteMode,
   setChangeActiveStatusMode,
+  setAssignMode,
 }: EmployeesTableProps) => {
   const columns = useTableColumns<Employee>([
     {
@@ -68,7 +72,7 @@ const EmployeesTable = ({
         <IconTooltip
           icon={<Icon.AddPerson />}
           label="Przypisz stanowisko"
-          onClick={() => console.log('soon')}
+          onClick={() => setAssignMode(ModalMode.ADD, row)}
           action
         />,
         <IconTooltip
@@ -90,6 +94,7 @@ const EmployeesTable = ({
   const { dataGridProps } = useTable({
     apiRef: useGridApiRef(),
     uniqueId: TableId.EMPLOYEES,
+    asyncPagination,
   });
 
   return (
@@ -99,16 +104,20 @@ const EmployeesTable = ({
         subheader="Dodaj i modyfikuj pracowników oraz zarządzaj ich stanowiskami"
       />
       <CardContent>
-        {isLoading ? (
-          <CircularProgress size={50} />
-        ) : (
-          <DataGrid
-            rows={employees}
-            columns={columns}
-            loading={isLoading}
-            {...dataGridProps}
-          />
-        )}
+        <DataGridPro
+          rows={employees}
+          columns={columns}
+          getDetailPanelContent={({ row }) => (
+            <EmployeesSubtable employee={row} />
+          )}
+          getDetailPanelHeight={() => "auto"}
+          sx={{
+            '& .MuiDataGrid-detailPanel': {
+              overflow: 'visible',
+            },
+          }}
+          {...dataGridProps}
+        />
       </CardContent>
     </Card>
   );

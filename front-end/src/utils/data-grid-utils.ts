@@ -1,13 +1,18 @@
-import { GridColDef } from '@mui/x-data-grid';
+import {
+  GridColDef,
+  GridColTypeDef,
+  GridRenderCellParams,
+  GridTreeNodeWithRender,
+} from '@mui/x-data-grid-pro';
+import { get } from 'lodash';
 
 export const enhanceColumns = (columns: GridColDef[]): GridColDef[] => {
-  return columns.map((column, i) => {
+  return columns.map((column) => {
     if (column.type !== 'actions') {
       return {
         ...column,
         headerAlign: 'left',
         align: 'left',
-        ...(i === columns.length - 2 && { cellClassName: 'sx-pr' }), // Padding right at prior to last column
       };
     }
 
@@ -20,4 +25,45 @@ export const enhanceColumns = (columns: GridColDef[]): GridColDef[] => {
       cellClassName: 'actions-column',
     };
   });
+};
+
+export const getNestedValues = (
+  params: GridRenderCellParams<any, any, GridTreeNodeWithRender>
+) => {
+  return get(params.row, params.field);
+};
+
+const currencyFormatter = new Intl.NumberFormat('pl-PL', {
+  style: 'currency',
+  currency: 'PLN',
+});
+
+export const dateFormatter = new Intl.DateTimeFormat('pl-PL', {
+  year: 'numeric',
+  month: '2-digit',
+  day: '2-digit',
+});
+
+// const dateAndHourFormatter = new Intl.DateTimeFormat('pl-PL', {
+//   year: 'numeric',
+//   month: '2-digit',
+//   day: '2-digit',
+//   hour: '2-digit',
+//   minute: '2-digit',
+// });
+
+export const displayAsPln: GridColTypeDef = {
+  type: 'number',
+  valueFormatter: ({ value }) => currencyFormatter.format(Number(value ?? 0)),
+};
+
+export const displayAsPct: GridColTypeDef = {
+  type: 'number',
+  valueFormatter: ({ value }) => (value !== undefined ? `${value}%` : '---'),
+};
+
+export const displayAsDate: GridColTypeDef = {
+  type: 'date',
+  // @ts-ignore
+  valueFormatter: (value ) => value && dateFormatter.format(new Date(value)),
 };

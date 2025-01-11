@@ -448,13 +448,13 @@
       "orgId": "999c973d-19e5-4b66-8ff3-5efc4c16f47b"
     },
     {
-      "id": "c63bfffd-4c0f-4e9b-810b-7225f743d9e1",
       "firstName": "Agnieszka",
       "lastName": "Lis",
       "email": "agnieszka.lis@gmail.com",
       "phone": "+48 234 567 890",
       "active": true,
-      "orgId": "999c973d-19e5-4b66-8ff3-5efc4c16f47b"
+      "orgId": "999c973d-19e5-4b66-8ff3-5efc4c16f47b",
+      "id": "c63bfffd-4c0f-4e9b-810b-7225f743d9e1"
     },
     {
       "id": "f4248c11-94b2-4646-b7ca-c4db85a25728",
@@ -468,16 +468,69 @@
   ],
   "employeepositions": [
     {
+      "id": "11345e7f-d464-47b0-8870-1e5cf6d093d1",
       "orgId": "999c973d-19e5-4b66-8ff3-5efc4c16f47b",
       "name": "Kierowca",
-      "color": "#2f2cdd",
-      "id": "11345e7f-d464-47b0-8870-1e5cf6d093d1"
+      "color": "#2f2cdd"
     },
     {
       "name": "Frontend Developer",
       "color": "#4bc11f",
       "orgId": "999c973d-19e5-4b66-8ff3-5efc4c16f47b",
       "id": "i3MAtqx"
+    }
+  ],
+  "employeeassignments": [
+    {
+      "id": "8e85b2a1-4c0e-4b15-9329-a7d77eec4539",
+      "orgId": "999c973d-19e5-4b66-8ff3-5efc4c16f47b",
+      "employeeId": "f0eb6065-b292-4a83-b0ff-b6a2619f27b1",
+      "positionId": "11345e7f-d464-47b0-8870-1e5cf6d093d1",
+      "rate": 35,
+      "paymentPeriod": "hourly",
+      "employmentType": "UOP",
+      "empStart": "2025-01-04"
+    },
+    {
+      "id": "8e85b2a1-4c0e-4b15-9329-a7d77eec4539",
+      "orgId": "999c973d-19e5-4b66-8ff3-5efc4c16f47b",
+      "employeeId": "f865aad0-c9b1-4e3f-ae8c-d2a96a338c38",
+      "positionId": "11345e7f-d464-47b0-8870-1e5cf6d093d1",
+      "rate": 8000,
+      "paymentPeriod": "monthly",
+      "employmentType": "B2B",
+      "empStart": "2025-01-04"
+    },
+    {
+      "positionId": "11345e7f-d464-47b0-8870-1e5cf6d093d1",
+      "rate": 6000,
+      "employmentType": "UOP",
+      "paymentPeriod": "monthly",
+      "empStart": "2025-01-08",
+      "empEnd": null,
+      "employeeId": "a8276fd8-9221-4d56-8f2c-27be1b839b01",
+      "orgId": "999c973d-19e5-4b66-8ff3-5efc4c16f47b",
+      "id": "bUf41ZO"
+    },
+    {
+      "positionId": "11345e7f-d464-47b0-8870-1e5cf6d093d1",
+      "rate": 5000,
+      "employmentType": "UOP",
+      "paymentPeriod": "monthly",
+      "empStart": "2025-01-08",
+      "employeeId": "a2671c57-8498-49ea-b658-9d5420aee32c",
+      "orgId": "999c973d-19e5-4b66-8ff3-5efc4c16f47b",
+      "id": "VbWfOF-"
+    },
+    {
+      "positionId": "i3MAtqx",
+      "rate": 12000,
+      "employmentType": "B2B",
+      "paymentPeriod": "hourly",
+      "empStart": "2025-01-08",
+      "empEnd": "2025-03-08",
+      "employeeId": "a2671c57-8498-49ea-b658-9d5420aee32c",
+      "id": "V8VvVsO"
     }
   ]
 }

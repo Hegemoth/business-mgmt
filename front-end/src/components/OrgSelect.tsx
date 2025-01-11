@@ -3,8 +3,6 @@ import { useDispatch } from 'react-redux';
 import { setCurrentOrg } from '../redux/slices/appContextSlice';
 import { Organization } from '../types/organization';
 
-// TODO Component
-
 interface OrgSelectProps {
   orgs: Organization[];
 }

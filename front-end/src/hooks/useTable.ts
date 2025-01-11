@@ -1,23 +1,27 @@
-import { DataGridProps, GridApi } from '@mui/x-data-grid';
+import { DataGridProProps, GridApi as GridApiPro } from '@mui/x-data-grid-pro';
 import { MutableRefObject } from 'react';
+import Icon from '../components/Icon';
 import { TableId } from '../types/enums';
+import { AsyncPagination } from '../types/shared';
 
 interface TableConfig {
-  apiRef?: MutableRefObject<GridApi>;
-  uniqueId?: TableId;
+  apiRef: MutableRefObject<GridApiPro | null>;
+  uniqueId: TableId;
+  asyncPagination?: AsyncPagination<any>;
   simpleTable?: boolean;
 }
 
 interface TableReturn {
-  dataGridProps: Partial<DataGridProps>;
+  dataGridProps: Partial<DataGridProProps>;
 }
 
 export const useTable = ({
   apiRef,
   uniqueId,
+  asyncPagination,
   simpleTable = false,
 }: TableConfig): TableReturn => {
-  if (simpleTable) {
+  if (simpleTable || !asyncPagination) {
     return {
       dataGridProps: {
         hideFooter: true,
@@ -27,8 +31,8 @@ export const useTable = ({
 
   return {
     dataGridProps: {
+      apiRef: apiRef as MutableRefObject<GridApiPro>,
       className: `datagrid-${uniqueId}`,
-      apiRef,
       pagination: true,
       disableRowSelectionOnClick: true,
       autoHeight: true,
@@ -39,39 +43,32 @@ export const useTable = ({
         outliersFactor: 1.5,
         expand: false,
       },
-      pageSizeOptions: [8, 25, 50],
+      pinnedColumns: { right: ['actions'] },
+      pageSizeOptions: [25, 50],
       autosizeOnMount: true,
       sx: {
         '.actions-header': {
           borderLeft: '1px solid #ddd',
-          borderRight: '1px solid #ddd',
         },
         '.actions-column': {
           borderLeft: '1px solid #ddd',
-          borderRight: '1px solid #ddd',
-        },
-        '.sx-pr': {
-          pr: 8,
         },
       },
+      slots: {
+        detailPanelExpandIcon: Icon.ChevronRight,
+        detailPanelCollapseIcon: Icon.ExpandMore
+      },
+      loading: asyncPagination.isFetching,
+      rowCount: asyncPagination.dataLength,
+      paginationMode: 'server',
+      onPaginationModelChange: asyncPagination.changePagination,
+      sortingMode: 'server',
+      onSortModelChange: asyncPagination.changeSort,
+      paginationModel: {
+        page: asyncPagination.pageIndex as number,
+        pageSize: asyncPagination.pageSize as number,
+      },
+      ...(asyncPagination && { key: String(asyncPagination?.isSuccess) }),
     },
   };
 };
-
-// const isFirstRenderRef = useRef(true);
-
-// const handleAutosizeColumns = () => {
-//   if (apiRef?.current) {
-//     apiRef.current.autosizeColumns();
-
-//     setTimeout(() => {
-//       isFirstRenderRef.current = false;
-//     }, 1000);
-//   }
-// };
-
-// const onStateChange = () => {
-//   if (apiRef?.current && isFirstRenderRef.current) {
-//     handleAutosizeColumns();
-//   }
-// };

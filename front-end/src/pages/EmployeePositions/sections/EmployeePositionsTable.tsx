@@ -1,5 +1,5 @@
 import { Card, CardContent, CardHeader } from '@mui/material';
-import { DataGrid, useGridApiRef } from '@mui/x-data-grid';
+import { DataGridPro, useGridApiRef } from '@mui/x-data-grid-pro';
 import AvatarText from '../../../components/AvatarText';
 import Cell from '../../../components/Cell';
 import ColorMark from '../../../components/ColorMark';
@@ -73,7 +73,7 @@ const EmployeePositionsTable = ({
         subheader="Dodaj i modyfikuj stanowiska"
       />
       <CardContent>
-        <DataGrid
+        <DataGridPro
           rows={positions}
           columns={columns}
           loading={isLoading}

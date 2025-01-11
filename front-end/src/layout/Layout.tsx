@@ -16,7 +16,7 @@ const Layout = ({ children }: LayoutProps) => {
     <Box>
       <TopNav {...{ isSideNavOpen, toggleSideNav }} />
       <SideNav {...{ isSideNavOpen, toggleSideNav }} />
-      <Box sx={{ pl: isSideNavOpen && isLgUp ? `${SIDE_NAV_WIDTH}px` : 0 }}>
+      <Box sx={{ pr: isSideNavOpen && isLgUp ? `${SIDE_NAV_WIDTH}px` : 0 }}>
         {children}
       </Box>
     </Box>

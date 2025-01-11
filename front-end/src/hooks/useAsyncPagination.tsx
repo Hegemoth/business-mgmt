@@ -1,5 +1,5 @@
 import { Button } from '@mui/material';
-import { GridPaginationModel, GridSortModel } from '@mui/x-data-grid';
+import { GridPaginationModel, GridSortModel } from '@mui/x-data-grid-pro';
 import {
   fetchBaseQuery,
   TypedLazyQueryTrigger,
@@ -9,14 +9,13 @@ import Icon from '../components/Icon';
 import {
   ApiResponse,
   CustomParams,
-  Filters,
   QueryParams,
   SimpleFilter,
 } from '../types/api';
 import { LazyRtkQueryResult } from '../types/shared';
 import { getFilterName, getFilterValue } from '../utils/data-utils';
+import { filtersReducer } from './useAsyncPagination/filtersReducer';
 import { useDelayEffect } from './useDelayEffect';
-import { filtersReducer } from './utils/filtersReducer';
 
 type LazyRtkQueryResultExtended<T, K extends string> = LazyRtkQueryResult & {
   dataLength: number;
@@ -42,53 +41,16 @@ type UseAsyncPaginationProps<T, K extends string> = {
   payload?: Record<string, any>;
 };
 
-type UseAsyncPaginationReturn<T, K extends string> = {
-  page: number;
-  pageIndex: number;
-  pageSize: number;
-  setPageSize: (size: number) => void;
-  previousPage: () => void;
-  nextPage: () => void;
-  goToPage: (page: number) => void;
-  canPreviousPage: boolean;
-  canNextPage: boolean;
-  pageOptions: number[];
-  refetch: () => void;
-  filters: Filters;
-  sortKey: string | null;
-  changeSort: (model: GridSortModel) => void;
-  changePagination: (model: GridPaginationModel) => void;
-  ResetButton: () => JSX.Element | null;
-  currentData: ApiResponse<T>;
-  dataLength: number;
-  enpointName: string;
-  fulfilledTimeStamp: number;
-  isError: boolean;
-  isFetching: boolean;
-  isLoading: boolean;
-  isSuccess: boolean;
-  isUninitialized: boolean;
-  original: ApiResponse<T>;
-  originalArgs: QueryParams;
-  requestId: string;
-  reset: () => void;
-  startedTimeStamp: number;
-  status: string;
-} & {
-  [key in K]: T[];
-};
-
 export function useAsyncPagination<T, K extends string = string>({
   lazyRtkQuery,
   queryKey,
   queryParams,
-  payload,
-}: UseAsyncPaginationProps<T, K>): UseAsyncPaginationReturn<T, K> {
+  payload: initialPayload,
+}: UseAsyncPaginationProps<T, K>) {
   const [page, setPage] = useState(0);
   const [pageSize, setPageSize] = useState(25);
   const [sortKey, setSortKey] = useState(queryParams?.s || null);
-  const [paramsState, setParamsState] = useState(queryParams);
-  const [canRefetch, setCanRefetch] = useState(true);
+  const [payload, setPayload] = useState(initialPayload || {});
 
   const [filtersState, dispatchFilters] = useReducer(
     filtersReducer,
@@ -106,20 +68,14 @@ export function useAsyncPagination<T, K extends string = string>({
   }) as unknown as QueryOperationResult<T, K>;
 
   useDelayEffect(
-    () => {
-      if (canRefetch) {
-        setParamsState({
-          offset: pageSize * page,
-          limit: pageSize,
-          ...queryParams,
-        });
-        trigger({ ...paramsState, ...payload });
-        setCanRefetch(false);
-      } else {
-        setCanRefetch(true);
-      }
-    },
-    [paramsState, page, pageSize],
+    () =>
+      trigger({
+        ...queryParams,
+        offset: pageSize * page,
+        limit: pageSize,
+        ...payload,
+      }),
+    [page, pageSize, payload],
     100
   );
 
@@ -177,9 +133,9 @@ export function useAsyncPagination<T, K extends string = string>({
 
   const isFiltersChanged = useMemo(
     () =>
-      JSON.stringify(queryParams?.f?.sort() || []) !==
-      JSON.stringify(paramsState?.f?.sort() || []),
-    [queryParams?.f, paramsState?.f]
+      JSON.stringify(queryParams?.f?.sort()) !==
+      JSON.stringify(filtersState?.sort()),
+    [queryParams?.f, filtersState]
   );
 
   const ResetButton = (): JSX.Element | null => {
@@ -202,6 +158,7 @@ export function useAsyncPagination<T, K extends string = string>({
     previousPage,
     nextPage,
     goToPage: setPage,
+    refetch: () => trigger(result.originalArgs),
     canPreviousPage: page > 0,
     canNextPage: result.dataLength - pageSize * page > pageSize,
     pageOptions: Array.from(
@@ -213,15 +170,16 @@ export function useAsyncPagination<T, K extends string = string>({
       remove: removeFilter,
       reset: resetFilters,
       getFilterByName,
-      current: paramsState?.f,
+      current: filtersState,
     },
-    refetch: () => trigger(result.originalArgs),
     ResetButton,
     sortKey,
+    setSortKey,
+    setPayload,
     changeSort,
     changePagination,
     ...result,
-  };
+  } as const;
 }
 
 export default useAsyncPagination;

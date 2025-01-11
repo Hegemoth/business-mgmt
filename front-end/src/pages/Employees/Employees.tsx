@@ -9,34 +9,53 @@ import Pill from '../../components/Pill';
 import { useAsyncPagination } from '../../hooks/useAsyncPagination';
 import { useModalMode } from '../../hooks/useModalMode';
 import {
+  useAddEmployeeAssignmentMutation,
   useAddEmployeeMutation,
   useDeleteEmployeeMutation,
+  useGetEmployeePositionsQuery,
   useLazyGetEmployeesQuery,
   useUpdateEmployeeMutation,
 } from '../../redux/api/employeesApi';
-import { Employee, EmployeeData } from '../../types/employees';
+import {
+  Employee,
+  EmployeeAssignmentData,
+  EmployeeData,
+} from '../../types/employees';
 import { ModalMode } from '../../types/enums';
+import { getFullName } from '../../utils/data-utils';
 import { toastErr } from '../../utils/form-utils';
 import AddEditEmployeeModal from './modals/AddEditEmployeeModal';
+import AssignEmployeePositionModal from './modals/AssignEmployeePositionModal';
 import EmployeesTable from './sections/EmployeesTable';
 
 const Employees = () => {
-  const { employees, refetch, ...asyncPagination } = useAsyncPagination<Employee>({
-    lazyRtkQuery: useLazyGetEmployeesQuery as any,
-    queryKey: "employees",
-    queryParams: {
-      // f: [`active:true`],
-      s: "firstName",
-    },
-  });
+  const { employees, refetch, ...asyncPagination } =
+    useAsyncPagination<Employee>({
+      lazyRtkQuery: useLazyGetEmployeesQuery as any,
+      queryKey: 'employees',
+      queryParams: {
+        // f: [`active:true`],
+        s: 'firstName',
+      },
+    });
 
-  console.log('asyncPagination', { employees, ...asyncPagination })
+  const { positions } = useGetEmployeePositionsQuery(
+    { limit: 50 },
+    {
+      selectFromResult: ({ data }) => ({
+        positions: data?.items || [],
+      }),
+    }
+  );
 
   const [addEmployee, addEmployeeState] = useAddEmployeeMutation();
   const [updateEmployee, updateEmployeeState] = useUpdateEmployeeMutation();
   const [deleteEmployee, deleteEmployeeState] = useDeleteEmployeeMutation();
+  const [addAssignment, addAssignmentState] =
+    useAddEmployeeAssignmentMutation();
   const [addEditMode, setAddEditMode, addEditValues] = useModalMode<Employee>();
   const [deleteMode, setDeleteMode, deleteValues] = useModalMode<Employee>();
+  const [assignMode, setAssignMode, assignValues] = useModalMode<Employee>();
   const [
     changeActiveStatusMode,
     setChangeActiveStatusMode,
@@ -114,6 +133,28 @@ const Employees = () => {
       });
   };
 
+  const onAssignPosition = (
+    data: Omit<EmployeeAssignmentData, 'employeeId'>
+  ): void => {
+    if (!assignValues) return toastErr();
+
+    const promise = addAssignment({
+      ...data,
+      employeeId: assignValues.id,
+    }).unwrap();
+
+    toast
+      .promise(promise, {
+        pending: 'Przypisywanie stanowiska...',
+        success: 'Pomyślnie przypisano stanowisko',
+        error: 'Nie udało się przypisać stanowiska',
+      })
+      .then(() => {
+        setAssignMode(ModalMode.CLOSED);
+        refetch();
+      });
+  };
+
   return (
     <PageContainer>
       <PageTitle
@@ -133,8 +174,13 @@ const Employees = () => {
         <Grid size={{ xs: 12 }}>
           <EmployeesTable
             employees={employees || []}
-            isLoading={asyncPagination.isFetching}
-            {...{ setAddEditMode, setDeleteMode, setChangeActiveStatusMode }}
+            asyncPagination={asyncPagination as any}
+            {...{
+              setAddEditMode,
+              setDeleteMode,
+              setChangeActiveStatusMode,
+              setAssignMode,
+            }}
           />
         </Grid>
       </Grid>
@@ -155,7 +201,7 @@ const Employees = () => {
           <>
             Usuń pracownika{' '}
             <Pill severity="error">
-              {deleteValues?.firstName} {deleteValues?.lastName}
+              {getFullName(deleteValues)}
             </Pill>
           </>
         }
@@ -182,8 +228,7 @@ const Employees = () => {
         <Alert severity="warning">
           Czy na pewno chcesz zmienić status użytkownika{' '}
           <Pill severity="warning">
-            {changeActiveStatusValues?.firstName}{' '}
-            {changeActiveStatusValues?.lastName}
+            {getFullName(changeActiveStatusValues)}
           </Pill>{' '}
           na{' '}
           <strong>
@@ -192,6 +237,14 @@ const Employees = () => {
           ?
         </Alert>
       </ConfirmationModal>
+
+      <AssignEmployeePositionModal
+        mode={assignMode}
+        setMode={() => setAssignMode(ModalMode.CLOSED)}
+        positions={positions}
+        submit={onAssignPosition}
+        isLoading={addAssignmentState.isLoading}
+      />
     </PageContainer>
   );
 };

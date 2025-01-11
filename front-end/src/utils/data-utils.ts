@@ -10,11 +10,13 @@ export const getUnit = (unit: Unit): string => {
   return units[unit];
 };
 
-export const getFullName = (obj: {
-  firstName: string;
-  lastName: string;
-}): string => {
-  return `${obj.firstName} ${obj.lastName}`;
+export const getFullName = (
+  obj: {
+    firstName: string;
+    lastName: string;
+  } | null
+): string => {
+  return obj ? `${obj.firstName} ${obj.lastName}` : '';
 };
 
 export const getFilterName = (filter: string): string => {

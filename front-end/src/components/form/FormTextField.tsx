@@ -4,9 +4,10 @@ import { Field, FieldProps } from 'formik';
 interface FormTextFieldProps {
   name: string;
   label: string;
+  number?: boolean;
 }
 
-const FormTextField = ({ name, label }: FormTextFieldProps) => (
+const FormTextField = ({ name, label, number }: FormTextFieldProps) => (
   <Field name={name}>
     {({ field, meta }: FieldProps) => (
       <TextField
@@ -15,6 +16,7 @@ const FormTextField = ({ name, label }: FormTextFieldProps) => (
         label={label}
         helperText={meta.touched && meta.error}
         error={meta.touched && !!meta.error}
+        {...(number && { type: 'number' })}
       />
     )}
   </Field>

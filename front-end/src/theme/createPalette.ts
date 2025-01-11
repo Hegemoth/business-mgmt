@@ -1,8 +1,14 @@
 import { common } from '@mui/material/colors';
-import { alpha } from '@mui/material/styles';
+import { alpha, PaletteOptions } from '@mui/material/styles';
 import { error, indigo, info, neutral, success, warning } from './colors';
 
-export const createPalette = () => {
+declare module '@mui/material/styles' {
+  interface PaletteOptions {
+    neutral: Record<number, string>;
+  }
+}
+
+export const createPalette = (): PaletteOptions => {
   return {
     action: {
       active: neutral[500],
@@ -13,14 +19,14 @@ export const createPalette = () => {
       selected: alpha(neutral[900], 0.12),
     },
     background: {
-      default: neutral[25],
-      paper: neutral[50],
+      default: common.white,
+      paper: common.white,
     },
     divider: '#F2F4F7',
     error,
     info,
     mode: 'light',
-    neutral: neutral,
+    neutral,
     primary: indigo,
     success,
     text: {

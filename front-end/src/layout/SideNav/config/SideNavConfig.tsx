@@ -133,15 +133,15 @@ const SideNavConfig = (): NavConfig => {
         },
       ],
     },
-    {
-      category: 'global',
-      items: [
-        {
-          title: 'Global',
-          icon: <Icon.Global />,
-        },
-      ],
-    },
+    // {
+    //   category: 'global',
+    //   items: [
+    //     {
+    //       title: 'Global',
+    //       icon: <Icon.Global />,
+    //     },
+    //   ],
+    // },
   ];
 };
 

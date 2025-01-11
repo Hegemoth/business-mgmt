@@ -3,6 +3,8 @@ import baseQuery from '../../shared/baseQuery';
 import { ApiResponse, QueryParams } from '../../types/api';
 import {
   Employee,
+  EmployeeAssignment,
+  EmployeeAssignmentData,
   EmployeeData,
   EmployeePayload,
   EmployeePosition,
@@ -25,22 +27,19 @@ export const employeesApi = createApi({
       query: (body) => ({
         url: '/employees',
         method: 'POST',
-        body: {
-          ...body,
-          active: true,
-        },
+        body,
       }),
     }),
 
     updateEmployee: builder.mutation<Employee, EmployeePayload & { id: uuid }>({
       query: ({ id, ...body }) => ({
         url: `/employees/${id}`,
-        method: 'PUT',
+        method: 'PATCH',
         body,
       }),
     }),
 
-    deleteEmployee: builder.mutation<void, string>({
+    deleteEmployee: builder.mutation<void, uuid>({
       query: (id) => ({
         url: `/employees/${id}`,
         method: 'DELETE',
@@ -74,14 +73,50 @@ export const employeesApi = createApi({
     >({
       query: ({ id, ...body }) => ({
         url: `/employeepositions/${id}`,
-        method: 'PUT',
+        method: 'PATCH',
         body,
       }),
     }),
 
-    deleteEmployeePosition: builder.mutation<void, string>({
+    deleteEmployeePosition: builder.mutation<void, uuid>({
       query: (id) => ({
         url: `/employeepositions/${id}`,
+        method: 'DELETE',
+      }),
+    }),
+
+    getEmployeeAssignments: builder.query<ApiResponse<EmployeeAssignment>, QueryParams>({
+      query: (params) => ({
+        url: '/employeeassignments',
+        params,
+      }),
+    }),
+
+    addEmployeeAssignment: builder.mutation<
+      EmployeeAssignment,
+      EmployeeAssignmentData
+    >({
+      query: (body) => ({
+        url: '/employeeassignments',
+        method: 'POST',
+        body,
+      }),
+    }),
+
+    updateEmployeeAssignment: builder.mutation<
+      EmployeeAssignment,
+      EmployeeAssignmentData & { id: uuid }
+    >({
+      query: ({ id, ...body }) => ({
+        url: `/employeeassignments/${id}`,
+        method: 'PATCH',
+        body,
+      }),
+    }),
+
+    deleteEmployeeAssignment: builder.mutation<void, uuid>({
+      query: (id) => ({
+        url: `/employeeassignments/${id}`,
         method: 'DELETE',
       }),
     }),
@@ -93,8 +128,13 @@ export const {
   useAddEmployeeMutation,
   useUpdateEmployeeMutation,
   useDeleteEmployeeMutation,
+  useGetEmployeePositionsQuery,
   useLazyGetEmployeePositionsQuery,
   useAddEmployeePositionMutation,
   useUpdateEmployeePositionMutation,
   useDeleteEmployeePositionMutation,
+  useLazyGetEmployeeAssignmentsQuery,
+  useAddEmployeeAssignmentMutation,
+  useUpdateEmployeeAssignmentMutation,
+  useDeleteEmployeeAssignmentMutation,
 } = employeesApi;

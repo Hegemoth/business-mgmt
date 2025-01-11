@@ -1,7 +1,6 @@
 const jsonServer = require('json-server');
 const path = require('path');
 const cors = require('cors');
-const { v4: uuidv4 } = require('uuid');
 
 const server = jsonServer.create();
 const router = jsonServer.router(path.join(__dirname, 'db.json'));
@@ -11,10 +10,7 @@ server.use(cors());
 server.use(middlewares);
 server.use(jsonServer.bodyParser);
 
-let l = null;
-let o = 0;
-
-server.use((req, res, next) => {
+server.use('/api', (req, res, next) => {
   const orgId = req.headers['x-org-id'];
 
   if (orgId) {
@@ -40,16 +36,13 @@ server.use((req, res, next) => {
     req.query._order = req.query.s.startsWith('-') ? 'desc' : 'asc';
   }
 
-  if (req.query.limit) {
-    req.query._limit = req.query.limit;
-  }
+  req.query._limit = Number(req.query.limit) || 10;
+  req.query._start = Number(req.query.offset) || 0
 
-  if (req.query.offset) {
-    req.query._start = req.query.offset;
-  }
-
-  l = Number(req.query.limit) || null;
-  o = Number(req.query.offset) || 0;
+  req.pagination = {
+    limit: req.query._limit,
+    offset: req.query._start,
+  };
 
   next();
 });
@@ -64,8 +57,8 @@ server.use('/api', (req, res, next) => {
       const response = {
         items: parsedData,
         total: Number(res.getHeader('X-Total-Count')) || 0,
-        limit: l,
-        offset: o,
+        limit: req.pagination.limit,
+        offset: req.pagination.offset,
       };
 
       originalSend.call(res, JSON.stringify(response));
@@ -80,5 +73,5 @@ server.use('/api', (req, res, next) => {
 server.use('/api', router);
 
 server.listen(3000, () => {
-  console.log('JSON Server is running on http://localhost:3000');
+  console.log('JSON Server is running on http://localhost:3000/api');
 });

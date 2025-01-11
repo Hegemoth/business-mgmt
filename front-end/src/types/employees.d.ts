@@ -1,3 +1,4 @@
+import { EmploymentType, PaymentPeriod } from './enums';
 import { DateType, uuid } from './shared';
 
 interface Employee {
@@ -10,10 +11,7 @@ interface Employee {
   phone?: string;
 }
 
-type EmployeeData = Pick<
-  Employee,
-  'firstName' | 'lastName' | 'email' | 'phone'
->;
+type EmployeeData = Omit<Employee, 'id' | 'orgId'>;
 
 type EmployeePayload = EmployeeData & { active?: boolean };
 
@@ -24,7 +22,21 @@ interface EmployeePosition {
   color: string;
 }
 
-type EmployeePositionData = Pick<EmployeePosition, 'name' | 'color'>;
+type EmployeePositionData = Omit<EmployeePosition, 'id' | 'orgId'>;
+
+interface EmployeeAssignment {
+  id: uuid;
+  orgId: uuid;
+  employeeId: uuid;
+  positionId: uuid;
+  rate: number;
+  paymentPeriod: PaymentPeriod;
+  employmentType: EmploymentType;
+  empStart: DateType;
+  empEnd?: DateType;
+}
+
+type EmployeeAssignmentData = Omit<EmployeeAssignment, 'id' | 'orgId'>;
 
 interface EmployeeShift {
   id: uuid;

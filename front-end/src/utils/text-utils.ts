@@ -9,3 +9,11 @@ export const capitalizeFull = (text: string): string => {
 export const getFirstLetter = (text: string): string => {
   return text.charAt(0).toUpperCase();
 };
+
+export const toKebabCase = (text: string): string => {
+  return text
+    .trim()
+    .toLowerCase()
+    .replace(/\s+/g, '-')
+    .replace(/[^a-z0-9-]/g, '');
+};

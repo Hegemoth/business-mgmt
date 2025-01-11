@@ -1,4 +1,4 @@
-import { GridColDef, GridValidRowModel } from '@mui/x-data-grid';
+import { GridColDef, GridValidRowModel } from '@mui/x-data-grid-pro';
 import { get } from 'lodash';
 import { AGGREGATE_ROW } from '../constants/constants';
 

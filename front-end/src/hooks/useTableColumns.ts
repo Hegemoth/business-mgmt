@@ -1,4 +1,4 @@
-import { GridColDef, GridValidRowModel } from '@mui/x-data-grid';
+import { GridColDef, GridValidRowModel } from '@mui/x-data-grid-pro';
 import { useMemo } from 'react';
 import { enhanceColumns } from '../utils/data-grid-utils';
 import { useTableAggregate } from './useTableAggregate';

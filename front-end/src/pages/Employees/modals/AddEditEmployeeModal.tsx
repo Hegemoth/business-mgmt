@@ -9,9 +9,11 @@ import {
   Grid2 as Grid,
 } from '@mui/material';
 import { Form, Formik } from 'formik';
+import { omit } from 'lodash';
 import * as Yup from 'yup';
-import FormTextField from '../../../components/FormTextField';
-import FormWrapper from '../../../components/FormWrapper';
+import FormTextField from '../../../components/form/FormTextField';
+import FormWrapper from '../../../components/form/FormWrapper';
+import { FIELD_REQUIRED } from '../../../constants/constants';
 import { Employee, EmployeeData } from '../../../types/employees';
 import { ModalMode } from '../../../types/enums';
 
@@ -24,8 +26,8 @@ interface AddEditEmployeeModalProps {
 }
 
 const validationSchema = Yup.object({
-  firstName: Yup.string().required('Imię jest wymagane'),
-  lastName: Yup.string().required('Nazwisko jest wymagane'),
+  firstName: Yup.string().required(FIELD_REQUIRED),
+  lastName: Yup.string().required(FIELD_REQUIRED),
   email: Yup.string().email('Niepoprawny adres email'),
   phone: Yup.string(),
 });
@@ -39,8 +41,8 @@ const AddEditEmployeeModal = ({
 }: AddEditEmployeeModalProps) => {
   const initialValues =
     mode === ModalMode.EDIT && values !== null
-      ? values
-      : { firstName: '', lastName: '', email: '', phone: '' };
+      ? omit(values, ['id', 'orgId'])
+      : { firstName: '', lastName: '', email: '', phone: '', active: true };
 
   return (
     <Dialog open={!!mode} onClose={() => setMode(ModalMode.CLOSED)}>
@@ -55,17 +57,16 @@ const AddEditEmployeeModal = ({
 
             <DialogContent>
               <DialogContentText>
-                Aby {mode === ModalMode.ADD ? 'dodać' : 'zedytować dane'} pracownika,
-                podaj poniższe informacje
+                Pola oznaczone gwiazdką są wymagane
               </DialogContentText>
 
               <FormWrapper>
                 <Grid size={{ xs: 12, md: 6 }}>
-                  <FormTextField name="firstName" label="Imię" />
+                  <FormTextField name="firstName" label="Imię*" />
                 </Grid>
 
                 <Grid size={{ xs: 12, md: 6 }}>
-                  <FormTextField name="lastName" label="Nazwisko" />
+                  <FormTextField name="lastName" label="Nazwisko*" />
                 </Grid>
 
                 <Grid size={{ xs: 12, md: 6 }}>

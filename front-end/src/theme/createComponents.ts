@@ -1,4 +1,5 @@
 import {
+  Components,
   createTheme,
   filledInputClasses,
   inputLabelClasses,
@@ -6,12 +7,21 @@ import {
   paperClasses,
   tableCellClasses,
 } from '@mui/material';
+import { common } from '@mui/material/colors';
 
-// Used only to create transitions
+declare module '@mui/material/styles' {
+  interface Components {
+    MuiDataGrid: {
+      styleOverrides?: {
+        root?: any;
+      };
+    };
+  }
+}
+
 const muiTheme = createTheme();
 
-export const createComponents = (config: { palette: any }) => {
-  const { palette } = config;
+export const createComponents = ({ palette }: { palette: any }): Components => {
 
   return {
     MuiDataGrid: {
@@ -150,6 +160,9 @@ export const createComponents = (config: { palette: any }) => {
           width: '100%',
           zIndex: 2000,
         },
+        '::-webkit-scrollbar': {
+          display: "none"
+      }
       },
     },
     MuiInputBase: {
@@ -268,7 +281,9 @@ export const createComponents = (config: { palette: any }) => {
               transform: 'translate(12px, 6px) scale(0.85)',
             },
             [`&.${inputLabelClasses.outlined}`]: {
-              transform: 'translate(14px, -9px) scale(0.85)',
+              transform: 'translate(10px, -9px) scale(0.85)',
+              backgroundColor: common.white,
+              padding: '0 5px',
             },
           },
         },

@@ -10,9 +10,11 @@ import {
   TextField,
 } from '@mui/material';
 import { Field, FieldProps, Form, Formik } from 'formik';
+import { omit } from 'lodash';
 import * as Yup from 'yup';
-import FormTextField from '../../../components/FormTextField';
-import FormWrapper from '../../../components/FormWrapper';
+import FormTextField from '../../../components/form/FormTextField';
+import FormWrapper from '../../../components/form/FormWrapper';
+import { FIELD_REQUIRED } from '../../../constants/constants';
 import {
   EmployeePosition,
   EmployeePositionData,
@@ -28,8 +30,8 @@ interface AddEditEmployeePositionModalProps {
 }
 
 const validationSchema = Yup.object({
-  name: Yup.string().required('Nazwa jest wymagana'),
-  color: Yup.string().required('Kolor jest wymagany'),
+  name: Yup.string().required(FIELD_REQUIRED),
+  color: Yup.string().required(FIELD_REQUIRED),
 });
 
 const AddEditEmployeePositionModal = ({
@@ -41,7 +43,7 @@ const AddEditEmployeePositionModal = ({
 }: AddEditEmployeePositionModalProps) => {
   const initialValues =
     mode === ModalMode.EDIT && values !== null
-      ? values
+      ? omit(values, ['id', 'orgId'])
       : { name: '', color: '#6366F1' };
 
   return (
@@ -57,12 +59,12 @@ const AddEditEmployeePositionModal = ({
 
             <DialogContent>
               <DialogContentText>
-                Aby dodać stanowisko, podaj poniższe informacje
+                Pola oznaczone gwiazdką są wymagane
               </DialogContentText>
 
               <FormWrapper>
                 <Grid size={{ xs: 12, md: 6 }}>
-                  <FormTextField name="name" label="Nazwa" />
+                  <FormTextField name="name" label="Nazwa*" />
                 </Grid>
 
                 <Grid size={{ xs: 12, md: 6 }}>
@@ -72,13 +74,9 @@ const AddEditEmployeePositionModal = ({
                         {...field}
                         fullWidth
                         type="color"
-                        label="Wybierz kolor"
+                        label="Kolor*"
                         sx={{ borderRadius: '50%', p: 0 }}
-                        helperText={
-                          touched.color && errors.color
-                            ? errors.color
-                            : 'Podaj kolor stanowiska'
-                        }
+                        helperText={touched.color && errors.color}
                         error={touched.color && !!errors.color}
                         onChange={(e) => setFieldValue('color', e.target.value)}
                       />
@@ -100,7 +98,7 @@ const AddEditEmployeePositionModal = ({
                 variant="contained"
                 loading={isLoading}
               >
-                {mode === ModalMode.ADD ? "Dodaj" : "Edytuj"}
+                {mode === ModalMode.ADD ? 'Dodaj' : 'Edytuj'}
               </LoadingButton>
             </DialogActions>
           </Form>

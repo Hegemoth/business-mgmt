@@ -24,5 +24,67 @@
       "id": 6,
       "name": "W Gorącej Wodzie Company"
     }
+  ],
+  "employees": [
+    {
+      "id": "f865aad0-c9b1-4e3f-ae8c-d2a96a338c38",
+      "firstName": "Andrzej",
+      "lastName": "Polej",
+      "email": "andrzej.polej@gmail.com",
+      "phone": "+48 123 345 456",
+      "active": true,
+      "orgId": "999c973d-19e5-4b66-8ff3-5efc4c16f47b"
+    },
+    {
+      "id": "94f26be5-bf6d-4a5d-8b76-994590c3e824",
+      "firstName": "Magdalena",
+      "lastName": "Kowalska",
+      "email": "magdalena.kowalska@gmail.com",
+      "phone": "+48 654 321 098",
+      "active": true,
+      "orgId": "999c973d-19e5-4b66-8ff3-5efc4c16f47b"
+    },
+    {
+      "firstName": "Andrzej",
+      "lastName": "Nowak",
+      "email": "andrzej.nowak@gmail.com",
+      "phone": "+48 789 456 123",
+      "active": true,
+      "orgId": "999c973d-19e5-4b66-8ff3-5efc4c16f47b",
+      "id": "a8276fd8-9221-4d56-8f2c-27be1b839b01"
+    }
+  ],
+  "employeeassignments": [
+    {
+      "id": "8e85b2a1-4c0e-4b15-9329-a7d77eec4539",
+      "orgId": "999c973d-19e5-4b66-8ff3-5efc4c16f47b",
+      "employeeId": "f0eb6065-b292-4a83-b0ff-b6a2619f27b1",
+      "positionId": "11345e7f-d464-47b0-8870-1e5cf6d093d1",
+      "rate": 35,
+      "paymentPeriod": "hourly",
+      "employmentType": "UOP",
+      "empStart": "2025-01-04"
+    },
+    {
+      "id": "8e85b2a1-4c0e-4b15-9329-a7d77eec4539",
+      "orgId": "999c973d-19e5-4b66-8ff3-5efc4c16f47b",
+      "employeeId": "f865aad0-c9b1-4e3f-ae8c-d2a96a338c38",
+      "positionId": "11345e7f-d464-47b0-8870-1e5cf6d093d1",
+      "rate": 8000,
+      "paymentPeriod": "monthly",
+      "employmentType": "B2B",
+      "empStart": "2025-01-04"
+    },
+    {
+      "positionId": "11345e7f-d464-47b0-8870-1e5cf6d093d1",
+      "rate": 6000,
+      "employmentType": "UOP",
+      "paymentPeriod": "monthly",
+      "empStart": "2025-01-08",
+      "empEnd": null,
+      "employeeId": "a8276fd8-9221-4d56-8f2c-27be1b839b01",
+      "orgId": "999c973d-19e5-4b66-8ff3-5efc4c16f47b",
+      "id": "bUf41ZO"
+    }
   ]
 }
