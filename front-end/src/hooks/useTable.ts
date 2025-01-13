@@ -56,7 +56,7 @@ export const useTable = ({
       },
       slots: {
         detailPanelExpandIcon: Icon.ChevronRight,
-        detailPanelCollapseIcon: Icon.ExpandMore
+        detailPanelCollapseIcon: Icon.ExpandMore,
       },
       loading: asyncPagination.isFetching,
       rowCount: asyncPagination.dataLength,
@@ -68,7 +68,6 @@ export const useTable = ({
         page: asyncPagination.pageIndex as number,
         pageSize: asyncPagination.pageSize as number,
       },
-      ...(asyncPagination && { key: String(asyncPagination?.isSuccess) }),
     },
   };
 };

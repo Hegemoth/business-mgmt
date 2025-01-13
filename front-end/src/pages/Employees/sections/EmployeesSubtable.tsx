@@ -202,7 +202,12 @@ const EmployeesSubtable = ({ employee }: EmployeesSubtableProps) => {
       }}
     >
       <Card>
-        <DataGridPro rows={assignements} columns={columns} {...dataGridProps} />
+        <DataGridPro
+          rows={assignements}
+          columns={columns}
+          key={String(asyncPagination.isSuccess)}
+          {...dataGridProps}
+        />
       </Card>
 
       <EditAssignmentModal
@@ -217,19 +222,14 @@ const EmployeesSubtable = ({ employee }: EmployeesSubtableProps) => {
         open={!!deleteMode}
         close={() => setDeleteMode(ModalMode.CLOSED)}
         onConfirm={onDeleteAssignment}
-        title={
-          <>
-            Usuń przypisanie pracownika
-            <Pill severity="error">Usuń przypisanie pracownika</Pill>
-          </>
-        }
+        title={<Pill severity="error">Usuń przypisanie pracownika</Pill>}
         isLoading={deleteAssignmentState.isLoading}
         deletion
       >
         <Alert severity="warning">
           Czy na pewno chcesz usunąć przypisanie pracownika{' '}
-          <Pill severity="primary">{getFullName(employee)}</Pill> do stanowiska{' '}
-          <Pill severity="secondary">
+          <Pill severity="warning">{getFullName(employee)}</Pill> do stanowiska{' '}
+          <Pill severity="warning">
             {positions.find((p) => p.id === deleteValues?.positionId)?.name}
           </Pill>
           ?

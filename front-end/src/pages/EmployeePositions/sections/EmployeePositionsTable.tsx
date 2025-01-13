@@ -9,20 +9,21 @@ import { useTable } from '../../../hooks/useTable';
 import { useTableColumns } from '../../../hooks/useTableColumns';
 import { EmployeePosition } from '../../../types/employees';
 import { ModalMode, TableId } from '../../../types/enums';
+import { AsyncPagination } from '../../../types/shared';
 
-interface EmployeePositionsProps {
+interface EmployeePositionsTableProps {
   positions: EmployeePosition[];
-  isLoading: boolean;
+  asyncPagination: AsyncPagination<EmployeePosition>;
   setAddEditMode: (mode: ModalMode, data?: EmployeePosition) => void;
   setDeleteMode: (mode: ModalMode, data?: EmployeePosition) => void;
 }
 
 const EmployeePositionsTable = ({
   positions,
-  isLoading,
+  asyncPagination,
   setAddEditMode,
   setDeleteMode,
-}: EmployeePositionsProps) => {
+}: EmployeePositionsTableProps) => {
   const columns = useTableColumns<EmployeePosition>([
     {
       field: 'name',
@@ -63,7 +64,8 @@ const EmployeePositionsTable = ({
 
   const { dataGridProps } = useTable({
     apiRef: useGridApiRef(),
-    uniqueId: TableId.EMPLOYEES,
+    uniqueId: TableId.EMPLOYEE_POSITIONS,
+    asyncPagination,
   });
 
   return (
@@ -76,7 +78,7 @@ const EmployeePositionsTable = ({
         <DataGridPro
           rows={positions}
           columns={columns}
-          loading={isLoading}
+          key={String(asyncPagination.isSuccess)}
           {...dataGridProps}
         />
       </CardContent>

@@ -107,10 +107,11 @@ const EmployeesTable = ({
         <DataGridPro
           rows={employees}
           columns={columns}
+          key={String(asyncPagination.isSuccess)}
           getDetailPanelContent={({ row }) => (
             <EmployeesSubtable employee={row} />
           )}
-          getDetailPanelHeight={() => "auto"}
+          getDetailPanelHeight={() => 'auto'}
           sx={{
             '& .MuiDataGrid-detailPanel': {
               overflow: 'visible',

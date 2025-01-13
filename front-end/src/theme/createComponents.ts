@@ -22,7 +22,6 @@ declare module '@mui/material/styles' {
 const muiTheme = createTheme();
 
 export const createComponents = ({ palette }: { palette: any }): Components => {
-
   return {
     MuiDataGrid: {
       styleOverrides: {
@@ -32,19 +31,19 @@ export const createComponents = ({ palette }: { palette: any }): Components => {
             fontWeight: 600,
             backgroundColor: palette.neutral[50],
           },
-          '& .MuiDataGrid-row:nth-child(odd)': {
+          '& .MuiDataGrid-row:nth-of-type(odd)': {
             borderTop: '0.5px solid ',
             borderBottom: '1px solid ',
             borderColor: palette.neutral[100],
             backgroundColor: palette.neutral[25],
           },
-          '& .MuiDataGrid-columnHeader:first-child': {
+          '& .MuiDataGrid-columnHeader:nth-of-type(1)': {
             marginLeft: '0.5rem',
           },
           '& .MuiDataGrid-columnHeader': {
             textTransform: 'uppercase',
           },
-          '& .MuiDataGrid-row .MuiDataGrid-cell:first-child': {
+          '& .MuiDataGrid-row .MuiDataGrid-cell:nth-of-type(1)': {
             marginLeft: '0.5rem',
           },
         },
@@ -161,8 +160,8 @@ export const createComponents = ({ palette }: { palette: any }): Components => {
           zIndex: 2000,
         },
         '::-webkit-scrollbar': {
-          display: "none"
-      }
+          display: 'none',
+        },
       },
     },
     MuiInputBase: {

@@ -1,6 +1,5 @@
 import {
   Box,
-  Button,
   Divider,
   Drawer,
   IconButton,
@@ -30,7 +29,7 @@ import SideNavList from './components/SideNavList';
 
 const drawerPaperProps: SxProps<Theme> = {
   sx: {
-    backgroundColor: 'primary.darkest',
+    backgroundColor: '#02002e',
     color: 'common.white',
     width: SIDE_NAV_WIDTH,
   },

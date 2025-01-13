@@ -20,6 +20,7 @@
     "@mui/x-date-pickers-pro": "^7.23.6",
     "@mui/x-license-pro": "^6.10.2",
     "@reduxjs/toolkit": "^2.2.7",
+    "beautiful-react-hooks": "^5.0.2",
     "date-fns": "^2.28.0",
     "formik": "^2.4.6",
     "lodash": "^4.17.21",

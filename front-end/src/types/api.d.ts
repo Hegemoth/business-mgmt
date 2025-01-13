@@ -33,17 +33,12 @@ interface CustomHeaders {
   };
 }
 
-interface SimpleFilter {
-  name: string;
-  value: string;
-}
-
 interface Filters {
   add: (params: string[]) => void;
   replace: (params: string[]) => void;
   remove: (params: string[]) => void;
   reset: () => void;
-  getFilterByName: (param: string) => SimpleFilter[];
+  getFilterValueByName: (param: string) => string;
   current?: string[];
 }
 

@@ -6,12 +6,7 @@ import {
 } from '@reduxjs/toolkit/query/react';
 import { useMemo, useReducer, useState } from 'react';
 import Icon from '../components/Icon';
-import {
-  ApiResponse,
-  CustomParams,
-  QueryParams,
-  SimpleFilter,
-} from '../types/api';
+import { ApiResponse, CustomParams, QueryParams } from '../types/api';
 import { LazyRtkQueryResult } from '../types/shared';
 import { getFilterName, getFilterValue } from '../utils/data-utils';
 import { filtersReducer } from './useAsyncPagination/filtersReducer';
@@ -75,7 +70,7 @@ export function useAsyncPagination<T, K extends string = string>({
         limit: pageSize,
         ...payload,
       }),
-    [page, pageSize, payload],
+    [page, pageSize, payload, filtersState],
     100
   );
 
@@ -122,13 +117,16 @@ export function useAsyncPagination<T, K extends string = string>({
     setPage(0);
   };
 
-  const getFilterByName = (name: string): SimpleFilter[] => {
-    return filtersState
+  const getFilterValueByName = (name: string, i?: number): string => {
+    const arr = filtersState
       .filter((f) => getFilterName(f) === name)
       .map((f) => ({
         name: getFilterName(f),
         value: getFilterValue(f),
       }));
+
+    if (i) return arr[i]?.value || '';
+    return arr[0]?.value || '';
   };
 
   const isFiltersChanged = useMemo(
@@ -169,7 +167,7 @@ export function useAsyncPagination<T, K extends string = string>({
       replace: replaceFilter,
       remove: removeFilter,
       reset: resetFilters,
-      getFilterByName,
+      getFilterValueByName,
       current: filtersState,
     },
     ResetButton,

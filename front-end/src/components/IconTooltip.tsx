@@ -44,31 +44,36 @@ const IconTooltip = ({
   },
   action,
   ...rest
-}: IconTooltipProps) => (
-  <Tooltip
-    title={locked?.isLocked ? locked.title : label}
-    placement={placement}
-    slotProps={{ popper: { sx: { zIndex: 1600 } } }}
-  >
-    <IconButton
-      onClick={locked.isLocked ? () => null : onClick}
-      disabled={disabled}
-    >
-      <SvgIcon
-        fontSize={action ? 'small' : fontSize}
-        color={locked.isLocked ? 'disabled' : color}
-        {...rest}
-      >
-        {icon}
-      </SvgIcon>
+}: IconTooltipProps) => {
+  // @ts-ignore
+  const { touchRippleRef, ...other } = rest;
 
-      {locked?.isLocked && (
-        <SvgIcon fontSize="small" {...rest} sx={sxLockIcon}>
-          <Icon.Lock />
+  return (
+    <Tooltip
+      title={locked?.isLocked ? locked.title : label}
+      placement={placement}
+      slotProps={{ popper: { sx: { zIndex: 1600 } } }}
+    >
+      <IconButton
+        onClick={locked.isLocked ? () => null : onClick}
+        disabled={disabled}
+      >
+        <SvgIcon
+          fontSize={action ? 'small' : fontSize}
+          color={locked.isLocked ? 'disabled' : color}
+          {...other}
+        >
+          {icon}
         </SvgIcon>
-      )}
-    </IconButton>
-  </Tooltip>
-);
+
+        {locked?.isLocked && (
+          <SvgIcon fontSize="small" {...other} sx={sxLockIcon}>
+            <Icon.Lock />
+          </SvgIcon>
+        )}
+      </IconButton>
+    </Tooltip>
+  );
+};
 
 export default IconTooltip;

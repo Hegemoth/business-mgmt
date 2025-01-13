@@ -1,5 +1,5 @@
 import { Alert, Button, Grid2 as Grid } from '@mui/material';
-import _ from 'lodash';
+import _, { omitBy } from 'lodash';
 import { toast } from 'react-toastify';
 import ConfirmationModal from '../../components/ConfirmationModal';
 import Icon from '../../components/Icon';
@@ -26,15 +26,15 @@ import { getFullName } from '../../utils/data-utils';
 import { toastErr } from '../../utils/form-utils';
 import AddEditEmployeeModal from './modals/AddEditEmployeeModal';
 import AssignEmployeePositionModal from './modals/AssignEmployeePositionModal';
+import EmployeesFilters from './sections/EmployeesFilters.tsx';
 import EmployeesTable from './sections/EmployeesTable';
 
 const Employees = () => {
-  const { employees, refetch, ...asyncPagination } =
+  const { employees, refetch, filters, ...asyncPagination } =
     useAsyncPagination<Employee>({
       lazyRtkQuery: useLazyGetEmployeesQuery as any,
       queryKey: 'employees',
       queryParams: {
-        // f: [`active:true`],
         s: 'firstName',
       },
     });
@@ -63,7 +63,7 @@ const Employees = () => {
   ] = useModalMode<Employee>();
 
   const onAddEmployee = (data: EmployeeData): void => {
-    const nonEmptyData = _.omitBy(data, (v) => v === '') as EmployeeData;
+    const nonEmptyData = omitBy(data, (v) => v === '') as EmployeeData;
     const promise = addEmployee(nonEmptyData);
 
     toast
@@ -170,7 +170,11 @@ const Employees = () => {
         }
       />
 
-      <Grid container>
+      <Grid container spacing={2}>
+        <Grid size={{ xs: 12 }}>
+          <EmployeesFilters filters={filters} />
+        </Grid>
+
         <Grid size={{ xs: 12 }}>
           <EmployeesTable
             employees={employees || []}
@@ -200,9 +204,7 @@ const Employees = () => {
         title={
           <>
             Usuń pracownika{' '}
-            <Pill severity="error">
-              {getFullName(deleteValues)}
-            </Pill>
+            <Pill severity="error">{getFullName(deleteValues)}</Pill>
           </>
         }
         isLoading={deleteEmployeeState.isLoading}

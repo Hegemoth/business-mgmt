@@ -1,12 +1,12 @@
 import { Alert, Button, Grid2 as Grid } from '@mui/material';
-import _ from 'lodash';
-import { useEffect } from 'react';
+import { omitBy } from 'lodash';
 import { toast } from 'react-toastify';
 import ConfirmationModal from '../../components/ConfirmationModal';
 import Icon from '../../components/Icon';
 import PageContainer from '../../components/PageContainer';
 import PageTitle from '../../components/PageTitle';
 import Pill from '../../components/Pill';
+import useAsyncPagination from '../../hooks/useAsyncPagination';
 import { useModalMode } from '../../hooks/useModalMode';
 import {
   useAddEmployeePositionMutation,
@@ -21,7 +21,12 @@ import AddEditEmployeePositionModal from './modals/AddEditEmployeePositionModal'
 import EmployeePositionsTable from './sections/EmployeePositionsTable';
 
 const EmployeePositions = () => {
-  const [getPositions, positions] = useLazyGetEmployeePositionsQuery();
+  const { positions, refetch, ...asyncPagination } =
+    useAsyncPagination<EmployeePosition>({
+      lazyRtkQuery: useLazyGetEmployeePositionsQuery as any,
+      queryKey: 'positions',
+    });
+
   const [addPosition, addPositionState] = useAddEmployeePositionMutation();
   const [updatePosition, updatePositionState] =
     useUpdateEmployeePositionMutation();
@@ -33,10 +38,7 @@ const EmployeePositions = () => {
     useModalMode<EmployeePosition>();
 
   const onAddEmployeePosition = (data: EmployeePositionData): void => {
-    const nonEmptyData = _.omitBy(
-      data,
-      (v) => v === ''
-    ) as EmployeePositionData;
+    const nonEmptyData = omitBy(data, (v) => v === '') as EmployeePositionData;
 
     const promise = addPosition(nonEmptyData);
 
@@ -48,7 +50,7 @@ const EmployeePositions = () => {
       })
       .then(() => {
         setAddEditMode(ModalMode.CLOSED);
-        getPositions({});
+        refetch();
       });
   };
 
@@ -65,7 +67,7 @@ const EmployeePositions = () => {
       })
       .then(() => {
         setAddEditMode(ModalMode.CLOSED);
-        getPositions({});
+        refetch();
       });
   };
 
@@ -82,15 +84,9 @@ const EmployeePositions = () => {
       })
       .then(() => {
         setDeleteMode(ModalMode.CLOSED);
-        getPositions({});
+        refetch();
       });
   };
-
-  useEffect(() => {
-    getPositions({});
-  }, []);
-
-  if (!positions.data) return null;
 
   return (
     <PageContainer>
@@ -110,9 +106,12 @@ const EmployeePositions = () => {
       <Grid container>
         <Grid size={{ xs: 12 }}>
           <EmployeePositionsTable
-            positions={positions.data.items}
-            isLoading={positions.isFetching}
-            {...{ setAddEditMode, setDeleteMode }}
+            {...{
+              positions,
+              asyncPagination: asyncPagination as any,
+              setAddEditMode,
+              setDeleteMode,
+            }}
           />
         </Grid>
       </Grid>

@@ -12,7 +12,7 @@ export const filtersReducer = (
     case 'replace':
       const toBeReplaced = action.filters.map((f) => getFilterName(f));
       return state
-        .reduce((acc, curr) => {
+        ?.reduce((acc, curr) => {
           if (toBeReplaced.includes(getFilterName(curr))) return acc;
           return [curr, ...acc];
         }, [] as string[])
@@ -20,7 +20,7 @@ export const filtersReducer = (
 
     case 'remove':
       const toBeRemoved = action.filters.map((f) => getFilterName(f));
-      return state.reduce((acc, curr) => {
+      return state?.reduce((acc, curr) => {
         if (toBeRemoved.includes(getFilterName(curr))) return acc;
         return [curr, ...acc];
       }, [] as string[]);

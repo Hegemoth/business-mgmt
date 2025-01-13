@@ -1,4 +1,4 @@
-export const BACKEND_URL = 'http://localhost:3000/api/';
+export const BACKEND_URL = import.meta.env.VITE_API_URL;
 
 export const TOP_NAV_HEIGHT = 64;
 export const SIDE_NAV_WIDTH = 280;
