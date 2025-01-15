@@ -1,20 +1,14 @@
 {
   "organizations": [
     {
-      "id": "b8b5be65-15f7-49f1-b72e-846eb528b43f",
-      "name": "The Beatles Company",
+      "id": "999c973d-19e5-4b66-8ff3-5efc4c16f47b",
+      "name": "Garage Inc.",
       "features": [],
       "config": {}
     },
     {
-      "id": "d03b4c67-10f2-4e77-89fc-72d1e41656d5",
-      "name": "The Rollings Stones Company",
-      "features": [],
-      "config": {}
-    },
-    {
-      "id": "f8f5d4e9-9140-48ae-b607-e3075fc0e6c1",
-      "name": "Sun Industries",
+      "id": "830c9453-9f77-4cfe-9b13-3f6e11229404",
+      "name": "W Gorącej Wodzie Company",
       "features": [],
       "config": {}
     },
@@ -25,14 +19,20 @@
       "config": {}
     },
     {
-      "id": "999c973d-19e5-4b66-8ff3-5efc4c16f47b",
-      "name": "Garage Inc.",
+      "id": "f8f5d4e9-9140-48ae-b607-e3075fc0e6c1",
+      "name": "Sun Industries",
       "features": [],
       "config": {}
     },
     {
-      "id": "830c9453-9f77-4cfe-9b13-3f6e11229404",
-      "name": "W Gorącej Wodzie Company",
+      "id": "b8b5be65-15f7-49f1-b72e-846eb528b43f",
+      "name": "The Beatles Company",
+      "features": [],
+      "config": {}
+    },
+    {
+      "id": "d03b4c67-10f2-4e77-89fc-72d1e41656d5",
+      "name": "The Rollings Stones Company",
       "features": [],
       "config": {}
     }
@@ -253,12 +253,6 @@
       "id": "5X2ehBv"
     },
     {
-      "firstName": "Btest1",
-      "lastName": "QWEQWE",
-      "orgId": "999c973d-19e5-4b66-8ff3-5efc4c16f47b",
-      "id": "BB2CyUv"
-    },
-    {
       "id": "d1b26c62-d50f-4b99-b88d-e54a9033c2e6",
       "firstName": "Tomasz",
       "lastName": "Bąk",
@@ -474,33 +468,25 @@
       "color": "#2f2cdd"
     },
     {
-      "name": "Frontend Developer",
+      "name": "Front-end Developer",
       "color": "#4bc11f",
       "orgId": "999c973d-19e5-4b66-8ff3-5efc4c16f47b",
       "id": "i3MAtqx"
+    },
+    {
+      "name": "Java Developer",
+      "color": "#ff0000",
+      "orgId": "999c973d-19e5-4b66-8ff3-5efc4c16f47b",
+      "id": "de8bo2D"
+    },
+    {
+      "name": "UI/UX Designer",
+      "color": "#45ff38",
+      "orgId": "999c973d-19e5-4b66-8ff3-5efc4c16f47b",
+      "id": "oQ-b3bQ"
     }
   ],
   "employeeassignments": [
-    {
-      "id": "8e85b2a1-4c0e-4b15-9329-a7d77eec4539",
-      "orgId": "999c973d-19e5-4b66-8ff3-5efc4c16f47b",
-      "employeeId": "f0eb6065-b292-4a83-b0ff-b6a2619f27b1",
-      "positionId": "11345e7f-d464-47b0-8870-1e5cf6d093d1",
-      "rate": 35,
-      "paymentPeriod": "hourly",
-      "employmentType": "UOP",
-      "empStart": "2025-01-04"
-    },
-    {
-      "id": "8e85b2a1-4c0e-4b15-9329-a7d77eec4539",
-      "orgId": "999c973d-19e5-4b66-8ff3-5efc4c16f47b",
-      "employeeId": "f865aad0-c9b1-4e3f-ae8c-d2a96a338c38",
-      "positionId": "11345e7f-d464-47b0-8870-1e5cf6d093d1",
-      "rate": 8000,
-      "paymentPeriod": "monthly",
-      "employmentType": "B2B",
-      "empStart": "2025-01-04"
-    },
     {
       "positionId": "11345e7f-d464-47b0-8870-1e5cf6d093d1",
       "rate": 6000,
@@ -531,6 +517,138 @@
       "empEnd": "2025-03-08",
       "employeeId": "a2671c57-8498-49ea-b658-9d5420aee32c",
       "id": "V8VvVsO"
+    },
+    {
+      "positionId": "i3MAtqx",
+      "rate": 14000,
+      "employmentType": "B2B",
+      "paymentPeriod": "monthly",
+      "empStart": "2025-02-05T00:00:00.000Z",
+      "employeeId": "f865aad0-c9b1-4e3f-ae8c-d2a96a338c38",
+      "orgId": "999c973d-19e5-4b66-8ff3-5efc4c16f47b",
+      "id": "YO9-pNp"
+    },
+    {
+      "positionId": "de8bo2D",
+      "rate": 10000,
+      "employmentType": "UZ",
+      "paymentPeriod": "monthly",
+      "empStart": "2025-01-16",
+      "employeeId": "f865aad0-c9b1-4e3f-ae8c-d2a96a338c38",
+      "orgId": "999c973d-19e5-4b66-8ff3-5efc4c16f47b",
+      "id": "aL5ZU41"
+    },
+    {
+      "positionId": "oQ-b3bQ",
+      "rate": 6000,
+      "employmentType": "UOP",
+      "paymentPeriod": "hourly",
+      "empStart": "2025-01-15",
+      "employeeId": "f865aad0-c9b1-4e3f-ae8c-d2a96a338c38",
+      "orgId": "999c973d-19e5-4b66-8ff3-5efc4c16f47b",
+      "id": "JHMicPC"
+    }
+  ],
+  "materials": [
+    {
+      "id": "c11f1d9b-72be-4425-bc9e-9c731b09f4b5",
+      "orgId": "999c973d-19e5-4b66-8ff3-5efc4c16f47b",
+      "name": "Pręt stalowy",
+      "unit": "kg",
+      "netCost": 50.0,
+      "taxRate": 18.0,
+      "grossCost": 59.0,
+      "active": true
+    },
+    {
+      "id": "d21a2d8a-19fa-4827-8aef-2c8b79214f7d",
+      "orgId": "999c973d-19e5-4b66-8ff3-5efc4c16f47b",
+      "name": "Drut miedziany",
+      "unit": "un",
+      "netCost": 20.0,
+      "taxRate": 12.0,
+      "grossCost": 22.4,
+      "active": true
+    },
+    {
+      "id": "e53d2b8c-73ae-4f87-96ef-9c741b89d5f3",
+      "orgId": "999c973d-19e5-4b66-8ff3-5efc4c16f47b",
+      "name": "Blacha aluminiowa",
+      "unit": "kg",
+      "netCost": 30.0,
+      "taxRate": 10.0,
+      "grossCost": 33.0,
+      "active": false
+    },
+    {
+      "id": "a91d2e7a-38ce-46b9-aedf-1d6f3b9819e5",
+      "orgId": "999c973d-19e5-4b66-8ff3-5efc4c16f47b",
+      "name": "Rura żelazna",
+      "unit": "un",
+      "netCost": 100.0,
+      "taxRate": 15.0,
+      "grossCost": 115.0,
+      "active": true
+    },
+    {
+      "id": "f22d3c8f-29fc-4b96-84bf-7a3d129e7a4e",
+      "orgId": "999c973d-19e5-4b66-8ff3-5efc4c16f47b",
+      "name": "Beton",
+      "unit": "kg",
+      "netCost": 40.0,
+      "taxRate": 8.0,
+      "grossCost": 43.2,
+      "active": false
+    },
+    {
+      "id": "b34e5d7f-48bc-43a9-81df-4c9e73a5f4b6",
+      "orgId": "999c973d-19e5-4b66-8ff3-5efc4c16f47b",
+      "name": "Rura PVC",
+      "unit": "un",
+      "netCost": 15.0,
+      "taxRate": 10.0,
+      "grossCost": 16.5,
+      "active": true
+    },
+    {
+      "id": "c62d8e7c-49af-4b92-83bf-5a3d129c7f2b",
+      "orgId": "999c973d-19e5-4b66-8ff3-5efc4c16f47b",
+      "name": "Panel szklany",
+      "unit": "kg",
+      "netCost": 75.0,
+      "taxRate": 20.0,
+      "grossCost": 90.0,
+      "active": false
+    },
+    {
+      "id": "d13f5c7b-28ed-43f8-89cf-3c92f1b6e3a7",
+      "orgId": "999c973d-19e5-4b66-8ff3-5efc4c16f47b",
+      "name": "Cegła",
+      "unit": "un",
+      "netCost": 0.5,
+      "taxRate": 5.0,
+      "grossCost": 0.525,
+      "active": true
+    },
+    {
+      "id": "e94a7d6f-38ec-4f8a-83af-1d5f9b8a7c3e",
+      "orgId": "999c973d-19e5-4b66-8ff3-5efc4c16f47b",
+      "name": "Deska drewniana",
+      "unit": "un",
+      "netCost": 25.0,
+      "taxRate": 18.0,
+      "grossCost": 29.5,
+      "active": true
+    },
+    {
+      "id": "f71c5d8f-48ac-43b7-89cf-6b92c7a5f3e2",
+      "orgId": "999c973d-19e5-4b66-8ff3-5efc4c16f47b",
+      "name": "Farba w wiadrze",
+      "unit": "lt",
+      "netCost": 12.0,
+      "taxRate": 12.0,
+      "grossCost": 13.44,
+      "active": false
     }
   ]
 }

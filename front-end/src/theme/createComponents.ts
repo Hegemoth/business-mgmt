@@ -89,8 +89,7 @@ export const createComponents = ({ palette }: { palette: any }): Components => {
         root: {
           borderRadius: 20,
           [`&.${paperClasses.elevation1}`]: {
-            boxShadow:
-              '0px 5px 22px rgba(0, 0, 0, 0.04), 0px 0px 0px 0.5px rgba(0, 0, 0, 0.03)',
+            boxShadow: '0px 5px 22px rgba(0, 0, 0, 0.04), 0px 0px 0px 0.5px rgba(0, 0, 0, 0.03)',
           },
         },
       },
@@ -108,7 +107,7 @@ export const createComponents = ({ palette }: { palette: any }): Components => {
     MuiCardHeader: {
       defaultProps: {
         titleTypographyProps: {
-          variant: 'h6',
+          variant: 'h4',
         },
         subheaderTypographyProps: {
           variant: 'body2',
@@ -194,10 +193,7 @@ export const createComponents = ({ palette }: { palette: any }): Components => {
           borderWidth: 1,
           overflow: 'hidden',
           borderColor: palette.neutral[200],
-          transition: muiTheme.transitions.create([
-            'border-color',
-            'box-shadow',
-          ]),
+          transition: muiTheme.transitions.create(['border-color', 'box-shadow']),
           '&:hover': {
             backgroundColor: palette.action.hover,
           },
@@ -257,10 +253,7 @@ export const createComponents = ({ palette }: { palette: any }): Components => {
         },
         notchedOutline: {
           borderColor: palette.neutral[200],
-          transition: muiTheme.transitions.create([
-            'border-color',
-            'box-shadow',
-          ]),
+          transition: muiTheme.transitions.create(['border-color', 'box-shadow']),
         },
       },
     },
@@ -282,6 +275,7 @@ export const createComponents = ({ palette }: { palette: any }): Components => {
             [`&.${inputLabelClasses.outlined}`]: {
               transform: 'translate(10px, -9px) scale(0.85)',
               backgroundColor: common.white,
+              borderRadius: '18%',
               padding: '0 5px',
             },
           },
@@ -343,6 +337,26 @@ export const createComponents = ({ palette }: { palette: any }): Components => {
         root: {
           color: '#6C6C6C',
         },
+      },
+    },
+    MuiAlert: {
+      styleOverrides: {
+        root: {
+          '&.MuiAlert-standardInfo': {
+            boxShadow: '0 0 0 1px #e4f8ff',
+          },
+          '&.MuiAlert-filledInfo': {
+            boxShadow: '0 0 0 1px #e4f8ff',
+          },
+          '&.MuiAlert-outlinedInfo': {
+            boxShadow: '0 0 0 1px #e4f8ff',
+          },
+        },
+      },
+    },
+    MuiDialogTitle: {
+      defaultProps: {
+        typography: 'h4',
       },
     },
   };

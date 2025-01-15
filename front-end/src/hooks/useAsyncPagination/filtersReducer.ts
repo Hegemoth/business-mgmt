@@ -1,5 +1,5 @@
 import { FilterAction } from '../../types/api';
-import { getFilterName } from '../../utils/data-utils';
+import { getFilterName, getFilterValue } from '../../utils/data-utils';
 
 export const filtersReducer = (
   state: string[],
@@ -11,12 +11,14 @@ export const filtersReducer = (
 
     case 'replace':
       const toBeReplaced = action.filters.map((f) => getFilterName(f));
+      const replaced = action.filters.filter((f) => getFilterValue(f) !== '');
+
       return state
         ?.reduce((acc, curr) => {
           if (toBeReplaced.includes(getFilterName(curr))) return acc;
           return [curr, ...acc];
         }, [] as string[])
-        .concat(action.filters);
+        .concat(replaced);
 
     case 'remove':
       const toBeRemoved = action.filters.map((f) => getFilterName(f));

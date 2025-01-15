@@ -54,16 +54,16 @@ export const dateFormatter = new Intl.DateTimeFormat('pl-PL', {
 
 export const displayAsPln: GridColTypeDef = {
   type: 'number',
-  valueFormatter: ({ value }) => currencyFormatter.format(Number(value ?? 0)),
+  valueFormatter: (value) => currencyFormatter.format(Number(value ?? 0)),
 };
 
 export const displayAsPct: GridColTypeDef = {
   type: 'number',
-  valueFormatter: ({ value }) => (value !== undefined ? `${value}%` : '---'),
+  valueFormatter: (value) => (value !== undefined ? `${value}%` : '---'),
 };
 
 export const displayAsDate: GridColTypeDef = {
   type: 'date',
   // @ts-ignore
-  valueFormatter: (value ) => value && dateFormatter.format(new Date(value)),
+  valueFormatter: (value) => value && dateFormatter.format(new Date(value)),
 };

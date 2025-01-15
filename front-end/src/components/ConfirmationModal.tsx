@@ -1,11 +1,5 @@
 import { LoadingButton } from '@mui/lab';
-import {
-  Button,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogTitle,
-} from '@mui/material';
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
 
 interface ConfirmationModalProps {
   open: boolean;
@@ -33,12 +27,7 @@ const ConfirmationModal = ({
       <Button onClick={close} variant="outlined">
         Anuluj
       </Button>
-      <LoadingButton
-        onClick={onConfirm}
-        variant="contained"
-        loading={isLoading}
-        autoFocus
-      >
+      <LoadingButton onClick={onConfirm} variant="contained" loading={isLoading} autoFocus>
         {deletion ? 'Usuń' : 'Potwierdź'}
       </LoadingButton>
     </DialogActions>

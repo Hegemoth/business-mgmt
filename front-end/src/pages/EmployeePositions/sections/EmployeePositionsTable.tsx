@@ -28,9 +28,7 @@ const EmployeePositionsTable = ({
     {
       field: 'name',
       headerName: 'Stanowisko',
-      renderCell: ({ row, value }) => (
-        <AvatarText text={value} color={row.color} />
-      ),
+      renderCell: ({ row, value }) => <AvatarText text={value} color={row.color} />,
     },
     {
       field: 'color',
@@ -40,6 +38,7 @@ const EmployeePositionsTable = ({
           <ColorMark color={value} />
         </Cell>
       ),
+      sortable: false,
     },
     {
       field: 'actions',
@@ -70,17 +69,9 @@ const EmployeePositionsTable = ({
 
   return (
     <Card>
-      <CardHeader
-        title="Tabela stanowisk"
-        subheader="Dodaj i modyfikuj stanowiska"
-      />
+      <CardHeader title="Tabela stanowisk" subheader="Dodaj i modyfikuj stanowiska" />
       <CardContent>
-        <DataGridPro
-          rows={positions}
-          columns={columns}
-          key={String(asyncPagination.isSuccess)}
-          {...dataGridProps}
-        />
+        <DataGridPro rows={positions} columns={columns} key={positions.length} {...dataGridProps} />
       </CardContent>
     </Card>
   );

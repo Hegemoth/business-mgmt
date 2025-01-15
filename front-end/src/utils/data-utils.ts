@@ -20,7 +20,8 @@ export const getFullName = (
 };
 
 export const getFilterName = (filter: string): string => {
-  return filter.split(':')[0];
+  const name = filter.split(':')[0];
+  return name.split('_')[0];
 };
 
 export const getFilterValue = (filter: string): string => {

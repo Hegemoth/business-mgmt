@@ -10,6 +10,7 @@ import {
   TextField,
 } from '@mui/material';
 import useDebouncedCallback from 'beautiful-react-hooks/useDebouncedCallback';
+import { useFilterClear } from '../../../hooks/useFilterClear';
 import { Filters } from '../../../types/api';
 
 interface EmployeesFiltersProps {
@@ -17,14 +18,22 @@ interface EmployeesFiltersProps {
 }
 
 const EmployeesFilters = ({ filters }: EmployeesFiltersProps) => {
+  const [firstName, setFirstName] = useFilterClear(filters, 'firstName');
+  const [lastName, setLastName] = useFilterClear(filters, 'firstName');
+  const [activeStatus, setActiveStatus] = useFilterClear(filters, 'active');
+
   const handleFirstNameFilterChange = useDebouncedCallback(
-    (e) => filters.replace([`firstName:${e.target.value}_like`]),
-    [700]
+    (e) => {
+      filters.replace([`firstName_like:${e.target.value}`]);
+    },
+    [500]
   );
 
   const handleLastNameFilterChange = useDebouncedCallback(
-    (e) => filters.replace([`lastName:${e.target.value}_like`]),
-    [700]
+    (e) => {
+      filters.replace([`lastName_like:${e.target.value}`]);
+    },
+    [500]
   );
 
   const activeStatusOptions = [
@@ -41,32 +50,41 @@ const EmployeesFilters = ({ filters }: EmployeesFiltersProps) => {
       />
       <CardContent>
         <Grid container spacing={2}>
-          <Grid size={{ xs: 3 }}>
+          <Grid size={{ xs: 12, sm: 6, md: 3, xl: 2 }}>
             <TextField
               fullWidth
               label="Imię"
-              defaultValue={filters.getFilterValueByName('firstName')}
-              onChange={handleFirstNameFilterChange}
+              value={firstName}
+              onChange={(e) => {
+                setFirstName(e.target.value);
+                handleFirstNameFilterChange(e);
+              }}
             />
           </Grid>
 
-          <Grid size={{ xs: 3 }}>
+          <Grid size={{ xs: 12, sm: 6, md: 3, xl: 2 }}>
             <TextField
               fullWidth
               label="Nazwisko"
-              defaultValue={filters.getFilterValueByName('lastName')}
-              onChange={handleLastNameFilterChange}
+              value={lastName}
+              onChange={(e) => {
+                setLastName(e.target.value);
+                handleLastNameFilterChange(e);
+              }}
             />
           </Grid>
 
-          <Grid size={{ xs: 3 }}>
+          <Grid size={{ xs: 12, sm: 6, md: 3, xl: 2 }}>
             <FormControl fullWidth>
               <InputLabel shrink>Status aktywności</InputLabel>
               <Select
                 label="Status aktywności"
+                value={activeStatus}
+                onChange={(e) => {
+                  setActiveStatus(e.target.value);
+                  filters.replace([`active:${e.target.value}`]);
+                }}
                 displayEmpty
-                value={filters.getFilterValueByName('active')}
-                onChange={(e) => filters.replace([`active:${e.target.value}`])}
               >
                 {activeStatusOptions.map((status) => (
                   <MenuItem key={status.value} value={status.value}>

@@ -47,7 +47,7 @@ const AddEditEmployeePositionModal = ({
       : { name: '', color: '#6366F1' };
 
   return (
-    <Dialog open={!!mode} onClose={() => setMode(ModalMode.CLOSED)}>
+    <Dialog open={!!mode} onClose={() => setMode(ModalMode.CLOSED)} fullWidth maxWidth="xs">
       <Formik {...{ initialValues, validationSchema }} onSubmit={submit}>
         {({ handleSubmit, touched, errors, setFieldValue }) => (
           <Form onSubmit={handleSubmit}>
@@ -63,11 +63,11 @@ const AddEditEmployeePositionModal = ({
               </DialogContentText>
 
               <FormWrapper>
-                <Grid size={{ xs: 12, md: 6 }}>
+                <Grid size={{ xs: 12, md: 7 }}>
                   <FormTextField name="name" label="Nazwa*" />
                 </Grid>
 
-                <Grid size={{ xs: 12, md: 6 }}>
+                <Grid size={{ xs: 12, md: 5 }}>
                   <Field name="color">
                     {({ field }: FieldProps) => (
                       <TextField

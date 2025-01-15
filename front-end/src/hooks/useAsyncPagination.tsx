@@ -1,16 +1,16 @@
 import { Button } from '@mui/material';
 import { GridPaginationModel, GridSortModel } from '@mui/x-data-grid-pro';
-import {
-  fetchBaseQuery,
-  TypedLazyQueryTrigger,
-} from '@reduxjs/toolkit/query/react';
-import { useMemo, useReducer, useState } from 'react';
+import { fetchBaseQuery, TypedLazyQueryTrigger } from '@reduxjs/toolkit/query/react';
+import { useEffect, useMemo, useReducer, useState } from 'react';
 import Icon from '../components/Icon';
 import { ApiResponse, CustomParams, QueryParams } from '../types/api';
 import { LazyRtkQueryResult } from '../types/shared';
 import { getFilterName, getFilterValue } from '../utils/data-utils';
 import { filtersReducer } from './useAsyncPagination/filtersReducer';
-import { useDelayEffect } from './useDelayEffect';
+
+interface ResetButtonProps {
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
+}
 
 type LazyRtkQueryResultExtended<T, K extends string> = LazyRtkQueryResult & {
   dataLength: number;
@@ -46,11 +46,9 @@ export function useAsyncPagination<T, K extends string = string>({
   const [pageSize, setPageSize] = useState(25);
   const [sortKey, setSortKey] = useState(queryParams?.s || null);
   const [payload, setPayload] = useState(initialPayload || {});
+  const [paramsState, setParamsState] = useState<QueryParams | null>(null);
 
-  const [filtersState, dispatchFilters] = useReducer(
-    filtersReducer,
-    queryParams?.f || []
-  );
+  const [filtersState, dispatchFilters] = useReducer(filtersReducer, queryParams?.f || []);
 
   const [trigger, result] = lazyRtkQuery({
     selectFromResult: (res: LazyRtkQueryResult) => ({
@@ -62,17 +60,39 @@ export function useAsyncPagination<T, K extends string = string>({
     }),
   }) as unknown as QueryOperationResult<T, K>;
 
-  useDelayEffect(
-    () =>
+  useEffect(() => {
+    if (paramsState) {
       trigger({
-        ...queryParams,
+        ...paramsState,
         offset: pageSize * page,
         limit: pageSize,
         ...payload,
-      }),
-    [page, pageSize, payload, filtersState],
-    100
-  );
+      });
+    } else {
+      setParamsState({
+        offset: pageSize * page,
+        limit: pageSize,
+        ...queryParams,
+      });
+      trigger({ ...queryParams, ...payload });
+    }
+  }, [paramsState, page, pageSize, payload]);
+
+  useEffect(() => {
+    paramsState &&
+      setParamsState({
+        ...paramsState,
+        f: filtersState,
+      });
+  }, [filtersState]);
+
+  useEffect(() => {
+    paramsState &&
+      setParamsState({
+        ...paramsState,
+        s: sortKey || undefined,
+      });
+  }, [sortKey]);
 
   const previousPage = (): void => {
     setPage(page - 1);
@@ -92,9 +112,7 @@ export function useAsyncPagination<T, K extends string = string>({
       return setSortKey(null);
     }
 
-    model[0].sort === 'asc'
-      ? setSortKey(model[0].field)
-      : setSortKey(`-${model[0].field}`);
+    model[0].sort === 'asc' ? setSortKey(model[0].field) : setSortKey(`-${model[0].field}`);
   };
 
   const addFilter = (filters: string[]): void => {
@@ -130,19 +148,22 @@ export function useAsyncPagination<T, K extends string = string>({
   };
 
   const isFiltersChanged = useMemo(
-    () =>
-      JSON.stringify(queryParams?.f?.sort()) !==
-      JSON.stringify(filtersState?.sort()),
+    () => JSON.stringify(queryParams?.f?.sort() || []) !== JSON.stringify(filtersState?.sort()),
     [queryParams?.f, filtersState]
   );
 
-  const ResetButton = (): JSX.Element | null => {
+  const ResetButton = ({ onClick }: ResetButtonProps): JSX.Element | null => {
     if (!isFiltersChanged) {
       return null;
     }
 
     return (
-      <Button color="error" onClick={resetFilters} startIcon={<Icon.Clear />}>
+      <Button
+        variant="outlined"
+        color="error"
+        onClick={onClick || resetFilters}
+        startIcon={<Icon.Clear />}
+      >
         Wyczyść filtry
       </Button>
     );
@@ -159,9 +180,7 @@ export function useAsyncPagination<T, K extends string = string>({
     refetch: () => trigger(result.originalArgs),
     canPreviousPage: page > 0,
     canNextPage: result.dataLength - pageSize * page > pageSize,
-    pageOptions: Array.from(
-      Array(Math.ceil(result.dataLength / pageSize)).keys()
-    ),
+    pageOptions: Array.from(Array(Math.ceil(result.dataLength / pageSize)).keys()),
     filters: {
       add: addFilter,
       replace: replaceFilter,

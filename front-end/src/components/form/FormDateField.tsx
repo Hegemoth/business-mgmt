@@ -1,4 +1,4 @@
-import { DatePicker } from '@mui/x-date-pickers';
+import { DatePicker } from '@mui/x-date-pickers-pro';
 import { format, isValid } from 'date-fns';
 import { Field, FieldProps } from 'formik';
 
@@ -13,7 +13,7 @@ const FormDateField = ({ name, label }: FormDateFieldProps) => {
       {({ field, meta, form }: FieldProps) => (
         <DatePicker
           label={label}
-          {...(field.value && { value: field.value })}
+          {...(field.value && { defaultValue: new Date(field.value) })}
           onChange={(date: Date | null) => {
             date && isValid(date)
               ? form.setFieldValue(field.name, format(date, 'yyyy-MM-dd'))

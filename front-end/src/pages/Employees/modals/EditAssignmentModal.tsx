@@ -18,10 +18,7 @@ import FormTextField from '../../../components/form/FormTextField';
 import FormWrapper from '../../../components/form/FormWrapper';
 import { FIELD_REQUIRED } from '../../../constants/constants';
 import { translateMap } from '../../../helpers/language-helpers';
-import {
-  EmployeeAssignment,
-  EmployeeAssignmentData,
-} from '../../../types/employees';
+import { EmployeeAssignment, EmployeeAssignmentData } from '../../../types/employees';
 import { EmploymentType, ModalMode, PaymentPeriod } from '../../../types/enums';
 import { getEnumValues } from '../../../utils/enum-utils';
 
@@ -62,9 +59,7 @@ const EditAssignmentModal = ({
             <DialogTitle>Edytuj przypisanie</DialogTitle>
 
             <DialogContent>
-              <DialogContentText>
-                Pola oznaczone gwiazdką są wymagane
-              </DialogContentText>
+              <DialogContentText>Pola oznaczone gwiazdką są wymagane</DialogContentText>
 
               <FormWrapper>
                 <Grid size={{ xs: 12 }}>
@@ -97,10 +92,7 @@ const EditAssignmentModal = ({
                 </Grid>
 
                 <Grid size={{ xs: 12, md: 6 }}>
-                  <FormDateField
-                    name="empStart"
-                    label="Początek zatrudnienia*"
-                  />
+                  <FormDateField name="empStart" label="Początek zatrudnienia*" />
                 </Grid>
 
                 <Grid size={{ xs: 12, md: 6 }}>
@@ -110,17 +102,10 @@ const EditAssignmentModal = ({
             </DialogContent>
 
             <DialogActions>
-              <Button
-                variant="outlined"
-                onClick={() => setMode(ModalMode.CLOSED)}
-              >
+              <Button variant="outlined" onClick={() => setMode(ModalMode.CLOSED)}>
                 Anuluj
               </Button>
-              <LoadingButton
-                type="submit"
-                variant="contained"
-                loading={isLoading}
-              >
+              <LoadingButton type="submit" variant="contained" loading={isLoading}>
                 Edytuj
               </LoadingButton>
             </DialogActions>

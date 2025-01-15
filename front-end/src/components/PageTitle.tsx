@@ -9,7 +9,7 @@ interface PageTitleProps {
 const PageTitle = ({ title, rightContent, bottomContent }: PageTitleProps) => (
   <Stack direction="row" justifyContent="space-between" sx={{ pb: 4 }}>
     <Stack spacing={2}>
-      <Typography variant="h4">{title}</Typography>
+      <Typography variant="h2">{title}</Typography>
       {bottomContent && <Box>{bottomContent}</Box>}
     </Stack>
 

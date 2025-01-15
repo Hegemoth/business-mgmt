@@ -16,7 +16,7 @@ export const employeesApi = createApi({
   reducerPath: 'employeesApi',
   baseQuery,
   endpoints: (builder) => ({
-    getEmployees: builder.query<any, any>({
+    getEmployees: builder.query<ApiResponse<Employee>, QueryParams>({
       query: (params) => ({
         url: '/employees',
         params,
@@ -46,20 +46,14 @@ export const employeesApi = createApi({
       }),
     }),
 
-    getEmployeePositions: builder.query<
-      ApiResponse<EmployeePosition>,
-      QueryParams
-    >({
+    getEmployeePositions: builder.query<ApiResponse<EmployeePosition>, QueryParams>({
       query: (params) => ({
         url: '/employeepositions',
         params,
       }),
     }),
 
-    addEmployeePosition: builder.mutation<
-      EmployeePosition,
-      EmployeePositionData
-    >({
+    addEmployeePosition: builder.mutation<EmployeePosition, EmployeePositionData>({
       query: (body) => ({
         url: '/employeepositions',
         method: 'POST',
@@ -67,16 +61,15 @@ export const employeesApi = createApi({
       }),
     }),
 
-    updateEmployeePosition: builder.mutation<
-      EmployeePosition,
-      EmployeePositionData & { id: uuid }
-    >({
-      query: ({ id, ...body }) => ({
-        url: `/employeepositions/${id}`,
-        method: 'PATCH',
-        body,
-      }),
-    }),
+    updateEmployeePosition: builder.mutation<EmployeePosition, EmployeePositionData & { id: uuid }>(
+      {
+        query: ({ id, ...body }) => ({
+          url: `/employeepositions/${id}`,
+          method: 'PATCH',
+          body,
+        }),
+      }
+    ),
 
     deleteEmployeePosition: builder.mutation<void, uuid>({
       query: (id) => ({
@@ -92,10 +85,7 @@ export const employeesApi = createApi({
       }),
     }),
 
-    addEmployeeAssignment: builder.mutation<
-      EmployeeAssignment,
-      EmployeeAssignmentData
-    >({
+    addEmployeeAssignment: builder.mutation<EmployeeAssignment, EmployeeAssignmentData>({
       query: (body) => ({
         url: '/employeeassignments',
         method: 'POST',
@@ -124,6 +114,7 @@ export const employeesApi = createApi({
 });
 
 export const {
+  useGetEmployeesQuery,
   useLazyGetEmployeesQuery,
   useAddEmployeeMutation,
   useUpdateEmployeeMutation,
@@ -133,6 +124,7 @@ export const {
   useAddEmployeePositionMutation,
   useUpdateEmployeePositionMutation,
   useDeleteEmployeePositionMutation,
+  useGetEmployeeAssignmentsQuery,
   useLazyGetEmployeeAssignmentsQuery,
   useAddEmployeeAssignmentMutation,
   useUpdateEmployeeAssignmentMutation,

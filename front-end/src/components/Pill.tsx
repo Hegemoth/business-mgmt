@@ -10,14 +10,7 @@ interface PillProps extends BoxProps {
   sx?: SxProps<Theme>;
 }
 
-const Pill = ({
-  children,
-  severity,
-  color,
-  noTransform,
-  sx,
-  ...other
-}: PillProps) => {
+const Pill = ({ children, severity, color, noTransform, sx, ...other }: PillProps) => {
   const theme = useTheme();
   const pillType = severity ? 'severity' : color ? 'color' : 'severity';
   const sxProps = {
@@ -43,14 +36,11 @@ const sxPill = (
 ): SxProps<Theme> => ({
   alignItems: 'center',
   backgroundColor: alpha(
-    pillType === 'severity'
-      ? theme.palette[severity || 'primary'].main
-      : (color as string),
+    pillType === 'severity' ? theme.palette[severity || 'primary'].main : (color as string),
     0.12
   ),
   borderRadius: 12,
-  color:
-    pillType === 'severity' ? theme.palette[severity || 'primary'].main : color,
+  color: pillType === 'severity' ? theme.palette[severity || 'primary'].main : color,
   cursor: 'default',
   display: 'inline-flex',
   flexGrow: 0,

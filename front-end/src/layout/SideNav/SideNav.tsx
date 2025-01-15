@@ -16,13 +16,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import CustomPopover from '../../components/CustomPopover';
 import Icon from '../../components/Icon';
+import IconTooltip from '../../components/IconTooltip';
 import { SIDE_NAV_WIDTH } from '../../constants/constants';
 import { usePopover } from '../../hooks/usePopover';
 import { useGetOrganizationsQuery } from '../../redux/api/organizationApi';
-import {
-  getCurrentOrg,
-  setCurrentOrg,
-} from '../../redux/slices/appContextSlice';
+import { getCurrentOrg, setCurrentOrg } from '../../redux/slices/appContextSlice';
 import { AppRoute } from '../../types/enums';
 import { Organization } from '../../types/organization';
 import SideNavList from './components/SideNavList';
@@ -61,7 +59,8 @@ const sxLogo: SxProps<Theme> = {
 
 const sxH1: SxProps<Theme> = {
   fontFamily: 'Verdana',
-  fontSize: 20.2,
+  fontStyle: 'italic',
+  fontSize: 20.8,
 };
 
 const sxOrgNameStack = {
@@ -97,48 +96,20 @@ const SideNav = ({ isSideNavOpen, toggleSideNav }: SideNavProps) => {
       variant={isLgUp ? 'persistent' : 'temporary'}
       open={isSideNavOpen}
       onClose={toggleSideNav}
-      sx={isLgUp ? {} : { zIndex: (theme) => theme.zIndex.modal }}
+      {...(!isLgUp && { sx: { zIndex: (theme) => theme.zIndex.modal } })}
       PaperProps={drawerPaperProps}
     >
       <Box sx={sxRootBox}>
         <Stack sx={sxRootStack}>
           <Stack spacing={3} sx={{ p: 3 }}>
-            <Stack
-              flexDirection="row"
-              justifyContent="space-between"
-              alignItems="center"
-            >
+            <Stack flexDirection="row" justifyContent="space-between" alignItems="center">
               <Box component={Link} to={AppRoute.HOME} sx={sxLogo}>
                 <Typography variant="h1" sx={sxH1}>
                   Business.mgmt
                 </Typography>
               </Box>
 
-              <IconButton onClick={toggleSideNav}>
-                <Icon.Close />
-              </IconButton>
-            </Stack>
-
-            <Stack
-              flexDirection="row"
-              justifyContent="space-between"
-              alignItems="center"
-              sx={sxOrgNameStack}
-            >
-              <Typography variant="body2" color="neutral.400">
-                {currentOrg?.name}
-              </Typography>
-
-              <Tooltip title="Twoje organizacje">
-                <IconButton
-                  onClick={orgPopover.handleOpen}
-                  ref={orgPopover.anchorRef}
-                >
-                  <SvgIcon fontSize="small" sx={{ color: 'neutral.500' }}>
-                    <Icon.ExpandMore />
-                  </SvgIcon>
-                </IconButton>
-              </Tooltip>
+              <IconTooltip icon={<Icon.Close />} label="Zamknij menu" onClick={toggleSideNav} />
             </Stack>
           </Stack>
 
@@ -146,29 +117,32 @@ const SideNav = ({ isSideNavOpen, toggleSideNav }: SideNavProps) => {
 
           <SideNavList />
 
-          {/* <Divider sx={{ borderColor: 'neutral.700' }} />
+          <Divider sx={{ borderColor: 'neutral.700' }} />
 
-          <Box sx={{ px: 2, py: 3 }}>
+          <Stack spacing={2} sx={{ p: 3 }}>
             <Typography variant="subtitle2" color="neutral.100">
-              Potrzebujesz pomocy?
+              Twoja organizacja:
             </Typography>
 
-            <Typography variant="body2" color="neutral.400">
-              Sprawdź FAQ
-            </Typography>
-
-            <Button
-              component="a"
-              href="https://github.com/Hegemoth/business-mgmt"
-              target="_blank"
-              variant="contained"
-              fullWidth
-              endIcon={<Icon.Launch />}
-              sx={{ mt: 2 }}
+            <Stack
+              flexDirection="row"
+              justifyContent="space-between"
+              alignItems="center"
+              sx={sxOrgNameStack}
             >
-              FAQ
-            </Button>
-          </Box> */}
+              <Typography variant="body2" color="neutral.300">
+                {currentOrg?.name}
+              </Typography>
+
+              <Tooltip title="Twoje organizacje">
+                <IconButton onClick={orgPopover.handleOpen} ref={orgPopover.anchorRef}>
+                  <SvgIcon fontSize="small" sx={{ color: 'neutral.500' }}>
+                    <Icon.ExpandLess />
+                  </SvgIcon>
+                </IconButton>
+              </Tooltip>
+            </Stack>
+          </Stack>
         </Stack>
       </Box>
 
@@ -177,6 +151,7 @@ const SideNav = ({ isSideNavOpen, toggleSideNav }: SideNavProps) => {
         open={orgPopover.open}
         onClose={orgPopover.handleClose}
         anchorEl={orgPopover.anchorRef.current}
+        vertical="top"
         content={
           currentOrg
             ? orgs

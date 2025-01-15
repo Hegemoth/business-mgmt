@@ -2,6 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/query';
 import { persistStore } from 'redux-persist';
 import { employeesApi } from './api/employeesApi';
+import { materialsApi } from './api/materialsApi';
 import { organizationApi } from './api/organizationApi';
 import reducer from './reducer';
 
@@ -10,7 +11,7 @@ const store = configureStore({
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: false,
-    }).concat([organizationApi.middleware, employeesApi.middleware]),
+    }).concat([organizationApi.middleware, employeesApi.middleware, materialsApi.middleware]),
 });
 
 setupListeners(store.dispatch);

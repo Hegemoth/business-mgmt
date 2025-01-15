@@ -10,6 +10,9 @@ server.use(cors());
 server.use(middlewares);
 server.use(jsonServer.bodyParser);
 
+const nonRegExpKeys = ['firstName', 'lastName', 'name'];
+const jsonServerConditions = ['lt', 'lte', 'gt', 'gte', 'ne'];
+
 server.use('/api', (req, res, next) => {
   const orgId = req.headers['x-org-id'];
 
@@ -25,19 +28,38 @@ server.use('/api', (req, res, next) => {
     const filters = req.query.f.split(',');
     filters.forEach((f) => {
       const [key, value] = f.split(':');
-      req.query[key] = value;
+      if (nonRegExpKeys.includes(key)) {
+        req.query[key] = new RegExp(value, 'i');
+      } else {
+        req.query[key] = value;
+      }
     });
   }
+  // if (req.query.f && req.query.f.length) {
+  //   const filters = req.query.f.split(',');
+  //   filters.forEach((f) => {
+  //     if (f.includes(':')) {
+  //       const [key, operatorAndValue] = f.split('_');
+  //       const [operator, value] = operatorAndValue.split(':');
+
+  //       if (nonRegExpKeys.includes(key)) {
+  //         req.query[key] = new RegExp(value, 'i');
+  //       } else if (jsonServerConditions.includes(operator)) {
+  //         req.query[`${key}_${operator}`] = value;
+  //       } else {
+  //         req.query[key] = value; // Default equality
+  //       }
+  //     }
+  //   });
+  // }
 
   if (req.query.s) {
-    req.query._sort = req.query.s.startsWith('-')
-      ? req.query.s.slice(1)
-      : req.query.s;
+    req.query._sort = req.query.s.startsWith('-') ? req.query.s.slice(1) : req.query.s;
     req.query._order = req.query.s.startsWith('-') ? 'desc' : 'asc';
   }
 
   req.query._limit = Number(req.query.limit) || 10;
-  req.query._start = Number(req.query.offset) || 0
+  req.query._start = Number(req.query.offset) || 0;
 
   req.pagination = {
     limit: req.query._limit,

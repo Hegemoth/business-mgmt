@@ -7,6 +7,7 @@ import {
   MenuItem,
   Stack,
   Theme,
+  Typography,
   useMediaQuery,
 } from '@mui/material';
 import { useSelector } from 'react-redux';
@@ -43,14 +44,21 @@ const TopNav = ({ isSideNavOpen, toggleSideNav }: TopNavProps) => {
       <Box component="header" sx={sxHeader}>
         <Stack
           direction="row"
-          justifyContent="flex-end"
+          justifyContent="space-between"
           sx={{ height: TOP_NAV_HEIGHT, px: 2 }}
         >
-          {/* <Stack direction="row" alignItems="center" spacing={2}>
-          <Alert severity="info">Zalogowany</Alert>
-        </Stack> */}
+          <Stack direction="row" alignItems="center">
+            <Alert severity="info" sx={{ py: 0 }}>
+              <Typography fontSize={10} color="#303030">
+                Zalogowany jako:
+              </Typography>
+              <Typography fontSize={15} fontWeight={700} color="#303030">
+                Admin {/* TODO: Add user view with limited access to organizations */}
+              </Typography>
+            </Alert>
+          </Stack>
 
-          <Stack direction="row" alignItems="center" spacing={2}>
+          <Stack direction="row" alignItems="center" spacing={1}>
             <Avatar
               ref={avatarPopover.anchorRef}
               onClick={avatarPopover.handleOpen}
@@ -62,12 +70,11 @@ const TopNav = ({ isSideNavOpen, toggleSideNav }: TopNavProps) => {
               </IconButton>
             )}
           </Stack>
-
-          {/* TODO: Avatar & popover */}
         </Stack>
       </Box>
+
       <CustomPopover
-        title="Konto"
+        title="Organizacja"
         subtitle={currentOrg?.name}
         open={avatarPopover.open}
         onClose={avatarPopover.handleClose}
@@ -79,7 +86,7 @@ const TopNav = ({ isSideNavOpen, toggleSideNav }: TopNavProps) => {
               window.location.reload();
             }}
           >
-            Wyloguj
+            Wyjdź
           </MenuItem>
         }
       />

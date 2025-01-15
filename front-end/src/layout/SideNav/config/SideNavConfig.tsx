@@ -24,10 +24,10 @@ const SideNavConfig = (): NavConfig => {
               title: 'Stanowiska',
               path: AppRoute.EMPLOYEE_POSITIONS,
             },
-            {
-              title: 'Rejestr czasu pracy',
-              path: AppRoute.EMPLOYEE_SHIFTS,
-            },
+            // {
+            //   title: 'Rejestr czasu pracy',
+            //   path: AppRoute.EMPLOYEE_SHIFTS,
+            // },
           ],
         },
         {
@@ -35,7 +35,7 @@ const SideNavConfig = (): NavConfig => {
           icon: <Icon.Materials />,
           navNestedItems: [
             {
-              title: 'Materiały',
+              title: 'Lista materiałów',
               path: AppRoute.MATERIALS,
             },
             {
@@ -49,7 +49,7 @@ const SideNavConfig = (): NavConfig => {
           icon: <Icon.Products />,
           navNestedItems: [
             {
-              title: 'Produkty',
+              title: 'Lista produktów',
               path: AppRoute.PRODUCTS,
             },
             {
@@ -59,46 +59,52 @@ const SideNavConfig = (): NavConfig => {
           ],
         },
         {
-          title: 'Faktury',
+          title: 'Pozstałe faktury',
           icon: <Icon.Invoices />,
           path: AppRoute.INVOICES,
         },
-        {
-          title: 'Raporty miesięczne',
-          icon: <Icon.Reports />,
-          navNestedItems: [
-            {
-              title: 'Raport przychodów',
-              path: AppRoute.REPORT_REVENUES,
-            },
-            {
-              title: 'Raport sprzedaży',
-              path: AppRoute.REPORT_SALES,
-            },
-            {
-              title: 'Raport kosztów',
-              path: AppRoute.REPORT_COSTS,
-            },
-            {
-              title: 'Raport zużycia materiałów',
-              path: AppRoute.REPORT_MATERIAL_USAGE,
-            },
-          ],
-        },
-        {
-          title: 'Użytkownicy',
-          icon: <Icon.Users />,
-          navNestedItems: [
-            {
-              title: 'Użytkownicy',
-              path: AppRoute.USERS,
-            },
-            {
-              title: 'Uprawnienia użytkowników',
-              path: AppRoute.USER_PERMISSIONS,
-            },
-          ],
-        },
+
+        // ---------- TODO: Think through how to do it right. Maybe charts on the dashboard? ----------
+
+        // {
+        //   title: 'Raporty miesięczne',
+        //   icon: <Icon.Reports />,
+        //   navNestedItems: [
+        //     {
+        //       title: 'Raport przychodów',
+        //       path: AppRoute.REPORT_REVENUES,
+        //     },
+        //     {
+        //       title: 'Raport sprzedaży',
+        //       path: AppRoute.REPORT_SALES,
+        //     },
+        //     {
+        //       title: 'Raport kosztów',
+        //       path: AppRoute.REPORT_COSTS,
+        //     },
+        //     {
+        //       title: 'Raport zużycia materiałów',
+        //       path: AppRoute.REPORT_MATERIAL_USAGE,
+        //     },
+        //   ],
+        // },
+
+        // ---------- TODO: Future managing of users, roles and org settings + app settings ----------
+
+        // {
+        //   title: 'Użytkownicy',
+        //   icon: <Icon.Users />,
+        //   navNestedItems: [
+        //     {
+        //       title: 'Użytkownicy',
+        //       path: AppRoute.USERS,
+        //     },
+        //     {
+        //       title: 'Uprawnienia użytkowników',
+        //       path: AppRoute.USER_PERMISSIONS,
+        //     },
+        //   ],
+        // },
         {
           title: 'Ustawienia',
           icon: <Icon.Settings />,
@@ -106,6 +112,9 @@ const SideNavConfig = (): NavConfig => {
         },
       ],
     },
+
+    // ---------- TODO: Future categories ----------
+
     {
       category: 'admin',
       items: [
@@ -125,10 +134,10 @@ const SideNavConfig = (): NavConfig => {
               title: 'Użytkownicy',
               path: AppRoute.ADMIN_USERS,
             },
-            {
-              title: 'Uprawnienia użytkowników',
-              path: AppRoute.ADMIN_USER_PERMISSIONS,
-            },
+            // {
+            //   title: 'Uprawnienia użytkowników',
+            //   path: AppRoute.ADMIN_USER_PERMISSIONS,
+            // },
           ],
         },
       ],

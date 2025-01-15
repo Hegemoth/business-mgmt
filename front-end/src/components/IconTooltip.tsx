@@ -27,7 +27,8 @@ interface IconTooltipProps extends SvgIconProps {
     isLocked: boolean;
     title?: string;
   };
-  action: boolean;
+  action?: boolean;
+  noPadding?: boolean;
 }
 
 const IconTooltip = ({
@@ -43,6 +44,7 @@ const IconTooltip = ({
     title: 'Akcja zablokowana',
   },
   action,
+  noPadding,
   ...rest
 }: IconTooltipProps) => {
   // @ts-ignore
@@ -57,6 +59,7 @@ const IconTooltip = ({
       <IconButton
         onClick={locked.isLocked ? () => null : onClick}
         disabled={disabled}
+        {...(noPadding && { sx: { p: 0 } })}
       >
         <SvgIcon
           fontSize={action ? 'small' : fontSize}

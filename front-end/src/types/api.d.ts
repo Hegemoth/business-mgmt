@@ -1,6 +1,4 @@
-import { NameAndValue } from './shared';
-
-export type Export = string;
+import { uuid } from './shared';
 
 interface ApiResponse<T> {
   items: T[];
@@ -29,7 +27,7 @@ type CustomParams = QueryParams & Record<string, any>;
 
 interface CustomHeaders {
   headers?: {
-    'X-Org-Id': string;
+    'X-Org-Id': uuid;
   };
 }
 

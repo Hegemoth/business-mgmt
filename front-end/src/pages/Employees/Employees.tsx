@@ -1,5 +1,6 @@
 import { Alert, Button, Grid2 as Grid } from '@mui/material';
-import _, { omitBy } from 'lodash';
+import { omitBy } from 'lodash';
+import { useRef } from 'react';
 import { toast } from 'react-toastify';
 import ConfirmationModal from '../../components/ConfirmationModal';
 import Icon from '../../components/Icon';
@@ -16,27 +17,23 @@ import {
   useLazyGetEmployeesQuery,
   useUpdateEmployeeMutation,
 } from '../../redux/api/employeesApi';
-import {
-  Employee,
-  EmployeeAssignmentData,
-  EmployeeData,
-} from '../../types/employees';
+import { Employee, EmployeeAssignmentData, EmployeeData } from '../../types/employees';
 import { ModalMode } from '../../types/enums';
 import { getFullName } from '../../utils/data-utils';
 import { toastErr } from '../../utils/form-utils';
 import AddEditEmployeeModal from './modals/AddEditEmployeeModal';
 import AssignEmployeePositionModal from './modals/AssignEmployeePositionModal';
 import EmployeesFilters from './sections/EmployeesFilters.tsx';
+import { EmployeesSubtableRef } from './sections/EmployeesSubtable.tsx';
 import EmployeesTable from './sections/EmployeesTable';
 
 const Employees = () => {
-  const { employees, refetch, filters, ...asyncPagination } =
+  const subtableRef = useRef<EmployeesSubtableRef>(null!);
+
+  const { employees, refetch, filters, ResetButton, ...asyncPagination } =
     useAsyncPagination<Employee>({
       lazyRtkQuery: useLazyGetEmployeesQuery as any,
       queryKey: 'employees',
-      queryParams: {
-        s: 'firstName',
-      },
     });
 
   const { positions } = useGetEmployeePositionsQuery(
@@ -51,16 +48,12 @@ const Employees = () => {
   const [addEmployee, addEmployeeState] = useAddEmployeeMutation();
   const [updateEmployee, updateEmployeeState] = useUpdateEmployeeMutation();
   const [deleteEmployee, deleteEmployeeState] = useDeleteEmployeeMutation();
-  const [addAssignment, addAssignmentState] =
-    useAddEmployeeAssignmentMutation();
+  const [addAssignment, addAssignmentState] = useAddEmployeeAssignmentMutation();
   const [addEditMode, setAddEditMode, addEditValues] = useModalMode<Employee>();
   const [deleteMode, setDeleteMode, deleteValues] = useModalMode<Employee>();
   const [assignMode, setAssignMode, assignValues] = useModalMode<Employee>();
-  const [
-    changeActiveStatusMode,
-    setChangeActiveStatusMode,
-    changeActiveStatusValues,
-  ] = useModalMode<Employee>();
+  const [changeActiveStatusMode, setChangeActiveStatusMode, changeActiveStatusValues] =
+    useModalMode<Employee>();
 
   const onAddEmployee = (data: EmployeeData): void => {
     const nonEmptyData = omitBy(data, (v) => v === '') as EmployeeData;
@@ -112,7 +105,7 @@ const Employees = () => {
       });
   };
 
-  const onChangeEmployeeActiveState = (): void => {
+  const onChangeEmployeeActiveStatus = (): void => {
     if (!changeActiveStatusValues) return toastErr();
 
     const promise = updateEmployee({
@@ -133,9 +126,7 @@ const Employees = () => {
       });
   };
 
-  const onAssignPosition = (
-    data: Omit<EmployeeAssignmentData, 'employeeId'>
-  ): void => {
+  const onAssignPosition = (data: Omit<EmployeeAssignmentData, 'employeeId'>): void => {
     if (!assignValues) return toastErr();
 
     const promise = addAssignment({
@@ -152,6 +143,7 @@ const Employees = () => {
       .then(() => {
         setAssignMode(ModalMode.CLOSED);
         refetch();
+        subtableRef?.current?.refetchAssignments();
       });
   };
 
@@ -168,16 +160,18 @@ const Employees = () => {
             Dodaj pracownika
           </Button>
         }
+        bottomContent={<ResetButton />}
       />
 
-      <Grid container spacing={2}>
+      <Grid container spacing={3}>
         <Grid size={{ xs: 12 }}>
           <EmployeesFilters filters={filters} />
         </Grid>
 
         <Grid size={{ xs: 12 }}>
           <EmployeesTable
-            employees={employees || []}
+            ref={subtableRef}
+            employees={employees}
             asyncPagination={asyncPagination as any}
             {...{
               setAddEditMode,
@@ -203,40 +197,29 @@ const Employees = () => {
         onConfirm={onDeleteEmployee}
         title={
           <>
-            Usuń pracownika{' '}
-            <Pill severity="error">{getFullName(deleteValues)}</Pill>
+            Usuń pracownika <Pill severity="error">{getFullName(deleteValues)}</Pill>
           </>
         }
         isLoading={deleteEmployeeState.isLoading}
         deletion
       >
         <Alert severity="error">
-          Czy na pewno chcesz trwale usunąć tego pracownika z bazy? Może to
-          wpłynąć na dane Twojej organizacji.
+          Czy na pewno chcesz trwale usunąć tego pracownika z bazy? Może to wpłynąć na dane Twojej
+          organizacji.
         </Alert>
       </ConfirmationModal>
 
       <ConfirmationModal
         open={!!changeActiveStatusMode}
         close={() => setChangeActiveStatusMode(ModalMode.CLOSED)}
-        onConfirm={onChangeEmployeeActiveState}
-        title={
-          changeActiveStatusValues?.active
-            ? 'Deaktywuj pracownika'
-            : 'Aktywuj pracownika'
-        }
+        onConfirm={onChangeEmployeeActiveStatus}
+        title={changeActiveStatusValues?.active ? 'Deaktywuj pracownika' : 'Aktywuj pracownika'}
         isLoading={updateEmployeeState.isLoading}
       >
         <Alert severity="warning">
           Czy na pewno chcesz zmienić status użytkownika{' '}
-          <Pill severity="warning">
-            {getFullName(changeActiveStatusValues)}
-          </Pill>{' '}
-          na{' '}
-          <strong>
-            {changeActiveStatusValues?.active ? 'nieaktywny' : 'aktywny'}
-          </strong>
-          ?
+          <Pill severity="warning">{getFullName(changeActiveStatusValues)}</Pill> na{' '}
+          <strong>{changeActiveStatusValues?.active ? 'nieaktywny' : 'aktywny'}</strong>?
         </Alert>
       </ConfirmationModal>
 

@@ -35,11 +35,11 @@ export const useTable = ({
       className: `datagrid-${uniqueId}`,
       pagination: true,
       disableRowSelectionOnClick: true,
-      autoHeight: true,
       disableColumnFilter: true,
+      autoHeight: true,
       autosizeOptions: {
         includeHeaders: true,
-        includeOutliers: false,
+        includeOutliers: true,
         outliersFactor: 1.5,
         expand: false,
       },

@@ -22,10 +22,7 @@ const appContextSlice = createSlice({
 
 const appContextSelector = (s: RootState) => s.appContext;
 
-export const getCurrentOrg = createSelector(
-  appContextSelector,
-  (s) => s.currentOrg
-);
+export const getCurrentOrg = createSelector(appContextSelector, (s) => s.currentOrg);
 
 export const { setCurrentOrg } = appContextSlice.actions;
 

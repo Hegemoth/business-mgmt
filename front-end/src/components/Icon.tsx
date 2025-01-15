@@ -8,9 +8,10 @@ import CheckCircleRoundedIcon from '@mui/icons-material/CheckCircleRounded';
 import ChevronLeftRoundedIcon from '@mui/icons-material/ChevronLeftRounded';
 import ChevronRightRoundedIcon from '@mui/icons-material/ChevronRightRounded';
 import CloseIcon from '@mui/icons-material/Close';
-import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
+import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
 import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
 import EditRoundedIcon from '@mui/icons-material/EditRounded';
+import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import ExpandMoreRoundedIcon from '@mui/icons-material/ExpandMoreRounded';
 import GroupsRoundedIcon from '@mui/icons-material/GroupsRounded';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
@@ -51,6 +52,7 @@ const Icon = {
   ChevronLeft: ChevronLeftRoundedIcon,
   ChevronRight: ChevronRightRoundedIcon,
   ExpandMore: ExpandMoreRoundedIcon,
+  ExpandLess: ExpandLessIcon,
   Launch: LaunchRoundedIcon,
   Square: SquareRoundedIcon,
   AddPerson: PersonAddAlt1RoundedIcon,
