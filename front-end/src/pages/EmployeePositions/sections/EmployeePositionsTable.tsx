@@ -9,7 +9,7 @@ import { useTable } from '../../../hooks/useTable';
 import { useTableColumns } from '../../../hooks/useTableColumns';
 import { EmployeePosition } from '../../../types/employees';
 import { ModalMode, TableId } from '../../../types/enums';
-import { AsyncPagination } from '../../../types/shared';
+import { AsyncPagination } from '../../../types/pagination';
 
 interface EmployeePositionsTableProps {
   positions: EmployeePosition[];

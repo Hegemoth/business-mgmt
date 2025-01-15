@@ -1,5 +1,3 @@
-export type Export = string;
-
 export enum AppRoute {
   HOME = '/',
   EMPLOYEES = '/employees',
@@ -77,4 +75,9 @@ export enum TableId {
   EMPLOYEES_SUBTABLE = 'employees_subtable',
   EMPLOYEE_POSITIONS = 'employee_positions',
   MATERIALS = 'materials',
+  MATERIAL_PURCHASE = 'material_purchase',
+  MATERIAL_PURCHASE_SUBTABLE = 'material_purchase_subtable',
+  PRODUCTS = 'products',
+  PRODUCT_PURCHASE = 'product_purchase',
+  ADMIN_FEATURES = 'admin_features',
 }

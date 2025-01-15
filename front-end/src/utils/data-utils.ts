@@ -1,5 +1,6 @@
-import { Unit } from '../types/enums';
+import { PaymentPeriod, Unit } from '../types/enums';
 
+// TODO: change to i18n
 export const getUnit = (unit: Unit): string => {
   const units = {
     [Unit.UN]: 'szt.',
@@ -8,6 +9,16 @@ export const getUnit = (unit: Unit): string => {
   };
 
   return units[unit];
+};
+
+// TODO: change to i18n
+export const getPaymentPeriod = (period: PaymentPeriod): string => {
+  const paymentPeriods = {
+    [PaymentPeriod.MONTHLY]: 'Miesięczna',
+    [PaymentPeriod.HOURLY]: 'Godzinowa',
+  };
+
+  return paymentPeriods[period];
 };
 
 export const getFullName = (

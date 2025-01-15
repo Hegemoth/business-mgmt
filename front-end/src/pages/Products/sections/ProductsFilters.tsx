@@ -6,7 +6,6 @@ import {
   CardHeader,
   FormControl,
   Grid2 as Grid,
-  InputLabel,
   MenuItem,
   Select,
   TextField,
@@ -20,16 +19,15 @@ import { Filters } from '../../../types/api';
 
 type Sign = 'lte' | 'gte';
 
-interface MaterialsFiltersProps {
+interface ProductsFiltersProps {
   filters: Filters;
 }
 
-const MaterialsFilters = ({ filters }: MaterialsFiltersProps) => {
+const ProductsFilters = ({ filters }: ProductsFiltersProps) => {
   const currentOrg = useSelector(getCurrentOrg);
   const isEnabled = currentOrg?.features.filtering;
 
   const [name, setName] = useFilterClear(filters, 'name');
-  const [status, setStatus] = useFilterClear(filters, 'active');
   const [netCost, setNetCost] = useFilterClear(filters, 'netCost');
   const [taxRate, setTaxRate] = useFilterClear(filters, 'taxRate');
   const [grossCost, setGrossCost] = useFilterClear(filters, 'grossCost');
@@ -63,12 +61,6 @@ const MaterialsFilters = ({ filters }: MaterialsFiltersProps) => {
     }
   };
 
-  const activeStatusOptions = [
-    { title: 'Aktywni', value: 'true' },
-    { title: 'Nieaktywni', value: 'false' },
-    { title: 'Wszyscy', value: '' },
-  ];
-
   return (
     <Card>
       <CardHeader
@@ -95,28 +87,6 @@ const MaterialsFilters = ({ filters }: MaterialsFiltersProps) => {
               }}
               disabled={!isEnabled}
             />
-          </Grid>
-
-          <Grid size={{ xs: 12, sm: 6, md: 3, xl: 2 }}>
-            <FormControl fullWidth>
-              <InputLabel shrink>Status</InputLabel>
-              <Select
-                label="Status"
-                value={status}
-                onChange={(e) => {
-                  setStatus(e.target.value);
-                  filters.replace([`active:${e.target.value}`]);
-                }}
-                displayEmpty
-                disabled={!isEnabled}
-              >
-                {activeStatusOptions.map(({ title, value }) => (
-                  <MenuItem key={value} value={value}>
-                    {title}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
           </Grid>
 
           <Grid size={{ xs: 12, sm: 6, md: 3, xl: 2 }}>
@@ -214,4 +184,4 @@ const MaterialsFilters = ({ filters }: MaterialsFiltersProps) => {
   );
 };
 
-export default MaterialsFilters;
+export default ProductsFilters;

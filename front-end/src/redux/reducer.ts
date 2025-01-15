@@ -4,6 +4,7 @@ import storage from 'redux-persist/lib/storage';
 import { employeesApi } from './api/employeesApi';
 import { materialsApi } from './api/materialsApi';
 import { organizationApi } from './api/organizationApi';
+import { productsApi } from './api/productsApi';
 import appContextSlice from './slices/appContextSlice';
 import hintsSlice from './slices/hintsSlice';
 
@@ -26,6 +27,7 @@ const reducer = combineReducers({
   [organizationApi.reducerPath]: organizationApi.reducer,
   [employeesApi.reducerPath]: employeesApi.reducer,
   [materialsApi.reducerPath]: materialsApi.reducer,
+  [productsApi.reducerPath]: productsApi.reducer,
 });
 
 export default reducer;

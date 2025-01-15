@@ -6,7 +6,6 @@ import {
   EmployeeAssignment,
   EmployeeAssignmentData,
   EmployeeData,
-  EmployeePayload,
   EmployeePosition,
   EmployeePositionData,
 } from '../../types/employees';
@@ -31,7 +30,7 @@ export const employeesApi = createApi({
       }),
     }),
 
-    updateEmployee: builder.mutation<Employee, EmployeePayload & { id: uuid }>({
+    updateEmployee: builder.mutation<Employee, EmployeeData & { id: uuid }>({
       query: ({ id, ...body }) => ({
         url: `/employees/${id}`,
         method: 'PATCH',

@@ -4,39 +4,32 @@ import BinaryIcon from '../../../components/BinaryIcon';
 import Cell from '../../../components/Cell';
 import Icon from '../../../components/Icon';
 import IconTooltip from '../../../components/IconTooltip';
-import Pill from '../../../components/Pill';
 import { useTable } from '../../../hooks/useTable';
 import { useTableColumns } from '../../../hooks/useTableColumns';
 import { ModalMode, TableId } from '../../../types/enums';
-import { Material } from '../../../types/materials';
 import { AsyncPagination } from '../../../types/pagination';
+import { Product } from '../../../types/products';
 import { displayAsPct, displayAsPln } from '../../../utils/data-grid-utils';
-import { getUnit } from '../../../utils/data-utils';
 
-interface MaterialsTableProps {
-  materials: Material[];
-  asyncPagination: AsyncPagination<Material>;
-  setAddEditMode: (mode: ModalMode, data?: Material) => void;
-  setDeleteMode: (mode: ModalMode, data?: Material) => void;
-  setChangeActiveStatusMode: (mode: ModalMode, data?: Material) => void;
+interface ProductsTableProps {
+  products: Product[];
+  asyncPagination: AsyncPagination<Product>;
+  setAddEditMode: (mode: ModalMode, data?: Product) => void;
+  setDeleteMode: (mode: ModalMode, data?: Product) => void;
+  setChangeActiveStatusMode: (mode: ModalMode, data?: Product) => void;
 }
 
-const MaterialsTable = ({
-  materials,
+const ProductsTable = ({
+  products,
   asyncPagination,
   setAddEditMode,
   setDeleteMode,
   setChangeActiveStatusMode,
-}: MaterialsTableProps) => {
-  const columns = useTableColumns<Material>([
+}: ProductsTableProps) => {
+  const columns = useTableColumns<Product>([
     {
       field: 'name',
       headerName: 'Nazwa',
-    },
-    {
-      field: 'amount',
-      headerName: 'Ilość',
-      renderCell: ({ row }) => <Pill>{`${row.amount} ${getUnit(row.unit)}`}</Pill>,
     },
     {
       field: 'netCost',
@@ -91,21 +84,21 @@ const MaterialsTable = ({
 
   const { dataGridProps } = useTable({
     apiRef: useGridApiRef(),
-    uniqueId: TableId.MATERIALS,
+    uniqueId: TableId.PRODUCTS,
     asyncPagination,
   });
 
   return (
     <Card>
       <CardHeader
-        title="Tabela materiałów"
-        subheader="Dodaj i modyfikuj materiały, które aktualnie posiada Twoja firma"
+        title="Tabela produktów"
+        subheader="Dodaj i modyfikuj produktów, które aktualnie posiada Twoja firma"
       />
       <CardContent>
-        <DataGridPro rows={materials} columns={columns} key={materials.length} {...dataGridProps} />
+        <DataGridPro rows={products} columns={columns} key={products.length} {...dataGridProps} />
       </CardContent>
     </Card>
   );
 };
 
-export default MaterialsTable;
+export default ProductsTable;

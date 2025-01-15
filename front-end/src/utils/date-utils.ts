@@ -1,11 +1,7 @@
 import { format } from 'date-fns';
 import { DateType } from '../types/shared';
 
-export const toIntlDate = (
-  date: DateType,
-  locale?: string,
-  opts?: any
-): string => {
+export const toIntlDate = (date: DateType, locale?: string, opts?: any): string => {
   if (!(typeof date === 'string' || date instanceof Date)) {
     return '---';
   }
@@ -13,10 +9,7 @@ export const toIntlDate = (
   return new Intl.DateTimeFormat(locale, opts).format(new Date(date));
 };
 
-export const toApiFormatDate = (
-  date: DateType,
-  dateFnsModifier?: (x: Date) => Date
-): string => {
+export const toApiFormatDate = (date: DateType, dateFnsModifier?: (x: Date) => Date): string => {
   const dateObj = new Date(date);
 
   if (dateFnsModifier) {
@@ -35,4 +28,11 @@ export const toHumanReadableDateMonths = (date: DateType): string => {
     month: 'long',
     year: 'numeric',
   })}`;
+};
+
+export const apiToHumanMonth = (dateStr: string): string => {
+  const [m, y] = dateStr.split('-').map(Number);
+  const date = new Date(y, m - 1, 1);
+
+  return toHumanReadableDateMonths(date);
 };

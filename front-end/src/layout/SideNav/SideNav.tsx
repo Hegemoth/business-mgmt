@@ -87,7 +87,7 @@ const SideNav = ({ isSideNavOpen, toggleSideNav }: SideNavProps) => {
 
   const changeOrg = (org: Organization) => {
     dispatch(setCurrentOrg(org));
-    window.location.reload();
+    setTimeout(() => window.location.reload(), 0);
   };
 
   return (

@@ -1,7 +1,12 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import baseQuery from '../../shared/baseQuery';
 import { ApiResponse, QueryParams } from '../../types/api';
-import { Material, MaterialData } from '../../types/materials';
+import {
+  Material,
+  MaterialData,
+  MaterialPurchase,
+  MaterialPurchaseData,
+} from '../../types/materials';
 import { uuid } from '../../types/shared';
 
 export const materialsApi = createApi({
@@ -37,6 +42,38 @@ export const materialsApi = createApi({
         method: 'DELETE',
       }),
     }),
+
+    getMaterialPurchases: builder.query<ApiResponse<MaterialPurchase>, QueryParams>({
+      query: (params) => ({
+        url: '/materialpurchases',
+        params,
+      }),
+    }),
+
+    addMaterialPurchase: builder.mutation<MaterialPurchase, MaterialPurchaseData>({
+      query: (body) => ({
+        url: '/materialpurchases',
+        method: 'POST',
+        body,
+      }),
+    }),
+
+    updateMaterialPurchase: builder.mutation<MaterialPurchase, MaterialPurchaseData & { id: uuid }>(
+      {
+        query: ({ id, ...body }) => ({
+          url: `/materialpurchases/${id}`,
+          method: 'PATCH',
+          body,
+        }),
+      }
+    ),
+
+    deleteMaterialPurchase: builder.mutation<void, uuid>({
+      query: (id) => ({
+        url: `/materialpurchases/${id}`,
+        method: 'DELETE',
+      }),
+    }),
   }),
 });
 
@@ -46,4 +83,9 @@ export const {
   useAddMaterialMutation,
   useUpdateMaterialMutation,
   useDeleteMaterialMutation,
+  useGetMaterialPurchasesQuery,
+  useLazyGetMaterialPurchasesQuery,
+  useAddMaterialPurchaseMutation,
+  useUpdateMaterialPurchaseMutation,
+  useDeleteMaterialPurchaseMutation,
 } = materialsApi;

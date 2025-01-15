@@ -13,8 +13,6 @@ interface Employee {
 
 type EmployeeData = Omit<Employee, 'id' | 'orgId'>;
 
-type EmployeePayload = EmployeeData & { active?: boolean };
-
 interface EmployeePosition {
   id: uuid;
   orgId: uuid;

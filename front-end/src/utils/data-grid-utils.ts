@@ -27,9 +27,7 @@ export const enhanceColumns = (columns: GridColDef[]): GridColDef[] => {
   });
 };
 
-export const getNestedValues = (
-  params: GridRenderCellParams<any, any, GridTreeNodeWithRender>
-) => {
+export const getNestedValues = (params: GridRenderCellParams<any, any, GridTreeNodeWithRender>) => {
   return get(params.row, params.field);
 };
 

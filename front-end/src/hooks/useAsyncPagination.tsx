@@ -4,7 +4,7 @@ import { fetchBaseQuery, TypedLazyQueryTrigger } from '@reduxjs/toolkit/query/re
 import { useEffect, useMemo, useReducer, useState } from 'react';
 import Icon from '../components/Icon';
 import { ApiResponse, CustomParams, QueryParams } from '../types/api';
-import { LazyRtkQueryResult } from '../types/shared';
+import { LazyRtkQueryResult } from '../types/pagination';
 import { getFilterName, getFilterValue } from '../utils/data-utils';
 import { filtersReducer } from './useAsyncPagination/filtersReducer';
 
@@ -43,7 +43,7 @@ export function useAsyncPagination<T, K extends string = string>({
   payload: initialPayload,
 }: UseAsyncPaginationProps<T, K>) {
   const [page, setPage] = useState(0);
-  const [pageSize, setPageSize] = useState(25);
+  const [pageSize, setPageSize] = useState(10);
   const [sortKey, setSortKey] = useState(queryParams?.s || null);
   const [payload, setPayload] = useState(initialPayload || {});
   const [paramsState, setParamsState] = useState<QueryParams | null>(null);

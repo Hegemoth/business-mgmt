@@ -170,7 +170,7 @@ const EmployeesSubtable = forwardRef(
           <DataGridPro
             rows={assignments}
             columns={columns}
-            key={String(asyncPagination.isSuccess)}
+            key={assignments.length}
             {...dataGridProps}
           />
         </Card>

@@ -13,17 +13,18 @@ export const organizationApi = createApi({
         params,
       }),
     }),
+    updateOrganization: builder.mutation<Organization, Partial<Organization>>({
+      query: ({ id, ...body }) => ({
+        url: `/organizations/${id}`,
+        method: 'PATCH',
+        body,
+      }),
+    }),
   }),
 });
 
-export const { useGetOrganizationsQuery } = organizationApi;
-
-// const defaultResponseTransform = <T>(
-//   response: T[],
-//   meta: FetchBaseQueryMeta
-// ): ApiResponse<T> => ({
-//   items: response,
-//   total: Number(meta?.response?.headers.get('X-Total-Count')) || 0,
-//   limit: Number(meta?.response?.headers.get('X-Limit')),
-//   offset: Number(meta?.response?.headers.get('X-Offset')),
-// });
+export const {
+  useGetOrganizationsQuery,
+  useLazyGetOrganizationsQuery,
+  useUpdateOrganizationMutation,
+} = organizationApi;

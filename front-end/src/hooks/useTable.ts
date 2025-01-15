@@ -2,7 +2,7 @@ import { DataGridProProps, GridApi as GridApiPro } from '@mui/x-data-grid-pro';
 import { MutableRefObject } from 'react';
 import Icon from '../components/Icon';
 import { TableId } from '../types/enums';
-import { AsyncPagination } from '../types/shared';
+import { AsyncPagination } from '../types/pagination';
 
 interface TableConfig {
   apiRef: MutableRefObject<GridApiPro | null>;
@@ -44,7 +44,7 @@ export const useTable = ({
         expand: false,
       },
       pinnedColumns: { right: ['actions'] },
-      pageSizeOptions: [25, 50],
+      pageSizeOptions: [10, 25, 50],
       autosizeOnMount: true,
       sx: {
         '.actions-header': {

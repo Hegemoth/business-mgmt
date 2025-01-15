@@ -8,7 +8,7 @@ import Employees from '../pages/Employees/Employees';
 import EmployeeShifts from '../pages/EmployeeShifts/EmployeeShifts';
 import Home from '../pages/Home/Home';
 import Invoices from '../pages/Invoices/Invoices';
-import MaterialPurchase from '../pages/MaterialPurchase/MaterialPurchase';
+import MaterialPurchases from '../pages/MaterialPurchases/MaterialPurchases';
 import Materials from '../pages/Materials/Materials';
 import Products from '../pages/Products/Products';
 import ProductSales from '../pages/ProductSales/ProductSales';
@@ -28,7 +28,7 @@ const Router = () => (
     <Route path={AppRoute.EMPLOYEE_POSITIONS} element={<EmployeePositions />} />
     <Route path={AppRoute.EMPLOYEE_SHIFTS} element={<EmployeeShifts />} />
     <Route path={AppRoute.MATERIALS} element={<Materials />} />
-    <Route path={AppRoute.MATERIAL_PURCHASE} element={<MaterialPurchase />} />
+    <Route path={AppRoute.MATERIAL_PURCHASE} element={<MaterialPurchases />} />
     <Route path={AppRoute.PRODUCTS} element={<Products />} />
     <Route path={AppRoute.PRODUCT_SALES} element={<ProductSales />} />
     <Route path={AppRoute.EMPLOYEE_SHIFTS} element={<EmployeeShifts />} />

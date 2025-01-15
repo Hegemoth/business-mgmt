@@ -3,38 +3,62 @@
     {
       "id": "999c973d-19e5-4b66-8ff3-5efc4c16f47b",
       "name": "Garage Inc.",
-      "features": [],
-      "config": {}
+      "package": "premium",
+      "features": {
+        "filtering": true,
+        "materialsLimit": true,
+        "productsLimit": true
+      }
     },
     {
       "id": "830c9453-9f77-4cfe-9b13-3f6e11229404",
       "name": "W Gorącej Wodzie Company",
-      "features": [],
-      "config": {}
+      "package": "demo",
+      "features": {
+        "filtering": false,
+        "materialsLimit": false,
+        "productsLimit": false
+      }
     },
     {
       "id": "5b116540-7d1a-46fc-8753-83c0cbfadf3d",
       "name": "Innovation Trading sp. z o.o.",
-      "features": [],
-      "config": {}
+      "package": "premium",
+      "features": {
+        "filtering": true,
+        "materialsLimit": true,
+        "productsLimit": true
+      }
     },
     {
       "id": "f8f5d4e9-9140-48ae-b607-e3075fc0e6c1",
       "name": "Sun Industries",
-      "features": [],
-      "config": {}
+      "package": "demo",
+      "features": {
+        "filtering": false,
+        "materialsLimit": false,
+        "productsLimit": false
+      }
     },
     {
       "id": "b8b5be65-15f7-49f1-b72e-846eb528b43f",
       "name": "The Beatles Company",
-      "features": [],
-      "config": {}
+      "package": "demo",
+      "features": {
+        "filtering": false,
+        "materialsLimit": false,
+        "productsLimit": false
+      }
     },
     {
       "id": "d03b4c67-10f2-4e77-89fc-72d1e41656d5",
       "name": "The Rollings Stones Company",
-      "features": [],
-      "config": {}
+      "package": "demo",
+      "features": {
+        "filtering": false,
+        "materialsLimit": false,
+        "productsLimit": false
+      }
     }
   ],
   "employees": [
@@ -553,102 +577,288 @@
     {
       "id": "c11f1d9b-72be-4425-bc9e-9c731b09f4b5",
       "orgId": "999c973d-19e5-4b66-8ff3-5efc4c16f47b",
-      "name": "Pręt stalowy",
-      "unit": "kg",
-      "netCost": 50.0,
-      "taxRate": 18.0,
-      "grossCost": 59.0,
+      "name": "MacBook M1 Pro",
+      "amount": 12,
+      "unit": "un",
+      "netCost": 6000,
+      "taxRate": 23,
+      "grossCost": 7380,
       "active": true
     },
     {
       "id": "d21a2d8a-19fa-4827-8aef-2c8b79214f7d",
       "orgId": "999c973d-19e5-4b66-8ff3-5efc4c16f47b",
-      "name": "Drut miedziany",
+      "name": "Monitor DELL 27\"",
+      "amount": 26,
       "unit": "un",
-      "netCost": 20.0,
-      "taxRate": 12.0,
-      "grossCost": 22.4,
+      "netCost": 900,
+      "taxRate": 23,
+      "grossCost": 1107,
       "active": true
     },
     {
       "id": "e53d2b8c-73ae-4f87-96ef-9c741b89d5f3",
       "orgId": "999c973d-19e5-4b66-8ff3-5efc4c16f47b",
-      "name": "Blacha aluminiowa",
-      "unit": "kg",
-      "netCost": 30.0,
-      "taxRate": 10.0,
-      "grossCost": 33.0,
+      "name": "Myszka",
+      "amount": 40,
+      "unit": "un",
+      "netCost": 75,
+      "taxRate": 8,
+      "grossCost": 81,
       "active": false
     },
     {
       "id": "a91d2e7a-38ce-46b9-aedf-1d6f3b9819e5",
       "orgId": "999c973d-19e5-4b66-8ff3-5efc4c16f47b",
-      "name": "Rura żelazna",
+      "name": "Klawiatura",
+      "amount": 40,
       "unit": "un",
-      "netCost": 100.0,
-      "taxRate": 15.0,
-      "grossCost": 115.0,
+      "netCost": 225,
+      "taxRate": 23,
+      "grossCost": 276.75,
       "active": true
     },
     {
       "id": "f22d3c8f-29fc-4b96-84bf-7a3d129e7a4e",
       "orgId": "999c973d-19e5-4b66-8ff3-5efc4c16f47b",
-      "name": "Beton",
-      "unit": "kg",
-      "netCost": 40.0,
-      "taxRate": 8.0,
-      "grossCost": 43.2,
+      "name": "Ładowarka/zasilacz",
+      "amount": 15,
+      "unit": "un",
+      "netCost": 150,
+      "taxRate": 8,
+      "grossCost": 162,
       "active": false
     },
     {
       "id": "b34e5d7f-48bc-43a9-81df-4c9e73a5f4b6",
       "orgId": "999c973d-19e5-4b66-8ff3-5efc4c16f47b",
-      "name": "Rura PVC",
+      "name": "Adapter",
+      "amount": 30,
       "unit": "un",
-      "netCost": 15.0,
-      "taxRate": 10.0,
-      "grossCost": 16.5,
+      "netCost": 30,
+      "taxRate": 8,
+      "grossCost": 32.4,
       "active": true
     },
     {
       "id": "c62d8e7c-49af-4b92-83bf-5a3d129c7f2b",
       "orgId": "999c973d-19e5-4b66-8ff3-5efc4c16f47b",
-      "name": "Panel szklany",
-      "unit": "kg",
-      "netCost": 75.0,
-      "taxRate": 20.0,
-      "grossCost": 90.0,
+      "name": "Kabel HDMI",
+      "amount": 50,
+      "unit": "un",
+      "netCost": 45,
+      "taxRate": 23,
+      "grossCost": 55.35,
       "active": false
     },
     {
       "id": "d13f5c7b-28ed-43f8-89cf-3c92f1b6e3a7",
       "orgId": "999c973d-19e5-4b66-8ff3-5efc4c16f47b",
-      "name": "Cegła",
-      "unit": "un",
-      "netCost": 0.5,
-      "taxRate": 5.0,
-      "grossCost": 0.525,
+      "name": "Kawa",
+      "amount": 18,
+      "unit": "kg",
+      "netCost": 30,
+      "taxRate": 5,
+      "grossCost": 31.5,
       "active": true
     },
     {
       "id": "e94a7d6f-38ec-4f8a-83af-1d5f9b8a7c3e",
       "orgId": "999c973d-19e5-4b66-8ff3-5efc4c16f47b",
-      "name": "Deska drewniana",
-      "unit": "un",
-      "netCost": 25.0,
-      "taxRate": 18.0,
-      "grossCost": 29.5,
+      "name": "Woda",
+      "amount": 25,
+      "unit": "l",
+      "netCost": 6,
+      "taxRate": 8,
+      "grossCost": 6.48,
       "active": true
     },
     {
       "id": "f71c5d8f-48ac-43b7-89cf-6b92c7a5f3e2",
       "orgId": "999c973d-19e5-4b66-8ff3-5efc4c16f47b",
-      "name": "Farba w wiadrze",
-      "unit": "lt",
-      "netCost": 12.0,
-      "taxRate": 12.0,
-      "grossCost": 13.44,
+      "name": "Slack",
+      "amount": 1,
+      "unit": "un",
+      "netCost": 24,
+      "taxRate": 23,
+      "grossCost": 29.52,
       "active": false
+    },
+    {
+      "name": "Serwer",
+      "amount": 1,
+      "unit": "un",
+      "netCost": 15000,
+      "taxRate": 0,
+      "grossCost": 15000,
+      "active": true,
+      "orgId": "999c973d-19e5-4b66-8ff3-5efc4c16f47b",
+      "id": "J8rT-5_"
     }
-  ]
+  ],
+  "products": [
+    {
+      "id": "1a2b3c4d-5678-90ab-cdef-1234567890ab",
+      "orgId": "999c973d-19e5-4b66-8ff3-5efc4c16f47b",
+      "name": "Cloud Infrastructure Setup",
+      "netCost": 3000,
+      "taxRate": 23,
+      "grossCost": 3690,
+      "active": true
+    },
+    {
+      "id": "2b3c4d5e-6789-01bc-def2-2345678901bc",
+      "orgId": "999c973d-19e5-4b66-8ff3-5efc4c16f47b",
+      "name": "Web Application Development",
+      "netCost": 5000,
+      "taxRate": 23,
+      "grossCost": 6150,
+      "active": true
+    },
+    {
+      "id": "3c4d5e6f-7890-12cd-ef34-3456789012cd",
+      "orgId": "999c973d-19e5-4b66-8ff3-5efc4c16f47b",
+      "name": "Mobile App Development",
+      "netCost": 4500,
+      "taxRate": 23,
+      "grossCost": 5535,
+      "active": true
+    },
+    {
+      "id": "4d5e6f7g-8901-23de-f456-4567890123de",
+      "orgId": "999c973d-19e5-4b66-8ff3-5efc4c16f47b",
+      "name": "Data Analysis & Visualization",
+      "netCost": 2000,
+      "taxRate": 8,
+      "grossCost": 2160,
+      "active": true
+    },
+    {
+      "id": "5e6f7g8h-9012-34ef-5678-5678901234ef",
+      "orgId": "999c973d-19e5-4b66-8ff3-5efc4c16f47b",
+      "name": "IT Support & Maintenance",
+      "netCost": 1500,
+      "taxRate": 23,
+      "grossCost": 1845,
+      "active": true
+    },
+    {
+      "id": "6f7g8h9i-0123-45fg-6789-6789012345fg",
+      "orgId": "999c973d-19e5-4b66-8ff3-5efc4c16f47b",
+      "name": "Cybersecurity Assessment",
+      "netCost": 3500,
+      "taxRate": 23,
+      "grossCost": 4305,
+      "active": true
+    },
+    {
+      "id": "7g8h9i0j-1234-56gh-7890-7890123456gh",
+      "orgId": "999c973d-19e5-4b66-8ff3-5efc4c16f47b",
+      "name": "DevOps Implementation",
+      "netCost": 4000,
+      "taxRate": 23,
+      "grossCost": 4920,
+      "active": true
+    },
+    {
+      "id": "8h9i0j1k-2345-67hi-8901-8901234567hi",
+      "orgId": "999c973d-19e5-4b66-8ff3-5efc4c16f47b",
+      "name": "UX/UI Design",
+      "netCost": 2500,
+      "taxRate": 8,
+      "grossCost": 2700,
+      "active": true
+    },
+    {
+      "id": "9i0j1k2l-3456-78ij-9012-9012345678ij",
+      "orgId": "999c973d-19e5-4b66-8ff3-5efc4c16f47b",
+      "name": "API Development",
+      "netCost": 2200,
+      "taxRate": 8,
+      "grossCost": 2376,
+      "active": true
+    },
+    {
+      "id": "0j1k2l3m-4567-89jk-0123-0123456789jk",
+      "orgId": "999c973d-19e5-4b66-8ff3-5efc4c16f47b",
+      "name": "Custom CRM Development",
+      "netCost": 5500,
+      "taxRate": 23,
+      "grossCost": 6765,
+      "active": true
+    },
+    {
+      "id": "1k2l3m4n-5678-90kl-1234-1234567890kl",
+      "orgId": "999c973d-19e5-4b66-8ff3-5efc4c16f47b",
+      "name": "Database Optimization",
+      "netCost": 1800,
+      "taxRate": 8,
+      "grossCost": 1944,
+      "active": true
+    },
+    {
+      "id": "2l3m4n5o-6789-01lm-2345-2345678901lm",
+      "orgId": "999c973d-19e5-4b66-8ff3-5efc4c16f47b",
+      "name": "IT Consultancy",
+      "netCost": 1200,
+      "taxRate": 5,
+      "grossCost": 1260,
+      "active": true
+    },
+    {
+      "id": "3m4n5o6p-7890-12mn-3456-3456789012mn",
+      "orgId": "999c973d-19e5-4b66-8ff3-5efc4c16f47b",
+      "name": "Cloud Migration Services",
+      "netCost": 7000,
+      "taxRate": 23,
+      "grossCost": 8610,
+      "active": true
+    },
+    {
+      "id": "4n5o6p7q-8901-23no-4567-4567890123no",
+      "orgId": "999c973d-19e5-4b66-8ff3-5efc4c16f47b",
+      "name": "Virtualization Setup",
+      "netCost": 2700,
+      "taxRate": 23,
+      "grossCost": 3321,
+      "active": true
+    },
+    {
+      "id": "5o6p7q8r-9012-34op-5678-5678901234op",
+      "orgId": "999c973d-19e5-4b66-8ff3-5efc4c16f47b",
+      "name": "AI/ML Model Development",
+      "netCost": 8000,
+      "taxRate": 23,
+      "grossCost": 9840,
+      "active": true
+    }
+  ],
+  "materialpurchases": [
+    {
+      "id": "c2959ddd-9183-43fe-b1f4-c7ce9c85db9c",
+      "orgId": "999c973d-19e5-4b66-8ff3-5efc4c16f47b",
+      "date": "12-2024",
+      "items": [
+        {
+          "amount": 2,
+          "material": {
+            "id": "c11f1d9b-72be-4425-bc9e-9c731b09f4b5",
+            "name": "MacBook M1 Pro",
+            "unit": "un"
+          }
+        },
+        {
+          "amount": 3,
+          "material": {
+            "id": "d21a2d8a-19fa-4827-8aef-2c8b79214f7d",
+            "name": "Monitor DELL 27\"",
+            "unit": "un"
+          }
+        }
+      ]
+    }
+  ],
+  "usersettings": {
+    "sidenav": "right"
+  }
 }

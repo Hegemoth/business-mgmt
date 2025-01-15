@@ -13,7 +13,7 @@ import { getHintsVisible, toggleHintsVisible } from '../../../redux/slices/hints
 import { error, indigo } from '../../../theme/colors';
 import { Employee } from '../../../types/employees';
 import { ModalMode, TableId } from '../../../types/enums';
-import { AsyncPagination } from '../../../types/shared';
+import { AsyncPagination } from '../../../types/pagination';
 import EmployeesSubtable, { EmployeesSubtableRef } from './EmployeesSubtable';
 
 interface EmployeesTableProps {

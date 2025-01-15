@@ -1,4 +1,5 @@
 import {
+  Alert,
   Card,
   CardContent,
   CardHeader,
@@ -10,7 +11,9 @@ import {
   TextField,
 } from '@mui/material';
 import useDebouncedCallback from 'beautiful-react-hooks/useDebouncedCallback';
+import { useSelector } from 'react-redux';
 import { useFilterClear } from '../../../hooks/useFilterClear';
+import { getCurrentOrg } from '../../../redux/slices/appContextSlice';
 import { Filters } from '../../../types/api';
 
 interface EmployeesFiltersProps {
@@ -18,6 +21,9 @@ interface EmployeesFiltersProps {
 }
 
 const EmployeesFilters = ({ filters }: EmployeesFiltersProps) => {
+  const currentOrg = useSelector(getCurrentOrg);
+  const isEnabled = currentOrg?.features.filtering;
+
   const [firstName, setFirstName] = useFilterClear(filters, 'firstName');
   const [lastName, setLastName] = useFilterClear(filters, 'firstName');
   const [activeStatus, setActiveStatus] = useFilterClear(filters, 'active');
@@ -46,7 +52,14 @@ const EmployeesFilters = ({ filters }: EmployeesFiltersProps) => {
     <Card>
       <CardHeader
         title="Filtry"
-        subheader="Filtruj listę pracowników za pomocą poniższych parameterów"
+        subheader={'Filtruj listę pracowników za pomocą poniższych parameterów'}
+        action={
+          !isEnabled && (
+            <Alert severity="warning">
+              Ulepsz pakiet do premium, aby filtrować listę pracowników
+            </Alert>
+          )
+        }
       />
       <CardContent>
         <Grid container spacing={2}>
@@ -59,6 +72,7 @@ const EmployeesFilters = ({ filters }: EmployeesFiltersProps) => {
                 setFirstName(e.target.value);
                 handleFirstNameFilterChange(e);
               }}
+              disabled={!isEnabled}
             />
           </Grid>
 
@@ -71,6 +85,7 @@ const EmployeesFilters = ({ filters }: EmployeesFiltersProps) => {
                 setLastName(e.target.value);
                 handleLastNameFilterChange(e);
               }}
+              disabled={!isEnabled}
             />
           </Grid>
 
@@ -85,6 +100,7 @@ const EmployeesFilters = ({ filters }: EmployeesFiltersProps) => {
                   filters.replace([`active:${e.target.value}`]);
                 }}
                 displayEmpty
+                disabled={!isEnabled}
               >
                 {activeStatusOptions.map((status) => (
                   <MenuItem key={status.value} value={status.value}>

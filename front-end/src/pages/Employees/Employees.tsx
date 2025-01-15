@@ -217,7 +217,7 @@ const Employees = () => {
         isLoading={updateEmployeeState.isLoading}
       >
         <Alert severity="warning">
-          Czy na pewno chcesz zmienić status użytkownika{' '}
+          Czy na pewno chcesz zmienić status pracownika{' '}
           <Pill severity="warning">{getFullName(changeActiveStatusValues)}</Pill> na{' '}
           <strong>{changeActiveStatusValues?.active ? 'nieaktywny' : 'aktywny'}</strong>?
         </Alert>

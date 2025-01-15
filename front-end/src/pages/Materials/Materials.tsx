@@ -1,9 +1,11 @@
-import { Alert, Button, Grid2 as Grid, Stack } from '@mui/material';
+import { Alert, Button, Grid2 as Grid } from '@mui/material';
 import { omitBy } from 'lodash';
 import { toast } from 'react-toastify';
+import ConfirmationModal from '../../components/ConfirmationModal';
 import Icon from '../../components/Icon';
 import PageContainer from '../../components/PageContainer';
 import PageTitle from '../../components/PageTitle';
+import Pill from '../../components/Pill';
 import useAsyncPagination from '../../hooks/useAsyncPagination';
 import { useModalMode } from '../../hooks/useModalMode';
 import {
@@ -15,6 +17,7 @@ import {
 import { ModalMode } from '../../types/enums';
 import { Material, MaterialData } from '../../types/materials';
 import { toastErr } from '../../utils/form-utils';
+import AddEditMaterialModal from './modals/AddEditMaterialModal';
 import MaterialsFilters from './sections/MaterialsFilters';
 import MaterialsTable from './sections/MaterialsTable';
 
@@ -119,9 +122,9 @@ const Materials = () => {
         }
         bottomContent={
           <>
-            <Alert sx={{ mb: 2 }}>
+            <Alert severity="info" color="success" sx={{ mb: 2 }}>
               <strong>Materiały</strong> - tak na potrzeby aplikacji zostały nazwane wszelkie
-              podmioty zakupione przez organizację
+              podmioty zakupione na potrzeby organizacji.
             </Alert>
             <ResetButton />
           </>
@@ -145,6 +148,46 @@ const Materials = () => {
           />
         </Grid>
       </Grid>
+
+      <AddEditMaterialModal
+        mode={addEditMode}
+        setMode={setAddEditMode}
+        values={addEditValues}
+        submit={addEditMode === ModalMode.ADD ? onAddMaterial : onEditMaterial}
+        isLoading={addMaterialState.isLoading || updateMaterialState.isLoading}
+      />
+
+      <ConfirmationModal
+        open={!!deleteMode}
+        close={() => setDeleteMode(ModalMode.CLOSED)}
+        onConfirm={onDeleteMaterial}
+        title={
+          <>
+            Usuń materiał <Pill severity="error">{deleteValues?.name}</Pill>
+          </>
+        }
+        isLoading={deleteMaterialState.isLoading}
+        deletion
+      >
+        <Alert severity="error">
+          Czy na pewno chcesz trwale usunąć ten materiał z bazy? Może to wpłynąć na dane Twojej
+          organizacji.
+        </Alert>
+      </ConfirmationModal>
+
+      <ConfirmationModal
+        open={!!changeActiveStatusMode}
+        close={() => setChangeActiveStatusMode(ModalMode.CLOSED)}
+        onConfirm={onChangeMaterialActiveStatus}
+        title={changeActiveStatusValues?.active ? 'Deaktywuj material' : 'Aktywuj material'}
+        isLoading={updateMaterialState.isLoading}
+      >
+        <Alert severity="warning">
+          Czy na pewno chcesz zmienić status materiału{' '}
+          <Pill severity="warning">{changeActiveStatusValues?.name}</Pill> na{' '}
+          <strong>{changeActiveStatusValues?.active ? 'nieaktywny' : 'aktywny'}</strong>?
+        </Alert>
+      </ConfirmationModal>
     </PageContainer>
   );
 };

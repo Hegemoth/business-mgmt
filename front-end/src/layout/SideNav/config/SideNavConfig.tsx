@@ -58,11 +58,11 @@ const SideNavConfig = (): NavConfig => {
             },
           ],
         },
-        {
-          title: 'Pozstałe faktury',
-          icon: <Icon.Invoices />,
-          path: AppRoute.INVOICES,
-        },
+        // {
+        //   title: 'Pozostałe faktury',
+        //   icon: <Icon.Invoices />,
+        //   path: AppRoute.INVOICES,
+        // },
 
         // ---------- TODO: Think through how to do it right. Maybe charts on the dashboard? ----------
 
@@ -126,14 +126,14 @@ const SideNavConfig = (): NavConfig => {
               title: 'Funkcjonalności',
               path: AppRoute.ADMIN_FEATURES,
             },
-            {
-              title: 'Organizacje',
-              path: AppRoute.ADMIN_ORGANIZATIONS,
-            },
-            {
-              title: 'Użytkownicy',
-              path: AppRoute.ADMIN_USERS,
-            },
+            // {
+            //   title: 'Organizacje',
+            //   path: AppRoute.ADMIN_ORGANIZATIONS,
+            // },
+            // {
+            //   title: 'Użytkownicy',
+            //   path: AppRoute.ADMIN_USERS,
+            // },
             // {
             //   title: 'Uprawnienia użytkowników',
             //   path: AppRoute.ADMIN_USER_PERMISSIONS,
