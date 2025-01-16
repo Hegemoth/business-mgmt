@@ -2,4 +2,4 @@
 
 ## React, TypeScript, Redux Toolkit, MUI, i18n
 
-### Big project for business managment
+Work in progress...
