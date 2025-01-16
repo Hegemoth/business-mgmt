@@ -23,15 +23,18 @@ interface TopNavProps {
 }
 
 const TopNav = ({ isSideNavOpen, toggleSideNav }: TopNavProps) => {
+  const currentOrg = useSelector(getCurrentOrg);
+  const avatarPopover = usePopover();
   const isLgUp = useMediaQuery((theme: Theme) => theme.breakpoints.up('lg'));
   const isHamburgerVisible = !isLgUp || !isSideNavOpen;
-  const avatarPopover = usePopover();
-  const currentOrg = useSelector(getCurrentOrg);
+  const isSideNavRight = currentOrg?.config.sidenav === 'right';
+  const contentPadding = isSideNavOpen ? SIDE_NAV_WIDTH : 0;
 
   const sxHeader = (theme: Theme) => ({
     position: 'sticky',
     zIndex: theme.zIndex.appBar,
-    right: { lg: isSideNavOpen ? SIDE_NAV_WIDTH : 0 },
+    ...(isSideNavRight && { right: { lg: contentPadding } }),
+    ...(!isSideNavRight && { left: { lg: contentPadding } }),
     top: 0,
     width: { lg: isSideNavOpen ? `calc(100% - ${SIDE_NAV_WIDTH}px)` : '100%' },
     borderBottom: `1px solid ${theme.palette.divider}`,

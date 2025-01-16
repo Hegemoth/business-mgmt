@@ -1,4 +1,3 @@
-import { PredefinedShift } from './employees';
 import { uuid } from './shared';
 
 interface Organization {
@@ -6,10 +5,15 @@ interface Organization {
   name: string;
   package: 'premium' | 'demo';
   features: OrgFeatures;
+  config: OrgConfig;
 }
 
 interface OrgFeatures {
   filtering: boolean;
   materialsLimit: boolean;
   productsLimit: boolean;
+}
+
+interface OrgConfig {
+  sidenav: 'left' | 'right';
 }

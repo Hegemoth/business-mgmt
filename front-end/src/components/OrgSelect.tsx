@@ -35,12 +35,12 @@ const OrgSelect = ({ orgs }: OrgSelectProps) => {
       <Alert
         severity="info"
         variant="filled"
-        sx={{ position: 'absolute', width: 400, bottom: 0, right: 15 }}
+        sx={{ position: 'absolute', width: 550, bottom: 0, right: 15 }}
       >
-        Jeśli chcesz przejrzeć organizację z danymi, wybierz <strong>Garage Inc.</strong> (firma,
-        która w aplikacji posiada pakiet premium i włączone wszystkie feature'y) lub{' '}
-        <strong>W gorącej wodzie company</strong> (firma, która posiada pakiet demo). Pozostałe
-        organizacje nie zawierają żadnych danych
+        Jeśli chcesz przejrzeć organizację pokazową z uzupełnionymi danymi, wybierz{' '}
+        <strong>Garage Inc.</strong> (organizacja w aplikacji posiada pakiet „premium” i włączone
+        wszystkie funkcjonalności) lub <strong>W gorącej wodzie company</strong> (organizacja
+        posiada pakiet „demo”). Pozostałe organizacje nie zawierają żadnych danych.
       </Alert>
     </Box>
   );

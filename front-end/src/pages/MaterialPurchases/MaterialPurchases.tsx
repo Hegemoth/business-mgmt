@@ -15,18 +15,22 @@ import {
 import { ModalMode } from '../../types/enums';
 import { MaterialPurchase, MaterialPurchaseData } from '../../types/materials';
 import { toastErr } from '../../utils/form-utils';
+import AddMaterialPurchaseModal from './modals/AddMaterialPurchaseModal';
 import MaterialPurchasesTable from './sections/MaterialPurchaseTable';
 
-const MaterialPurchasesxd = () => {
+const MaterialPurchases = () => {
   const { purchases, refetch, filters, ResetButton, ...asyncPagination } =
     useAsyncPagination<MaterialPurchase>({
       lazyRtkQuery: useLazyGetMaterialPurchasesQuery as any,
       queryKey: 'purchases',
+      queryParams: {
+        s: '-date',
+      },
     });
 
   const [addMaterialPurchase, addMaterialPurchaseState] = useAddMaterialPurchaseMutation();
   const [deleteMaterialPurchase, deleteMaterialPurchaseState] = useDeleteMaterialPurchaseMutation();
-  const [addMode, setAddMode, addValues] = useModalMode<MaterialPurchase>();
+  const [addMode, setAddMode] = useModalMode<MaterialPurchase>();
   const [deleteMode, setDeleteMode, deleteValues] = useModalMode<MaterialPurchase>();
   useModalMode<MaterialPurchase>();
 
@@ -79,24 +83,21 @@ const MaterialPurchasesxd = () => {
       />
 
       <Grid container spacing={3}>
-        {/* <Grid size={{ xs: 12 }}><MaterialPurchaseFilters filters={filters} /></Grid> */}
-
         <Grid size={{ xs: 12 }}>
           <MaterialPurchasesTable
             purchases={purchases}
             asyncPagination={asyncPagination as any}
-            {...{ setDeleteMode }}
+            {...{ setDeleteMode, refetch }}
           />
         </Grid>
       </Grid>
 
-      {/* <AddMaterialPurchaseModal
+      <AddMaterialPurchaseModal
         mode={addMode}
         setMode={setAddMode}
-        values={addValues}
         submit={onAddPurchase}
         isLoading={addMaterialPurchaseState.isLoading}
-      /> */}
+      />
 
       <ConfirmationModal
         open={!!deleteMode}
@@ -119,4 +120,4 @@ const MaterialPurchasesxd = () => {
   );
 };
 
-export default MaterialPurchasesxd;
+export default MaterialPurchases;

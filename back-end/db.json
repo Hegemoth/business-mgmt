@@ -8,6 +8,9 @@
         "filtering": true,
         "materialsLimit": true,
         "productsLimit": true
+      },
+      "config": {
+        "sidenav": "right"
       }
     },
     {
@@ -18,6 +21,9 @@
         "filtering": false,
         "materialsLimit": false,
         "productsLimit": false
+      },
+      "config": {
+        "sidenav": "right"
       }
     },
     {
@@ -28,6 +34,9 @@
         "filtering": true,
         "materialsLimit": true,
         "productsLimit": true
+      },
+      "config": {
+        "sidenav": "right"
       }
     },
     {
@@ -38,6 +47,9 @@
         "filtering": false,
         "materialsLimit": false,
         "productsLimit": false
+      },
+      "config": {
+        "sidenav": "right"
       }
     },
     {
@@ -48,6 +60,9 @@
         "filtering": false,
         "materialsLimit": false,
         "productsLimit": false
+      },
+      "config": {
+        "sidenav": "right"
       }
     },
     {
@@ -58,6 +73,9 @@
         "filtering": false,
         "materialsLimit": false,
         "productsLimit": false
+      },
+      "config": {
+        "sidenav": "right"
       }
     }
   ],
@@ -694,6 +712,17 @@
       "active": true,
       "orgId": "999c973d-19e5-4b66-8ff3-5efc4c16f47b",
       "id": "J8rT-5_"
+    },
+    {
+      "name": "Xbox Series X",
+      "amount": 1,
+      "unit": "un",
+      "netCost": 3000,
+      "taxRate": 0,
+      "grossCost": 3000,
+      "active": true,
+      "orgId": "999c973d-19e5-4b66-8ff3-5efc4c16f47b",
+      "id": "Z5xla42"
     }
   ],
   "products": [
@@ -837,7 +866,7 @@
     {
       "id": "c2959ddd-9183-43fe-b1f4-c7ce9c85db9c",
       "orgId": "999c973d-19e5-4b66-8ff3-5efc4c16f47b",
-      "date": "12-2024",
+      "date": "2024-12",
       "items": [
         {
           "amount": 2,
@@ -848,17 +877,75 @@
           }
         },
         {
-          "amount": 3,
+          "amount": 5,
           "material": {
             "id": "d21a2d8a-19fa-4827-8aef-2c8b79214f7d",
             "name": "Monitor DELL 27\"",
             "unit": "un"
           }
+        },
+        {
+          "amount": 6,
+          "material": {
+            "id": "c12f1d9b-72be-4425-bc9e-9c731b09f4b7",
+            "name": "MacBook M1 Pro",
+            "unit": "un"
+          }
+        },
+        {
+          "amount": 5,
+          "material": {
+            "id": "c62d8e7c-49af-4b92-83bf-5a3d129c7f2b",
+            "name": "Kabel HDMI",
+            "unit": "un"
+          }
         }
       ]
+    },
+    {
+      "date": "2024-11",
+      "items": [],
+      "orgId": "999c973d-19e5-4b66-8ff3-5efc4c16f47b",
+      "id": "fufBRd8"
+    },
+    {
+      "date": "2024-10",
+      "items": [
+        {
+          "amount": 6,
+          "material": {
+            "id": "e53d2b8c-73ae-4f87-96ef-9c741b89d5f3",
+            "name": "Myszka",
+            "unit": "un"
+          }
+        },
+        {
+          "amount": 110,
+          "material": {
+            "id": "d13f5c7b-28ed-43f8-89cf-3c92f1b6e3a7",
+            "name": "Kawa",
+            "unit": "kg"
+          }
+        },
+        {
+          "amount": 110,
+          "material": {
+            "id": "e94a7d6f-38ec-4f8a-83af-1d5f9b8a7c3e",
+            "name": "Woda",
+            "unit": "l"
+          }
+        },
+        {
+          "amount": 1,
+          "material": {
+            "id": "Z5xla42",
+            "name": "Xbox Series X",
+            "unit": "un"
+          }
+        }
+      ],
+      "orgId": "999c973d-19e5-4b66-8ff3-5efc4c16f47b",
+      "id": "y6BCSzI"
     }
-  ],
-  "usersettings": {
-    "sidenav": "right"
-  }
+  ]
 }

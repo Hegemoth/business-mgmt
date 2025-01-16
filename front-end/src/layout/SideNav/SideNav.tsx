@@ -92,7 +92,7 @@ const SideNav = ({ isSideNavOpen, toggleSideNav }: SideNavProps) => {
 
   return (
     <Drawer
-      anchor="right"
+      anchor={currentOrg?.config.sidenav}
       variant={isLgUp ? 'persistent' : 'temporary'}
       open={isSideNavOpen}
       onClose={toggleSideNav}

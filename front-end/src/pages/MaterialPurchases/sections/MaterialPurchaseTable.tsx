@@ -15,18 +15,21 @@ interface MaterialPurchasesTableProps {
   purchases: MaterialPurchase[];
   asyncPagination: AsyncPagination<MaterialPurchase>;
   setDeleteMode: (mode: ModalMode, data?: MaterialPurchase) => void;
+  refetch: () => void;
 }
 
 const MaterialPurchasesTable = ({
   purchases,
   asyncPagination,
   setDeleteMode,
+  refetch,
 }: MaterialPurchasesTableProps) => {
   const columns = useTableColumns<MaterialPurchase>([
     {
       field: 'date',
       headerName: 'Miesiąc',
       renderCell: ({ value }) => <Pill>{apiToHumanMonth(value)}</Pill>,
+      // ...displayAsDate,
     },
     {
       field: 'items',
@@ -62,7 +65,9 @@ const MaterialPurchasesTable = ({
           rows={purchases}
           columns={columns}
           key={purchases.length}
-          getDetailPanelContent={({ row }) => <MaterialPurchaseSubtable purchase={row} />}
+          getDetailPanelContent={({ row }) => (
+            <MaterialPurchaseSubtable purchase={row} {...{ refetch }} />
+          )}
           getDetailPanelHeight={() => 'auto'}
           {...dataGridProps}
         />

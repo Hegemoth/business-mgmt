@@ -5,6 +5,7 @@ const ProductSales = () => {
   return (
     <PageContainer>
       <PageTitle title="Sprzedaż produktów" />
+      Soon...
     </PageContainer>
   );
 };

@@ -4,6 +4,8 @@ import {
   useGetEmployeePositionsQuery,
   useGetEmployeesQuery,
 } from '../../../../redux/api/employeesApi';
+import { useGetMaterialsQuery } from '../../../../redux/api/materialsApi';
+import { useGetProductsQuery } from '../../../../redux/api/productsApi';
 
 const steps = [
   'Dodaj pracowników',
@@ -24,8 +26,8 @@ const DashboardStepper = () => {
   const employees = useGetEmployeesQuery({ limit: 1 });
   const positions = useGetEmployeePositionsQuery({ limit: 1 });
   const assignments = useGetEmployeeAssignmentsQuery({ limit: 1 });
-  const materials = 0;
-  const products = 0;
+  const materials = useGetMaterialsQuery({ limit: 1 });
+  const products = useGetProductsQuery({ limit: 1 });
 
   const getActiveStep = () => {
     if (!employees.data?.total) return 0;

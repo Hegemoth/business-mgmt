@@ -42,14 +42,6 @@ export const dateFormatter = new Intl.DateTimeFormat('pl-PL', {
   day: '2-digit',
 });
 
-// const dateAndHourFormatter = new Intl.DateTimeFormat('pl-PL', {
-//   year: 'numeric',
-//   month: '2-digit',
-//   day: '2-digit',
-//   hour: '2-digit',
-//   minute: '2-digit',
-// });
-
 export const displayAsPln: GridColTypeDef = {
   type: 'number',
   valueFormatter: (value) => currencyFormatter.format(Number(value ?? 0)),
@@ -62,6 +54,5 @@ export const displayAsPct: GridColTypeDef = {
 
 export const displayAsDate: GridColTypeDef = {
   type: 'date',
-  // @ts-ignore
   valueFormatter: (value) => value && dateFormatter.format(new Date(value)),
 };

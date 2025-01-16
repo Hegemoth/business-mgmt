@@ -15,8 +15,6 @@ const AdminFeatures = () => {
   const [updateOrg] = useUpdateOrganizationMutation();
   const dispatch = useDispatch();
 
-  console.log(currentOrg.features);
-
   const rows = Object.entries(currentOrg.features).map(([key, value], i) => ({
     id: i,
     name: key,
