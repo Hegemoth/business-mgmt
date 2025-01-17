@@ -10,6 +10,8 @@ server.use(cors());
 server.use(middlewares);
 server.use(jsonServer.bodyParser);
 
+const PORT = process.env.PORT || 3000;
+
 const nonRegExpKeys = ['firstName', 'lastName', 'name'];
 const jsonServerConditions = ['lte', 'gte', 'ne'];
 
@@ -81,6 +83,6 @@ server.use('/api', (req, res, next) => {
 
 server.use('/api', router);
 
-server.listen(3000, () => {
-  console.log('JSON Server is running on http://localhost:3000/api');
+server.listen(PORT, () => {
+  console.log(`JSON Server is running on http://localhost:${PORT}/api`);
 });
