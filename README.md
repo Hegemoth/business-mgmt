@@ -1,5 +1,14 @@
 # Business management app
 
-## React, TypeScript, Redux Toolkit, MUI, i18n
+Live: https://business-mgmt.netlify.app/
 
-Work in progress...
+## Technologies
+
+```
+React
+TypeScript
+Redux Toolkit + RTK Query
+MUI
+Formik
+Node.js/Express/json-server
+```
