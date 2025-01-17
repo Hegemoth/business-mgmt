@@ -2,31 +2,31 @@ import { Card, CardContent, CardHeader, Divider, Skeleton, Stack, Typography } f
 import Icon from '../../../../components/Icon';
 import IconTooltip from '../../../../components/IconTooltip';
 import Pill from '../../../../components/Pill';
-import { useGetEmployeesQuery } from '../../../../redux/api/employeesApi';
+import { useGetProductsQuery } from '../../../../redux/api/productsApi';
 import { AppRoute } from '../../../../types/enums';
 import { Severity } from '../../../../types/shared';
 
-const EmployeesWidget: React.FC = () => {
-  const all = useGetEmployeesQuery({ limit: 1 });
-  const active = useGetEmployeesQuery({ f: ['active:true'], limit: 1 });
+const ProductsWidget: React.FC = () => {
+  const all = useGetProductsQuery({ limit: 1 });
+  const active = useGetProductsQuery({ f: ['active:true'], limit: 1 });
 
   return (
     <Card sx={{ height: '100%' }}>
       <CardHeader
-        title="Pracownicy"
+        title="Produkty"
         action={
           <IconTooltip
             icon={<Icon.Launch />}
-            label="Przejdź do pracowników"
-            onClick={() => window.open(AppRoute.EMPLOYEES, '_blank')}
+            label="Przejdź do produktów"
+            onClick={() => window.open(AppRoute.PRODUCTS, '_blank')}
           />
         }
         titleTypographyProps={{ typography: 'h3' }}
       />
       <CardContent sx={{ pt: 3 }}>
         <Stack spacing={1.5}>
-          <EmployeesWidgetRow
-            label="Wszyscy"
+          <ProductsWidgetRow
+            label="Wszystkie"
             total={all.data?.total}
             severity="info"
             loading={all.isFetching}
@@ -34,16 +34,11 @@ const EmployeesWidget: React.FC = () => {
 
           <Divider />
 
-          <EmployeesWidgetRow
-            label="Aktywni"
+          <ProductsWidgetRow
+            label="Aktywne"
             severity="success"
             total={active.data?.total}
             loading={active.isFetching}
-          />
-          <EmployeesWidgetRow
-            label="Bez przypisanego stanowiska"
-            total={8}
-            severity={true ? 'warning' : 'success'}
           />
         </Stack>
       </CardContent>
@@ -51,21 +46,21 @@ const EmployeesWidget: React.FC = () => {
   );
 };
 
-export default EmployeesWidget;
+export default ProductsWidget;
 
-interface EmployeesWidgetRowProps {
+interface ProductsWidgetRowProps {
   label: string;
   total?: number;
   severity?: Severity;
   loading?: boolean;
 }
 
-export const EmployeesWidgetRow = ({
+export const ProductsWidgetRow = ({
   label,
   total,
   severity = 'primary',
   loading,
-}: EmployeesWidgetRowProps) => {
+}: ProductsWidgetRowProps) => {
   if (loading) {
     return <Skeleton height={21.97} />;
   }

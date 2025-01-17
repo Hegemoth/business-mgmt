@@ -10,6 +10,12 @@ import { useUpdateOrganizationMutation } from '../../redux/api/organizationApi';
 import { getCurrentOrg, setCurrentOrg } from '../../redux/slices/appContextSlice';
 import { TableId } from '../../types/enums';
 
+const featureDescriptionMap = {
+  filtering: 'Filtrowanie',
+  materialsLimit: 'Limit materiałów do 10',
+  productsLimit: 'Limit produktów do 10',
+};
+
 const AdminFeatures = () => {
   const currentOrg = useSelector(getCurrentOrg)!;
   const [updateOrg] = useUpdateOrganizationMutation();
@@ -18,6 +24,8 @@ const AdminFeatures = () => {
   const rows = Object.entries(currentOrg.features).map(([key, value], i) => ({
     id: i,
     name: key,
+    // @ts-ignore
+    description: featureDescriptionMap[key],
     value,
   }));
 
@@ -46,6 +54,11 @@ const AdminFeatures = () => {
       renderCell: ({ value }) => <Pill>{value}</Pill>,
     },
     {
+      field: 'description',
+      headerName: 'Opis',
+      flex: 1,
+    },
+    {
       field: 'value',
       headerName: 'Wartość',
       flex: 1,
@@ -65,7 +78,7 @@ const AdminFeatures = () => {
     <PageContainer>
       <PageTitle title="Funkcjonalności" />
       <Grid container>
-        <Grid size={{ xs: 12, md: 6, xl: 4 }}>
+        <Grid size={{ xs: 12, md: 6 }}>
           <Card>
             <CardHeader
               title="Tabela funkcjonalności"

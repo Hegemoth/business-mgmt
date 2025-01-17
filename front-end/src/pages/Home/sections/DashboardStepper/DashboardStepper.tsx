@@ -50,8 +50,8 @@ const DashboardStepper = () => {
         }}
       >
         <Stepper activeStep={getActiveStep()} alternativeLabel sx={{ width: '100%' }}>
-          {steps.map((step) => (
-            <Step key={`${step}`}>
+          {steps.map((step, i) => (
+            <Step key={i}>
               <StepLabel>{step}</StepLabel>
             </Step>
           ))}

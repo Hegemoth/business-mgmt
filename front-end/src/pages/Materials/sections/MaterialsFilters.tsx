@@ -73,7 +73,7 @@ const MaterialsFilters = ({ filters }: MaterialsFiltersProps) => {
     <Card>
       <CardHeader
         title="Filtry"
-        subheader="Filtruj listę pracowników za pomocą poniższych parameterów"
+        subheader="Filtruj listę materiałów za pomocą poniższych parameterów"
         action={
           !isEnabled && (
             <Alert severity="warning">

@@ -65,7 +65,7 @@ const ProductsFilters = ({ filters }: ProductsFiltersProps) => {
     <Card>
       <CardHeader
         title="Filtry"
-        subheader="Filtruj listę pracowników za pomocą poniższych parameterów"
+        subheader="Filtruj listę produktów za pomocą poniższych parameterów"
         action={
           !isEnabled && (
             <Alert severity="warning">

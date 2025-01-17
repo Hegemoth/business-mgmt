@@ -4,19 +4,24 @@ import {
   Card,
   CardContent,
   CardHeader,
+  Divider,
   Grid2 as Grid,
-  Stack,
   Typography,
 } from '@mui/material';
+import { format } from 'date-fns';
+import { pl } from 'date-fns/locale';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import PageContainer from '../../components/PageContainer';
-import Pill from '../../components/Pill';
 import { useGetOrganizationsQuery } from '../../redux/api/organizationApi';
 import { getCurrentOrg } from '../../redux/slices/appContextSlice';
+import { capitalizeFull } from '../../utils/text-utils';
 import DashboardStepper from './sections/DashboardStepper/DashboardStepper';
 import EmployeesWidget from './sections/EmployeesWidget/EmployeesWidget';
+import MaterialsWidget from './sections/MaterialsWidget/MaterialsWidget';
+import ProductsWidget from './sections/ProductsWidget/ProductsWidget';
+import ReportChart from './sections/ReportChart/ReportChart';
 
 const Home = () => {
   const currentOrg = useSelector(getCurrentOrg);
@@ -95,55 +100,44 @@ const Home = () => {
           <DashboardStepper />
         </Grid>
 
-        <Grid size={{ xs: 12, md: 6, lg: 4 }}>
+        <Grid size={{ xs: 12, md: 6, lg: 3 }}>
           <Card sx={{ height: '100%' }}>
             <CardHeader
               title="Tyle organizacji już zaufało Business.mgmt"
               titleTypographyProps={{ typography: 'h3' }}
             />
             <CardContent sx={{ textAlign: 'center' }}>
-              {/* <Stack alignItems="center"> 
-                <Pill severity="primary"> */}
               <Typography variant="h2" fontSize={64}>
                 {orgs.data?.total}
               </Typography>
-              {/* </Pill>
-              </Stack> */}
             </CardContent>
           </Card>
         </Grid>
 
-        <Grid size={{ xs: 12, lg: 6, xl: 4 }}>
+        <Grid size={{ xs: 12, lg: 6, xl: 3 }}>
           <EmployeesWidget />
         </Grid>
 
-        <Grid size={{ xs: 12, lg: 6, xl: 2 }}>
-          <Card sx={{ height: '100%' }}>
-            <CardHeader title="Materiały" titleTypographyProps={{ typography: 'h3' }} />
-            <CardContent>
-              <Stack alignItems="center">
-                <Pill severity="secondary">
-                  <Typography variant="h2">46</Typography>
-                </Pill>
-              </Stack>
-            </CardContent>
-          </Card>
+        <Grid size={{ xs: 12, lg: 6, xl: 3 }}>
+          <MaterialsWidget />
         </Grid>
 
-        <Grid size={{ xs: 12, lg: 6, xl: 2 }}>
-          <Card sx={{ height: '100%' }}>
-            <CardHeader title="Produkty" titleTypographyProps={{ typography: 'h3' }} />
-            <CardContent>
-              {/* <Stack flexDirection="row" justifyContent="center" alignItems="center"> */}
-              <Pill severity="secondary">
-                <Typography variant="h2">37</Typography>
-              </Pill>
-              {/* </Stack> */}
-            </CardContent>
-          </Card>
+        <Grid size={{ xs: 12, lg: 6, xl: 3 }}>
+          <ProductsWidget />
         </Grid>
 
-        <Grid size={{ xs: 12 }}>Statystyki dla: STYCZEŃ 2024</Grid>
+        <Grid size={{ xs: 12 }}>
+          <Divider sx={{ my: 1.5, border: '1px solid #eee' }} />
+        </Grid>
+
+        <Grid size={{ xs: 12 }}>
+          <Card sx={{ textAlign: 'center' }}>
+            <Typography variant="caption" fontSize="large">
+              Statystyki dla:{' '}
+              <strong>{capitalizeFull(format(new Date(), 'LLLL yyyy', { locale: pl }))}</strong>
+            </Typography>
+          </Card>
+        </Grid>
 
         <Grid size={{ xs: 12, lg: 6, xl: 4 }}>
           <Card sx={{ height: '100%' }}>
@@ -176,6 +170,18 @@ const Home = () => {
               </Typography>
             </CardContent>
           </Card>
+        </Grid>
+
+        <Grid size={{ xs: 12 }}>
+          <Card sx={{ textAlign: 'center' }}>
+            <Typography variant="caption" fontSize="large">
+              Twój wynik w ostatnim kwartale
+            </Typography>
+          </Card>
+        </Grid>
+
+        <Grid size={{ xs: 12 }}>
+          <ReportChart />
         </Grid>
       </Grid>
     </PageContainer>

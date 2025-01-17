@@ -1,5 +1,6 @@
 import { Alert, Button, Grid2 as Grid } from '@mui/material';
 import { omitBy } from 'lodash';
+import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import ConfirmationModal from '../../components/ConfirmationModal';
 import Icon from '../../components/Icon';
@@ -14,6 +15,7 @@ import {
   useLazyGetProductsQuery,
   useUpdateProductMutation,
 } from '../../redux/api/productsApi';
+import { getCurrentOrg } from '../../redux/slices/appContextSlice';
 import { ModalMode } from '../../types/enums';
 import { Product, ProductData } from '../../types/products';
 import { toastErr } from '../../utils/form-utils';
@@ -22,6 +24,8 @@ import ProductsFilters from './sections/ProductsFilters';
 import ProductsTable from './sections/ProductsTable';
 
 const Products = () => {
+  const currentOrg = useSelector(getCurrentOrg);
+
   const { products, refetch, filters, ResetButton, ...asyncPagination } =
     useAsyncPagination<Product>({
       lazyRtkQuery: useLazyGetProductsQuery as any,
@@ -116,6 +120,7 @@ const Products = () => {
             variant="contained"
             startIcon={<Icon.Add />}
             onClick={() => setAddEditMode(ModalMode.ADD)}
+            disabled={!currentOrg?.features.productsLimit && products.length >= 10}
           >
             Dodaj produkt
           </Button>

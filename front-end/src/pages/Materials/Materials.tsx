@@ -1,5 +1,6 @@
 import { Alert, Button, Grid2 as Grid } from '@mui/material';
 import { omitBy } from 'lodash';
+import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import ConfirmationModal from '../../components/ConfirmationModal';
 import Icon from '../../components/Icon';
@@ -14,6 +15,7 @@ import {
   useLazyGetMaterialsQuery,
   useUpdateMaterialMutation,
 } from '../../redux/api/materialsApi';
+import { getCurrentOrg } from '../../redux/slices/appContextSlice';
 import { ModalMode } from '../../types/enums';
 import { Material, MaterialData } from '../../types/materials';
 import { toastErr } from '../../utils/form-utils';
@@ -22,6 +24,8 @@ import MaterialsFilters from './sections/MaterialsFilters';
 import MaterialsTable from './sections/MaterialsTable';
 
 const Materials = () => {
+  const currentOrg = useSelector(getCurrentOrg);
+
   const { materials, refetch, filters, ResetButton, ...asyncPagination } =
     useAsyncPagination<Material>({
       lazyRtkQuery: useLazyGetMaterialsQuery as any,
@@ -116,6 +120,7 @@ const Materials = () => {
             variant="contained"
             startIcon={<Icon.Add />}
             onClick={() => setAddEditMode(ModalMode.ADD)}
+            disabled={!currentOrg?.features.materialsLimit && materials.length >= 10}
           >
             Dodaj materiał
           </Button>
