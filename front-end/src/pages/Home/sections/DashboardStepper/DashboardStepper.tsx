@@ -9,7 +9,7 @@ import { useGetProductsQuery } from '../../../../redux/api/productsApi';
 
 const steps = [
   'Dodaj pracowników',
-  'Dodaj stanownika',
+  'Dodaj stanowiska',
   'Przypisz stanowiska pracownikom',
   <>
     Dodaj materiały <br />
