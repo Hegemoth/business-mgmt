@@ -27,11 +27,14 @@ const Home = () => {
   const currentOrg = useSelector(getCurrentOrg);
   const orgs = useGetOrganizationsQuery({ limit: 1 });
   const [showAlert, setShowAlert] = useState(true);
-
+  
   useEffect(() => {
     const timer = setTimeout(() => setShowAlert(false), 4000);
     return () => clearTimeout(timer);
   }, []);
+  
+  // TODO: Delete when API will handle it
+  const orgWithData = currentOrg?.id === "999c973d-19e5-4b66-8ff3-5efc4c16f47b";
 
   return (
     <PageContainer>
@@ -100,7 +103,7 @@ const Home = () => {
           <DashboardStepper />
         </Grid>
 
-        <Grid size={{ xs: 12, md: 6, lg: 3 }}>
+        <Grid size={{ xs: 12, md: 6, xl: 3 }}>
           <Card sx={{ height: '100%' }}>
             <CardHeader
               title="Tyle organizacji już zaufało Business.mgmt"
@@ -114,15 +117,15 @@ const Home = () => {
           </Card>
         </Grid>
 
-        <Grid size={{ xs: 12, lg: 6, xl: 3 }}>
+        <Grid size={{ xs: 12, md: 6, xl: 3 }}>
           <EmployeesWidget />
         </Grid>
 
-        <Grid size={{ xs: 12, lg: 6, xl: 3 }}>
+        <Grid size={{ xs: 12, md: 6, xl: 3 }}>
           <MaterialsWidget />
         </Grid>
 
-        <Grid size={{ xs: 12, lg: 6, xl: 3 }}>
+        <Grid size={{ xs: 12, md: 6, xl: 3 }}>
           <ProductsWidget />
         </Grid>
 
@@ -144,7 +147,7 @@ const Home = () => {
             <CardHeader title="Przychód" titleTypographyProps={{ typography: 'h3' }} />
             <CardContent>
               <Typography variant="h1" fontSize={64}>
-                230 325 zł
+                {orgWithData ? "230 325" : 0} zł
               </Typography>
             </CardContent>
           </Card>
@@ -155,7 +158,7 @@ const Home = () => {
             <CardHeader title="Koszty" titleTypographyProps={{ typography: 'h3' }} />
             <CardContent>
               <Typography variant="h1" fontSize={64}>
-                189 872 zł
+                {orgWithData ? "189 872" : 0} zł
               </Typography>
             </CardContent>
           </Card>
@@ -166,7 +169,7 @@ const Home = () => {
             <CardHeader title="Zysk" titleTypographyProps={{ typography: 'h3' }} />
             <CardContent>
               <Typography variant="h1" fontSize={64}>
-                40 726 zł
+                {orgWithData ? "40 453" : 0} zł
               </Typography>
             </CardContent>
           </Card>

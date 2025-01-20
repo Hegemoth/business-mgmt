@@ -40,10 +40,11 @@ const EmployeesWidget: React.FC = () => {
             total={active.data?.total}
             loading={active.isFetching}
           />
+          {/* TODO: Handle API call */}
           <EmployeesWidgetRow
             label="Bez przypisanego stanowiska"
-            total={8}
-            severity={true ? 'warning' : 'success'}
+            total={Number(active.data?.total) > 8 ? 8 : 0}
+            severity={Number(active.data?.total) > 8 ? 'warning' : 'success'}
           />
         </Stack>
       </CardContent>

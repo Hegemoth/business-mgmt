@@ -12,28 +12,28 @@ import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { format, subMonths } from 'date-fns';
 import { pl } from 'date-fns/locale';
 import { Bar } from 'react-chartjs-2';
+import { useSelector } from 'react-redux';
+import { getCurrentOrg } from '../../../../redux/slices/appContextSlice';
 import { toCurrency } from '../../../../utils/number-utils';
 import { capitalize } from '../../../../utils/text-utils';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, ChartDataLabels);
 
 const ReportChart = () => {
+  // TODO: Delete when API will handle it
+  const currentOrg = useSelector(getCurrentOrg);
+  const orgWithData = currentOrg?.id === '999c973d-19e5-4b66-8ff3-5efc4c16f47b';
+
+  const createData = (revenue: number, costs: number, profit: number) => ({
+    revenue: orgWithData ? revenue : 0,
+    costs: orgWithData ? costs : 0,
+    profit: orgWithData ? profit : 0,
+  });
+  
   const data = {
-    past2: {
-      revenue: 192805.84,
-      costs: 127466.92,
-      profit: 65338.92,
-    },
-    past1: {
-      revenue: 172805.44,
-      costs: 122466.89,
-      profit: 50338.55,
-    },
-    current: {
-      revenue: 230325.56,
-      costs: 189872.12,
-      profit: 40453.44,
-    },
+    past2: createData(192805.84, 127466.92, 65338.92),
+    past1: createData(172805.44, 122466.89, 50338.55),
+    current: createData(230325.56, 189872.12, 40453.44),
   };
 
   const options = {
@@ -86,7 +86,7 @@ const ReportChart = () => {
         label: 'Zysk',
         data: [data.past2.profit, data.past1.profit, data.current.profit],
         backgroundColor: (ctx: any) =>
-          ctx.raw > 0 ? 'rgba(20, 190, 0, 0.8)' : 'rgba(190, 20, 0, 0.8)',
+          ctx.raw >= 0 ? 'rgba(20, 190, 0, 0.8)' : 'rgba(190, 20, 0, 0.8)',
       },
     ].map((dataset) => ({
       ...dataset,
